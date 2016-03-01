@@ -3239,13 +3239,55 @@ void Executor::executeMemoryOperation(ExecutionState &state,
     if (incomplete) {
       terminateStateEarly(*unbound, "Query timed out (resolve).");
     } else {
-      terminateStateOnError(*unbound,
+        handleMemoryMissing(state, isWrite, address, value, target);
+        executeMemoryOperation(state, isWrite, address, value, target);
+        return ;
+
+        terminateStateOnError(*unbound,
                             "memory error: out of bound pointer",
                             "ptr.err",
                             getAddressInfo(*unbound, address));
     }
   }
 }
+
+#if defined(DBG_BO) || 1
+// Assumption: all the missing memories are from qemu within the same address space of klee
+// 1. Get the value from qemu
+// 2. create MO/OS within klee
+void Executor::handleMemoryMissing(ExecutionState &state,
+          bool isWrite,
+          ref<Expr> address,
+          ref<Expr> value /* undef if read */,
+          KInstruction *target /* undef if write */) {
+    uint64_t addr_value = cast<ConstantExpr>(address)->getZExtValue();
+    Expr::Width type = (isWrite ? value->getWidth() :
+                       getWidthForLLVMType(target->inst->getType()));
+    unsigned bytes = Expr::getMinBytesForWidth(type);
+
+    //1. get the value from qemu
+    std::vector<uint8_t> qemu_value;
+    for(uint64_t i = 0; i < bytes; ++i){
+        //CHENBO: xxx a check before deference is needed
+        uint8_t current_byte = *(uint8_t *) (addr_value + i);
+        qemu_value.push_back(current_byte);
+    }
+
+    assert(qemu_value.size() == bytes);
+
+    //2. create MO/OS
+    MemoryObject *temp_mo;
+    ObjectState  *temp_os;
+
+    temp_mo = memory->allocateFixed(addr_value, bytes, 0);
+    temp_mo->setName("created_for_qemu");
+
+    // Bind the Missing MO with a new OS, and write values to this OS
+    temp_os = bindObjectInState(state, temp_mo, false);
+    temp_os->write_n(0, qemu_value);
+  }
+#endif
+
 
 void Executor::executeMakeSymbolic(ExecutionState &state, 
                                    const MemoryObject *mo,

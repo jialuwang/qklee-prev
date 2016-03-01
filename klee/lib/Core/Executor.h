@@ -275,6 +275,13 @@ private:
                               ref<Expr> address,
                               ref<Expr> value /* undef if read */,
                               KInstruction *target /* undef if write */);
+#if defined(DBG_BO) || 1
+  void handleMemoryMissing(ExecutionState &state,
+          bool isWrite,
+          ref<Expr> address,
+          ref<Expr> value /* undef if read */,
+          KInstruction *target /* undef if write */)
+#endif
 
   void executeMakeSymbolic(ExecutionState &state, const MemoryObject *mo,
                            const std::string &name);

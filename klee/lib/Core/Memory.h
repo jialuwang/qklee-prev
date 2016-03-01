@@ -207,6 +207,9 @@ public:
   void write32(unsigned offset, uint32_t value);
   void write64(unsigned offset, uint64_t value);
 
+#if defined(DBG_BO) || 1
+  void write_n(unsigned offset, std::vector<uint8_t> value);
+#endif
 private:
   const UpdateList &getUpdates() const;
 
