@@ -583,6 +583,15 @@ void ObjectState::write64(unsigned offset, uint64_t value) {
   }
 }
 
+#if defined(DBG_BO) || 1
+void ObjectState::write_n(unsigned offset, std::vector<uint8_t> value) {
+      uint64_t NumBytes = value.size();
+      for (uint64_t idx = 0; idx != NumBytes; ++idx) {
+          write8(offset + idx, value[idx]);
+      }
+}
+#endif
+
 void ObjectState::print() {
   llvm::errs() << "-- ObjectState --\n";
   llvm::errs() << "\tMemoryObject ID: " << object->id << "\n";
