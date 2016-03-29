@@ -134,8 +134,8 @@ public:
 							char **argv,
 							char **envp) = 0;
 
-  virtual void executorRun(int enableQKLEE, unsigned long requestAddress) = 0;
-
+//  virtual void executorRun(int enableQKLEE, unsigned long requestAddress) = 0;
+  virtual void executorRun(void) = 0;
   virtual void executorExit(void) = 0;
 
   /*** Runtime options ***/

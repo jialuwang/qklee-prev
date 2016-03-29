@@ -280,7 +280,7 @@ private:
           bool isWrite,
           ref<Expr> address,
           ref<Expr> value /* undef if read */,
-          KInstruction *target /* undef if write */)
+          KInstruction *target /* undef if write */);
 #endif
 
   void executeMakeSymbolic(ExecutionState &state, const MemoryObject *mo,
@@ -455,7 +455,7 @@ public:
 							char **argv,
 							char **envp);
 
-  virtual void executorRun(int enableQKLEE, unsigned long requestAddress);
+  virtual void executorRun(void);
 
   virtual void executorExit(void);
 

@@ -131,7 +131,9 @@ using namespace metaSMT::solver;
 
 #endif /* SUPPORT_METASMT */
 
-
+//Qin
+#include "externalcall.h"
+bool isKleeExternal = false;
 
 namespace {
   cl::opt<bool>
@@ -1176,7 +1178,10 @@ void Executor::executeCall(ExecutionState &state,
     switch(f->getIntrinsicID()) {
     case Intrinsic::not_intrinsic:
       // state may be destroyed by this call, cannot touch
+//Qin
+      isKleeExternal = true;
       callExternalFunction(state, ki, f, arguments);
+      isKleeExternal = false;
       break;
         
       // va_arg is handled by caller and intrinsic lowering, see comment for
@@ -1953,7 +1958,7 @@ void Executor::executeInstruction(ExecutionState &state, KInstruction *ki) {
     executeMemoryOperation(state, false, base, 0, ki);
     break;
   }
-  case Instruction::Store: {
+  case Instruction::Store: { //Qin start here to synchronize
     ref<Expr> base = eval(ki, 1, state).value;
     ref<Expr> value = eval(ki, 0, state).value;
     executeMemoryOperation(state, true, base, value, 0);
@@ -2478,6 +2483,7 @@ void Executor::bindModuleConstants() {
   }
 }
 
+// Qin
 void Executor::run(ExecutionState &initialState) {
   states.insert(&initialState);
 
@@ -2552,7 +2558,7 @@ void Executor::run(ExecutionState &initialState) {
   while (!states.empty() && !haltExecution) {
     ExecutionState &state = searcher->selectState();
     KInstruction *ki = state.pc;
-    stepInstruction(state);
+    stepInstruction(state); //to read
 
     executeInstruction(state, ki);
     processTimers(&state, MaxInstructionTime);
@@ -2595,7 +2601,6 @@ void Executor::run(ExecutionState &initialState) {
 
     updateStates(&state);
   }
-
   delete searcher;
   searcher = 0;
   
@@ -2818,6 +2823,9 @@ void Executor::callExternalFunction(ExecutionState &state,
                                     KInstruction *target,
                                     Function *function,
                                     std::vector< ref<Expr> > &arguments) {
+//Qin
+//    klee_warning("Klee call external function qklee_isKleeExternal %s", isKleeExternal?"true":"false");
+
   // check if specialFunctionHandler wants it
   if (specialFunctionHandler->handle(state, function, target, arguments))
     return;
@@ -3239,7 +3247,10 @@ void Executor::executeMemoryOperation(ExecutionState &state,
     if (incomplete) {
       terminateStateEarly(*unbound, "Query timed out (resolve).");
     } else {
-        handleMemoryMissing(state, isWrite, address, value, target);
+//	klee_warning("out of bound pointer -- create new MO/OS on the fly"); 
+//        handleMemoryMissing(state, isWrite, address, value, target);
+	//Qin
+	addExternalObject(state, (void *)cast<ConstantExpr>(address)->getZExtValue(), bytes, false);
         executeMemoryOperation(state, isWrite, address, value, target);
         return ;
 
@@ -3460,20 +3471,24 @@ void Executor::executorInit(Function *f,
   initState = state;
 }
 
-void Executor::executorRun(int enableQKLEE, unsigned long requestAddress) {
-  ExecutionState *state = new ExecutionState(*initState);
+//Qin
+void Executor::executorRun(void) {
+//void Executor::executorRun(int enableQKLEE, unsigned long requestAddress) {
+  ExecutionState *state = new ExecutionState(*initState); // every execution is from initState
 
-  if(enableQKLEE) {
-	  state->requestAddress = requestAddress;
-  }
+//  if(enableQKLEE) {
+//	  state->requestAddress = requestAddress;
+//  }
 
   processTree = new PTree(state);
   state->ptreeNode = processTree->root;
-
+  klee_warning("start executorRun ---->");
   run(*state);
+//  klee_warning("done executorRun run(*state)"); 
 
   delete processTree;
   processTree = 0;
+  klee_warning("\t\t------>done executorRun");
 }
 
 void Executor::executorExit(void) {
@@ -3496,7 +3511,8 @@ void Executor::runFunctionAsMain(Function *f,
 				 char **envp) {
   executorInit(f, argc, argv, envp);
 
-  executorRun(0, 0);
+  //executorRun(0, 0);
+  executorRun();
 
   executorExit();
 }

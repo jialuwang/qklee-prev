@@ -71,7 +71,6 @@
 #include <iterator>
 #include <sstream>
 
-
 using namespace llvm;
 using namespace klee;
 
@@ -1144,6 +1143,7 @@ static llvm::Module *linkWithUclibc(llvm::Module *mainModule, StringRef libDir) 
 }
 #endif
 
+//Qin
 extern "C" {
 
 int qklee_main(int argc, char **argv, char **envp) {  
@@ -1498,7 +1498,7 @@ int qklee_entry(int qargc, char **qargv, char **qenvp) {
     char **envp;
     char fname[] = "/home/qin/qklee/model/svd_main.o";
 
-    printf("@klee_entry!\n");
+    fprintf(stderr,"@klee_entry!\n");
 
     argc = 2;
     envp = (char **)malloc(sizeof(char *));
@@ -1598,6 +1598,7 @@ int qklee_exit(void) {
 
 typedef struct _MMIO_REQUEST {
   void *opaque;
+  const uint8_t *buf;
   hwaddr addr;
   uint64_t val;
   unsigned size;
@@ -1607,6 +1608,10 @@ typedef struct _MMIO_REQUEST {
 
 static MMIO_REQUEST mmio_request;
 
+//bool qklee_isKleeExternal(void) {
+//    return isKleeExternal;
+//}
+
 int qklee_mmio_write(void *opaque, hwaddr addr, uint64_t val,
                  unsigned size) {
   mmio_request.opaque = opaque;
@@ -1614,12 +1619,12 @@ int qklee_mmio_write(void *opaque, hwaddr addr, uint64_t val,
   mmio_request.val = val;
   mmio_request.size = size;
 // return 1 --> 0
-  mmio_request.ret = 0;
+//  mmio_request.ret = 0;
   mmio_request.type = 1;
 
-  theInterpreter->executorRun(1, addr);
+  theInterpreter->executorRun();
 
-  return mmio_request.ret;
+  return 0;
 }
 
 int qklee_mmio_read(void *opaque, hwaddr addr, unsigned size) {
@@ -1627,12 +1632,42 @@ int qklee_mmio_read(void *opaque, hwaddr addr, unsigned size) {
   mmio_request.addr = addr;
   mmio_request.size = size;
 // return 1 --> 0
-  mmio_request.ret = 0;
+//  mmio_request.ret = 0;
   mmio_request.type = 2;
 
-  theInterpreter->executorRun(1, addr);
+  theInterpreter->executorRun();
 
   return mmio_request.ret;
+}
+
+int qklee_receive(void *opaque, const uint8_t *buf, size_t size) {
+    mmio_request.opaque = opaque;
+    mmio_request.buf = buf;
+    mmio_request.type = 3;
+    mmio_request.size = size;
+
+//    ssize_t ret = (ssize_t) theInterpreter->executorRun(1, 0);
+    theInterpreter->executorRun();
+    return mmio_request.ret;
+
+}
+
+int qklee_can_receive(void *opaque) {
+//    return 1;
+    mmio_request.opaque = opaque;
+    mmio_request.type = 5;
+
+    theInterpreter->executorRun();
+//    fprintf(stderr, "qklee_can_receive return %d\n", mmio_request.ret);
+    return mmio_request.ret;
+}
+
+int qklee_set_link_status(void *opaque) {
+    mmio_request.opaque = opaque;
+    mmio_request.type = 4;
+
+    theInterpreter->executorRun();
+    return 0;
 }
 
 void qklee_request_cpy(void *dst, unsigned size) {
@@ -1643,7 +1678,8 @@ void qklee_mem_cpy(void *dst, void *src, unsigned size) {
   memcpy(dst, src, size);
 }
 
-int qklee_ret(void) {
+int qklee_ret(int ret) {
+  mmio_request.ret = ret;
   return 0;
 }
 

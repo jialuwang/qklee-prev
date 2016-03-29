@@ -54,3 +54,5 @@ namespace klee {
 }
 
 #endif /* __KLEE_COMMON_H__ */
+
+//bool isKleeExternal = false;

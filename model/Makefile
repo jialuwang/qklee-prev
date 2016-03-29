@@ -1,5 +1,5 @@
 CC = clang-3.4
-CFLAGS = -emit-llvm -c -g -DQKLEE
+CFLAGS = -emit-llvm -c -g
 LD = llvm-link
 LDFLAGS =
 LIBS =

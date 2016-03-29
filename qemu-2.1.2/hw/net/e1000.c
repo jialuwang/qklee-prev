@@ -38,6 +38,7 @@
 
 // Add by Kai
 #include "qklee.h"
+#include "externalcall.h"
 
 #define E1000_DEBUG
 
@@ -580,10 +581,14 @@ e1000_send_packet(E1000State *s, const uint8_t *buf, int size)
 
     NetClientState *nc = qemu_get_queue(s->nic);
     if (s->phy_reg[PHY_CTRL] & MII_CR_LOOPBACK) {
+	//Qin
+	fprintf(stderr, "in QEMU: call nc->info->receive(nc, buf, size)\n");
         nc->info->receive(nc, buf, size);
     } else {
+	fprintf(stderr, "e1000_send_packet calling qemu_send_packet ....e1000_receive\n");
         qemu_send_packet(nc, buf, size);
     }
+
 }
 
 static void
@@ -867,9 +872,21 @@ have_autoneg(E1000State *s)
            (s->phy_reg[PHY_CTRL] & MII_CR_RESTART_AUTO_NEG);
 }
 
-static void
-e1000_set_link_status(NetClientState *nc)
+//Qin
+static void e1000_bc_set_link_status(void * opaque);
+
+static void e1000_set_link_status(NetClientState *nc)
 {
+//    fprintf(stderr, "calling: e1000_set_link_status\n");
+//    qklee_set_link_status(nc);
+    e1000_bc_set_link_status(nc);
+}
+
+static void
+e1000_bc_set_link_status(void * opaque)
+{
+//    fprintf(stderr, "calling: e1000_bc_set_link_status\n");
+    NetClientState *nc = opaque;
     E1000State *s = qemu_get_nic_opaque(nc);
     uint32_t old_status = s->mac_reg[STATUS];
 
@@ -908,11 +925,30 @@ static bool e1000_has_rxbufs(E1000State *s, size_t total_size)
     return total_size <= bufs * s->rxbuf_size;
 }
 
-static int
-e1000_can_receive(NetClientState *nc)
+//Qin
+static int e1000_bc_can_receive(void *opaque);
+
+static int e1000_can_receive(NetClientState *nc)
 {
+    void *opaque = nc;
+
+    if (isKleeExternal) {
+	fprintf(stderr,"KLEEbytecode-->QEMU calling: e1000_can_receive: %p\n", nc);
+        return e1000_bc_can_receive(opaque);
+    } else {
+	fprintf(stderr, "QEMU interface calling: e1000_can_receive: %p\n", nc);
+        return qklee_can_receive(opaque); // call KLEE
+    }
+
+}
+
+static int e1000_bc_can_receive(void *opaque)
+{
+    NetClientState *nc = (NetClientState *)opaque;
+//    fprintf(stderr, "calling: e1000_bc_can_receive: %p\n", nc);
     E1000State *s = qemu_get_nic_opaque(nc);
 
+//    fprintf(stderr, "DONE qemu_get_nic_opaque \n");
     return (s->mac_reg[STATUS] & E1000_STATUS_LU) &&
         (s->mac_reg[RCTL] & E1000_RCTL_EN) && e1000_has_rxbufs(s, 1);
 }
@@ -1083,15 +1119,38 @@ e1000_receive_iov(NetClientState *nc, const struct iovec *iov, int iovcnt)
     return size;
 }
 
-static ssize_t
-e1000_receive(NetClientState *nc, const uint8_t *buf, size_t size)
+
+//Qin
+static ssize_t e1000_bc_receive(void *nc, const uint8_t *buf, size_t size);
+//static void print_NetClientState(NetClientState *nc) {
+//    fprintf(stderr, "nc->NetClientInfo.size = %d, link_down = %d, model
+
+static ssize_t e1000_receive(NetClientState *nc, const uint8_t *buf, size_t size)
 {
+
+    fprintf(stderr,"calling: e1000_receive: %p\n", nc);
+    if(isKleeExternal) {
+	fprintf(stderr,"KLEEbytecode --> QEMU calling: e1000_receive: %p\n", nc);
+        return e1000_bc_receive(nc, buf, size);
+    } else {
+	fprintf(stderr,"QEMU interface calling: e1000_receive: %p\n", nc);
+        return qklee_receive(nc, buf, size);
+    }
+}
+
+
+static ssize_t
+e1000_bc_receive(void *nc, const uint8_t *buf, size_t size)
+{
+    NetClientState *pnc = nc;
+    fprintf(stderr, "calling e1000_bc_receive: %p\n", pnc);
+    
     const struct iovec iov = {
         .iov_base = (uint8_t *)buf,
         .iov_len = size
     };
 
-    return e1000_receive_iov(nc, &iov, 1);
+    return e1000_receive_iov(pnc, &iov, 1);
 }
 
 static uint32_t
@@ -1167,6 +1226,7 @@ set_dlen(E1000State *s, int index, uint32_t val)
 static void
 set_tctl(E1000State *s, int index, uint32_t val)
 {
+//    fprintf(stderr, "calling set_tctl --> start_xmit --> call qemu\n");
     s->mac_reg[index] = val;
     s->mac_reg[TDT] &= 0xffff;
     start_xmit(s);
@@ -1233,17 +1293,22 @@ static void (*macreg_writeops[])(E1000State *, int, uint32_t) = {
 
 enum { NWRITEOPS = ARRAY_SIZE(macreg_writeops) };
 
-static void
-e1000_mmio_write(void *opaque, hwaddr addr, uint64_t val,
+//Qin
+static void e1000_bc_mmio_write(void *opaque, hwaddr addr, uint64_t val, unsigned size);
+static uint64_t e1000_bc_mmio_read(void *opaque, hwaddr addr, unsigned size);
+
+static void e1000_mmio_write(void *opaque, hwaddr addr, uint64_t val,
                  unsigned size)
 {
     qklee_mmio_write(opaque, addr, val, size);
+//    e1000_bc_mmio_write(opaque, addr, val, size);
 }
 
-static void 
-e1000_bc_mmio_write(void *opaque, hwaddr addr, uint64_t val, 
+static void e1000_bc_mmio_write(void *opaque, hwaddr addr, uint64_t val, 
                  unsigned size)
 {
+    fprintf(stderr,"calling: e100_bc_mmio_write\n");
+
     E1000State *s = opaque;
     unsigned int index = (addr & 0x1ffff) >> 2;
 
@@ -1256,18 +1321,18 @@ e1000_bc_mmio_write(void *opaque, hwaddr addr, uint64_t val,
                index<<2, val);
     }    
 }
-
+//Qin
 static uint64_t
 e1000_mmio_read(void *opaque, hwaddr addr, unsigned size)
 {
-    qklee_mmio_read(opaque, addr, size);
-    return 0;
+    return qklee_mmio_read(opaque, addr, size);
+//    return e1000_bc_mmio_read(opaque, addr, size);
 }
 
 
-static uint64_t
-e1000_bc_mmio_read(void *opaque, hwaddr addr, unsigned size)
+static uint64_t e1000_bc_mmio_read(void *opaque, hwaddr addr, unsigned size)
 {
+    fprintf(stderr,"calling: e100_bc_mmio_read\n");
     E1000State *s = opaque;
     unsigned int index = (addr & 0x1ffff) >> 2;
 
@@ -1533,10 +1598,12 @@ pci_e1000_uninit(PCIDevice *dev)
 static NetClientInfo net_e1000_info = {
     .type = NET_CLIENT_OPTIONS_KIND_NIC,
     .size = sizeof(NICState),
+//#ifdef QKLEE
     .can_receive = e1000_can_receive,
     .receive = e1000_receive,
     .receive_iov = e1000_receive_iov,
     .cleanup = e1000_cleanup,
+//#endif
     .link_status_changed = e1000_set_link_status,
 };
 

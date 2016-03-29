@@ -283,13 +283,16 @@ NetClientState *qemu_get_queue(NICState *nic)
 
 NICState *qemu_get_nic(NetClientState *nc)
 {
+//    fprintf(stderr, "calling qemu_get_nic: %p\n", nc);
     NetClientState *nc0 = nc - nc->queue_index;
-
+ 
+//    fprintf(stderr, "calling qemu_get_nic: %p\n", nc0);
     return (NICState *)((void *)nc0 - nc->info->size);
 }
 
 void *qemu_get_nic_opaque(NetClientState *nc)
 {
+//    fprintf(stderr, "calling qemu_get_nic_opaque: %p\n", nc);
     NICState *nic = qemu_get_nic(nc);
 
     return nic->opaque;
@@ -493,9 +496,12 @@ ssize_t qemu_deliver_packet(NetClientState *sender,
     if (flags & QEMU_NET_PACKET_FLAG_RAW && nc->info->receive_raw) {
         ret = nc->info->receive_raw(nc, data, size);
     } else {
+//Qin
+	fprintf(stderr, "qemu_deliver_packet call e1000_receive %p\n", nc);
         ret = nc->info->receive(nc, data, size);
     }
 
+    fprintf(stderr, "nc->info->receive return value is:\t\t%d\n", ret);
     if (ret == 0) {
         nc->receive_disabled = 1;
     }
@@ -607,6 +613,8 @@ ssize_t qemu_deliver_packet_iov(NetClientState *sender,
     }
 
     if (nc->info->receive_iov) {
+//Qin
+	fprintf(stderr, "qemu_deliver_packet_iov call e1000_receive_iov\n");
         ret = nc->info->receive_iov(nc, iov, iovcnt);
     } else {
         ret = nc_sendv_compat(nc, iov, iovcnt);
