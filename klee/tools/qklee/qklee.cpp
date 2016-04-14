@@ -2,6 +2,7 @@
 
 // FIXME: This does not belong here.
 #include "../lib/Core/Common.h"
+#include "../lib/Core/externalcall.h"
 
 #include "klee/ExecutionState.h"
 #include "klee/Expr.h"
@@ -1618,12 +1619,13 @@ int qklee_mmio_write(void *opaque, hwaddr addr, uint64_t val,
   mmio_request.addr = addr;
   mmio_request.val = val;
   mmio_request.size = size;
-// return 1 --> 0
-//  mmio_request.ret = 0;
   mmio_request.type = 1;
 
-  theInterpreter->executorRun();
+  fprintf(stderr, "mmio_write:addr -- %" PRIu64 "\n", addr);
+  fprintf(stderr, "mmio_write:val  -- %" PRIu64 "\n", val);
 
+  theInterpreter->executorRun();
+  
   return 0;
 }
 
@@ -1631,8 +1633,6 @@ int qklee_mmio_read(void *opaque, hwaddr addr, unsigned size) {
   mmio_request.opaque = opaque;
   mmio_request.addr = addr;
   mmio_request.size = size;
-// return 1 --> 0
-//  mmio_request.ret = 0;
   mmio_request.type = 2;
 
   theInterpreter->executorRun();
@@ -1641,24 +1641,26 @@ int qklee_mmio_read(void *opaque, hwaddr addr, unsigned size) {
 }
 
 int qklee_receive(void *opaque, const uint8_t *buf, size_t size) {
+//    dumpTrace = true;
     mmio_request.opaque = opaque;
     mmio_request.buf = buf;
     mmio_request.type = 3;
     mmio_request.size = size;
 
-//    ssize_t ret = (ssize_t) theInterpreter->executorRun(1, 0);
+//    trace = new llvm::raw_fd_ostream("e1000_receive_trace.ll", EC, sys::fs::F_None);
+
     theInterpreter->executorRun();
+//    dumpTrace = false;
+//    trace.close();
     return mmio_request.ret;
 
 }
 
 int qklee_can_receive(void *opaque) {
-//    return 1;
     mmio_request.opaque = opaque;
     mmio_request.type = 5;
 
     theInterpreter->executorRun();
-//    fprintf(stderr, "qklee_can_receive return %d\n", mmio_request.ret);
     return mmio_request.ret;
 }
 

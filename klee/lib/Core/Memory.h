@@ -52,6 +52,8 @@ public:
   /// true if created by us.
   bool fake_object;
   bool isUserSpecified;
+//Qin
+  bool isExternal;
 
   MemoryManager *parent;
 
@@ -171,6 +173,8 @@ public:
   unsigned size;
 
   bool readOnly;
+//Qin
+//  bool external;
 
 public:
   /// Create a new object state for the given memory object with concrete
@@ -188,6 +192,8 @@ public:
   const MemoryObject *getObject() const { return object; }
 
   void setReadOnly(bool ro) { readOnly = ro; }
+//Qin
+//  void setExternal(bool ex) { external = ex; }
 
   // make contents all concrete and zero
   void initializeToZero();

@@ -128,25 +128,26 @@ target triple = "x86_64-pc-linux-gnu"
 @.str21 = private unnamed_addr constant [35 x i8] c"e1000: frames %d size %d ipcss %d\0A\00", align 1
 @.str22 = private unnamed_addr constant [31 x i8] c"e1000: tcp %d tucss %d len %d\0A\00", align 1
 @.str23 = private unnamed_addr constant [48 x i8] c"in QEMU: call nc->info->receive(nc, buf, size)\0A\00", align 1
-@.str24 = private unnamed_addr constant [39 x i8] c"e1000: RCTL: %d, mac_reg[RCTL] = 0x%x\0A\00", align 1
-@.str25 = private unnamed_addr constant [19 x i8] c"e1000: set_icr %x\0A\00", align 1
-@.str26 = private unnamed_addr constant [27 x i8] c"e1000: MDIC read reg 0x%x\0A\00", align 1
+@.str24 = private unnamed_addr constant [62 x i8] c"e1000_send_packet calling qemu_send_packet ....e1000_receive\0A\00", align 1
+@.str25 = private unnamed_addr constant [39 x i8] c"e1000: RCTL: %d, mac_reg[RCTL] = 0x%x\0A\00", align 1
+@.str26 = private unnamed_addr constant [19 x i8] c"e1000: set_icr %x\0A\00", align 1
+@.str27 = private unnamed_addr constant [27 x i8] c"e1000: MDIC read reg 0x%x\0A\00", align 1
 @phy_regcap = internal constant [32 x i8] c"\03\01\01\01\03\01\01\00\00\03\01\00\00\00\00\00\03\01\00\00\03\01\00\00\00\00\00\00\00\00\00\00", align 16
-@.str27 = private unnamed_addr constant [35 x i8] c"e1000: MDIC read reg %x unhandled\0A\00", align 1
-@.str28 = private unnamed_addr constant [40 x i8] c"e1000: MDIC write reg 0x%x, value 0x%x\0A\00", align 1
-@.str29 = private unnamed_addr constant [36 x i8] c"e1000: MDIC write reg %x unhandled\0A\00", align 1
+@.str28 = private unnamed_addr constant [35 x i8] c"e1000: MDIC read reg %x unhandled\0A\00", align 1
+@.str29 = private unnamed_addr constant [40 x i8] c"e1000: MDIC write reg 0x%x, value 0x%x\0A\00", align 1
+@.str30 = private unnamed_addr constant [36 x i8] c"e1000: MDIC write reg %x unhandled\0A\00", align 1
 @phyreg_writeops = internal global [1 x void (%struct.E1000State_st*, i32, i16)*] [void (%struct.E1000State_st*, i32, i16)* @set_phy_ctrl], align 8
-@.str30 = private unnamed_addr constant [36 x i8] c"e1000: Start link auto negotiation\0A\00", align 1
-@.str31 = private unnamed_addr constant [47 x i8] c"e1000: eeprom bitnum in %d out %d, reading %d\0A\00", align 1
-@.str32 = private unnamed_addr constant [22 x i8] c"klee_div_zero_check.c\00", align 1
-@.str133 = private unnamed_addr constant [15 x i8] c"divide by zero\00", align 1
-@.str234 = private unnamed_addr constant [8 x i8] c"div.err\00", align 1
-@.str335 = private unnamed_addr constant [8 x i8] c"IGNORED\00", align 1
-@.str1436 = private unnamed_addr constant [16 x i8] c"overshift error\00", align 1
-@.str2537 = private unnamed_addr constant [14 x i8] c"overshift.err\00", align 1
-@.str638 = private unnamed_addr constant [13 x i8] c"klee_range.c\00", align 1
-@.str1739 = private unnamed_addr constant [14 x i8] c"invalid range\00", align 1
-@.str2840 = private unnamed_addr constant [5 x i8] c"user\00", align 1
+@.str31 = private unnamed_addr constant [36 x i8] c"e1000: Start link auto negotiation\0A\00", align 1
+@.str32 = private unnamed_addr constant [47 x i8] c"e1000: eeprom bitnum in %d out %d, reading %d\0A\00", align 1
+@.str33 = private unnamed_addr constant [22 x i8] c"klee_div_zero_check.c\00", align 1
+@.str134 = private unnamed_addr constant [15 x i8] c"divide by zero\00", align 1
+@.str235 = private unnamed_addr constant [8 x i8] c"div.err\00", align 1
+@.str336 = private unnamed_addr constant [8 x i8] c"IGNORED\00", align 1
+@.str1437 = private unnamed_addr constant [16 x i8] c"overshift error\00", align 1
+@.str2538 = private unnamed_addr constant [14 x i8] c"overshift.err\00", align 1
+@.str639 = private unnamed_addr constant [13 x i8] c"klee_range.c\00", align 1
+@.str1740 = private unnamed_addr constant [14 x i8] c"invalid range\00", align 1
+@.str2841 = private unnamed_addr constant [5 x i8] c"user\00", align 1
 
 ; Function Attrs: nounwind uwtable
 define i32 @main() #0 {
@@ -1022,7 +1023,7 @@ define internal i64 @e1000_receive_iov(%struct.NetClientState* %nc, %struct.iove
   store %struct.E1000State_st* %7, %struct.E1000State_st** %s, align 8, !dbg !1433
   %8 = load %struct.E1000State_st** %s, align 8, !dbg !1434
   %9 = bitcast %struct.E1000State_st* %8 to %struct.Object*, !dbg !1434
-  %10 = call %struct.Object* @object_dynamic_cast_assert(%struct.Object* %9, i8* getelementptr inbounds ([11 x i8]* @.str1, i32 0, i32 0), i8* getelementptr inbounds ([30 x i8]* @.str2, i32 0, i32 0), i32 966, i8* getelementptr inbounds ([18 x i8]* @__fu
+  %10 = call %struct.Object* @object_dynamic_cast_assert(%struct.Object* %9, i8* getelementptr inbounds ([11 x i8]* @.str1, i32 0, i32 0), i8* getelementptr inbounds ([30 x i8]* @.str2, i32 0, i32 0), i32 968, i8* getelementptr inbounds ([18 x i8]* @__fu
   %11 = bitcast %struct.Object* %10 to %struct.PCIDevice*, !dbg !1434
   store %struct.PCIDevice* %11, %struct.PCIDevice** %d, align 8, !dbg !1434
   store i16 0, i16* %vlan_special, align 2, !dbg !1435
@@ -2765,7 +2766,7 @@ define internal void @set_eecd(%struct.E1000State_st* %s, i32 %index, i32 %val) 
   %120 = getelementptr inbounds %struct.anon.15* %119, i32 0, i32 3, !dbg !1738
   %121 = load i16* %120, align 2, !dbg !1738
   %122 = zext i16 %121 to i32, !dbg !1738
-  %123 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %107, i8* getelementptr inbounds ([47 x i8]* @.str31, i32 0, i32 0), i32 %112, i32 %117, i32 %122), !dbg !1738
+  %123 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %107, i8* getelementptr inbounds ([47 x i8]* @.str32, i32 0, i32 0), i32 %112, i32 %117, i32 %122), !dbg !1738
   br label %124, !dbg !1738
 
 ; <label>:124                                     ; preds = %102, %106, %35, %0, %47
@@ -2871,7 +2872,7 @@ define internal void @set_mdic(%struct.E1000State_st* %s, i32 %index, i32 %val) 
 ; <label>:27                                      ; preds = %23
   %28 = load %struct._IO_FILE** @stderr, align 8, !dbg !1758
   %29 = load i32* %addr, align 4, !dbg !1758
-  %30 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %28, i8* getelementptr inbounds ([27 x i8]* @.str26, i32 0, i32 0), i32 %29), !dbg !1758
+  %30 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %28, i8* getelementptr inbounds ([27 x i8]* @.str27, i32 0, i32 0), i32 %29), !dbg !1758
   br label %31, !dbg !1758
 
 ; <label>:31                                      ; preds = %23, %27
@@ -2893,7 +2894,7 @@ define internal void @set_mdic(%struct.E1000State_st* %s, i32 %index, i32 %val) 
 ; <label>:43                                      ; preds = %39
   %44 = load %struct._IO_FILE** @stderr, align 8, !dbg !1764
   %45 = load i32* %addr, align 4, !dbg !1764
-  %46 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %44, i8* getelementptr inbounds ([35 x i8]* @.str27, i32 0, i32 0), i32 %45), !dbg !1764
+  %46 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %44, i8* getelementptr inbounds ([35 x i8]* @.str28, i32 0, i32 0), i32 %45), !dbg !1764
   br label %47, !dbg !1764
 
 ; <label>:47                                      ; preds = %39, %43
@@ -2933,7 +2934,7 @@ define internal void @set_mdic(%struct.E1000State_st* %s, i32 %index, i32 %val) 
   %71 = load %struct._IO_FILE** @stderr, align 8, !dbg !1773
   %72 = load i32* %addr, align 4, !dbg !1773
   %73 = load i32* %data, align 4, !dbg !1773
-  %74 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %71, i8* getelementptr inbounds ([40 x i8]* @.str28, i32 0, i32 0), i32 %72, i32 %73), !dbg !1773
+  %74 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %71, i8* getelementptr inbounds ([40 x i8]* @.str29, i32 0, i32 0), i32 %72, i32 %73), !dbg !1773
   br label %75, !dbg !1773
 
 ; <label>:75                                      ; preds = %66, %70
@@ -2955,7 +2956,7 @@ define internal void @set_mdic(%struct.E1000State_st* %s, i32 %index, i32 %val) 
 ; <label>:87                                      ; preds = %83
   %88 = load %struct._IO_FILE** @stderr, align 8, !dbg !1779
   %89 = load i32* %addr, align 4, !dbg !1779
-  %90 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %88, i8* getelementptr inbounds ([36 x i8]* @.str29, i32 0, i32 0), i32 %89), !dbg !1779
+  %90 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %88, i8* getelementptr inbounds ([36 x i8]* @.str30, i32 0, i32 0), i32 %89), !dbg !1779
   br label %91, !dbg !1779
 
 ; <label>:91                                      ; preds = %83, %87
@@ -3037,7 +3038,7 @@ define internal void @set_icr(%struct.E1000State_st* %s, i32 %index, i32 %val) #
 ; <label>:7                                       ; preds = %0
   %8 = load %struct._IO_FILE** @stderr, align 8, !dbg !1799
   %9 = load i32* %3, align 4, !dbg !1799
-  %10 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %8, i8* getelementptr inbounds ([19 x i8]* @.str25, i32 0, i32 0), i32 %9), !dbg !1799
+  %10 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %8, i8* getelementptr inbounds ([19 x i8]* @.str26, i32 0, i32 0), i32 %9), !dbg !1799
   br label %11, !dbg !1799
 
 ; <label>:11                                      ; preds = %0, %7
@@ -3155,7 +3156,7 @@ define internal void @set_rx_control(%struct.E1000State_st* %s, i32 %index, i32 
   %28 = getelementptr inbounds %struct.E1000State_st* %27, i32 0, i32 5, !dbg !1815
   %29 = getelementptr inbounds [32768 x i32]* %28, i32 0, i64 64, !dbg !1815
   %30 = load i32* %29, align 4, !dbg !1815
-  %31 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %22, i8* getelementptr inbounds ([39 x i8]* @.str24, i32 0, i32 0), i32 %26, i32 %30), !dbg !1815
+  %31 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %22, i8* getelementptr inbounds ([39 x i8]* @.str25, i32 0, i32 0), i32 %26, i32 %30), !dbg !1815
   br label %32, !dbg !1815
 
 ; <label>:32                                      ; preds = %0, %21
@@ -3259,7 +3260,7 @@ define internal void @start_xmit(%struct.E1000State_st* %s) #0 {
   store %struct.E1000State_st* %s, %struct.E1000State_st** %1, align 8
   %2 = load %struct.E1000State_st** %1, align 8, !dbg !1833
   %3 = bitcast %struct.E1000State_st* %2 to %struct.Object*, !dbg !1833
-  %4 = call %struct.Object* @object_dynamic_cast_assert(%struct.Object* %3, i8* getelementptr inbounds ([11 x i8]* @.str1, i32 0, i32 0), i8* getelementptr inbounds ([30 x i8]* @.str2, i32 0, i32 0), i32 771, i8* getelementptr inbounds ([11 x i8]* @__fun
+  %4 = call %struct.Object* @object_dynamic_cast_assert(%struct.Object* %3, i8* getelementptr inbounds ([11 x i8]* @.str1, i32 0, i32 0), i8* getelementptr inbounds ([30 x i8]* @.str2, i32 0, i32 0), i32 773, i8* getelementptr inbounds ([11 x i8]* @__fun
   %5 = bitcast %struct.Object* %4 to %struct.PCIDevice*, !dbg !1833
   store %struct.PCIDevice* %5, %struct.PCIDevice** %d, align 8, !dbg !1833
   %6 = load %struct.E1000State_st** %1, align 8, !dbg !1834
@@ -3455,7 +3456,7 @@ define internal void @process_tx_desc(%struct.E1000State_st* %s, %struct.e1000_t
   store %struct.e1000_tx_desc* %dp, %struct.e1000_tx_desc** %2, align 8
   %3 = load %struct.E1000State_st** %1, align 8, !dbg !1864
   %4 = bitcast %struct.E1000State_st* %3 to %struct.Object*, !dbg !1864
-  %5 = call %struct.Object* @object_dynamic_cast_assert(%struct.Object* %4, i8* getelementptr inbounds ([11 x i8]* @.str1, i32 0, i32 0), i8* getelementptr inbounds ([30 x i8]* @.str2, i32 0, i32 0), i32 651, i8* getelementptr inbounds ([16 x i8]* @__fun
+  %5 = call %struct.Object* @object_dynamic_cast_assert(%struct.Object* %4, i8* getelementptr inbounds ([11 x i8]* @.str1, i32 0, i32 0), i8* getelementptr inbounds ([30 x i8]* @.str2, i32 0, i32 0), i32 653, i8* getelementptr inbounds ([16 x i8]* @__fun
   %6 = bitcast %struct.Object* %5 to %struct.PCIDevice*, !dbg !1864
   store %struct.PCIDevice* %6, %struct.PCIDevice** %d, align 8, !dbg !1864
   %7 = load %struct.e1000_tx_desc** %2, align 8, !dbg !1865
@@ -4066,7 +4067,7 @@ define internal i32 @txdesc_writeback(%struct.E1000State_st* %s, i64 %base, %str
   store %struct.e1000_tx_desc* %dp, %struct.e1000_tx_desc** %4, align 8
   %5 = load %struct.E1000State_st** %2, align 8, !dbg !1973
   %6 = bitcast %struct.E1000State_st* %5 to %struct.Object*, !dbg !1973
-  %7 = call %struct.Object* @object_dynamic_cast_assert(%struct.Object* %6, i8* getelementptr inbounds ([11 x i8]* @.str1, i32 0, i32 0), i8* getelementptr inbounds ([30 x i8]* @.str2, i32 0, i32 0), i32 747, i8* getelementptr inbounds ([17 x i8]* @__fun
+  %7 = call %struct.Object* @object_dynamic_cast_assert(%struct.Object* %6, i8* getelementptr inbounds ([11 x i8]* @.str1, i32 0, i32 0), i8* getelementptr inbounds ([30 x i8]* @.str2, i32 0, i32 0), i32 749, i8* getelementptr inbounds ([17 x i8]* @__fun
   %8 = bitcast %struct.Object* %7 to %struct.PCIDevice*, !dbg !1973
   store %struct.PCIDevice* %8, %struct.PCIDevice** %d, align 8, !dbg !1973
   %9 = load %struct.e1000_tx_desc** %4, align 8, !dbg !1974
@@ -4686,11 +4687,11 @@ define internal void @e1000_send_packet(%struct.E1000State_st* %s, i8* %buf, i32
   %12 = zext i16 %11 to i32, !dbg !2073
   %13 = and i32 %12, 16384, !dbg !2073
   %14 = icmp ne i32 %13, 0, !dbg !2073
-  br i1 %14, label %15, label %28, !dbg !2073
+  %15 = load %struct._IO_FILE** @stderr, align 8, !dbg !2075
+  br i1 %14, label %16, label %28, !dbg !2073
 
-; <label>:15                                      ; preds = %0
-  %16 = load %struct._IO_FILE** @stderr, align 8, !dbg !2075
-  %17 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %16, i8* getelementptr inbounds ([48 x i8]* @.str23, i32 0, i32 0)), !dbg !2075
+; <label>:16                                      ; preds = %0
+  %17 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %15, i8* getelementptr inbounds ([48 x i8]* @.str23, i32 0, i32 0)), !dbg !2075
   %18 = load %struct.NetClientState** %nc, align 8, !dbg !2077
   %19 = getelementptr inbounds %struct.NetClientState* %18, i32 0, i32 0, !dbg !2077
   %20 = load %struct.NetClientInfo** %19, align 8, !dbg !2077
@@ -4701,17 +4702,18 @@ define internal void @e1000_send_packet(%struct.E1000State_st* %s, i8* %buf, i32
   %25 = load i32* %3, align 4, !dbg !2077
   %26 = sext i32 %25 to i64, !dbg !2077
   %27 = call i64 %22(%struct.NetClientState* %23, i8* %24, i64 %26), !dbg !2077
-  br label %32, !dbg !2078
+  br label %33, !dbg !2078
 
 ; <label>:28                                      ; preds = %0
-  %29 = load %struct.NetClientState** %nc, align 8, !dbg !2079
-  %30 = load i8** %2, align 8, !dbg !2079
-  %31 = load i32* %3, align 4, !dbg !2079
-  call void @qemu_send_packet(%struct.NetClientState* %29, i8* %30, i32 %31), !dbg !2079
-  br label %32
+  %29 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %15, i8* getelementptr inbounds ([62 x i8]* @.str24, i32 0, i32 0)), !dbg !2079
+  %30 = load %struct.NetClientState** %nc, align 8, !dbg !2081
+  %31 = load i8** %2, align 8, !dbg !2081
+  %32 = load i32* %3, align 4, !dbg !2081
+  call void @qemu_send_packet(%struct.NetClientState* %30, i8* %31, i32 %32), !dbg !2081
+  br label %33
 
-; <label>:32                                      ; preds = %28, %15
-  ret void, !dbg !2081
+; <label>:33                                      ; preds = %28, %16
+  ret void, !dbg !2082
 }
 
 declare void @qemu_send_packet(%struct.NetClientState*, i8*, i32) #1
@@ -4722,10 +4724,10 @@ define internal i32 @net_checksum_add(i32 %len, i8* %buf) #3 {
   %2 = alloca i8*, align 8
   store i32 %len, i32* %1, align 4
   store i8* %buf, i8** %2, align 8
-  %3 = load i32* %1, align 4, !dbg !2082
-  %4 = load i8** %2, align 8, !dbg !2082
-  %5 = call i32 @net_checksum_add_cont(i32 %3, i8* %4, i32 0), !dbg !2082
-  ret i32 %5, !dbg !2082
+  %3 = load i32* %1, align 4, !dbg !2083
+  %4 = load i8** %2, align 8, !dbg !2083
+  %5 = call i32 @net_checksum_add_cont(i32 %3, i8* %4, i32 0), !dbg !2083
+  ret i32 %5, !dbg !2083
 }
 
 declare zeroext i16 @net_checksum_finish(i32) #1
@@ -4739,9 +4741,9 @@ define internal i32 @bswap32(i32 %x) #3 {
   %__x = alloca i32, align 4
   %2 = alloca i32, align 4
   store i32 %x, i32* %1, align 4
-  %3 = load i32* %1, align 4, !dbg !2084
-  store i32 %3, i32* %__x, align 4, !dbg !2084
-  %4 = load i32* %__x, align 4, !dbg !2086
+  %3 = load i32* %1, align 4, !dbg !2085
+  store i32 %3, i32* %__x, align 4, !dbg !2085
+  %4 = load i32* %__x, align 4, !dbg !2087
   %bswap.4 = shl i32 %4, 24
   %bswap.3 = shl i32 %4, 8
   %bswap.2 = lshr i32 %4, 8
@@ -4751,11 +4753,11 @@ define internal i32 @bswap32(i32 %x) #3 {
   %bswap.or1 = or i32 %bswap.4, %bswap.and3
   %bswap.or2 = or i32 %bswap.and2, %bswap.1
   %bswap.i32 = or i32 %bswap.or1, %bswap.or2
-  store i32 %bswap.i32, i32* %__v, align 4, !dbg !2086
-  %5 = load i32* %__v, align 4, !dbg !2086
-  store i32 %5, i32* %2, !dbg !2086
-  %6 = load i32* %2, !dbg !2084
-  ret i32 %6, !dbg !2084
+  store i32 %bswap.i32, i32* %__v, align 4, !dbg !2087
+  %5 = load i32* %__v, align 4, !dbg !2087
+  store i32 %5, i32* %2, !dbg !2087
+  %6 = load i32* %2, !dbg !2085
+  ret i32 %6, !dbg !2085
 }
 
 ; Function Attrs: inlinehint nounwind uwtable
@@ -4763,11 +4765,11 @@ define internal i32 @ldl_he_p(i8* %ptr) #3 {
   %1 = alloca i8*, align 8
   %r = alloca i32, align 4
   store i8* %ptr, i8** %1, align 8
-  %2 = bitcast i32* %r to i8*, !dbg !2088
-  %3 = load i8** %1, align 8, !dbg !2088
+  %2 = bitcast i32* %r to i8*, !dbg !2089
+  %3 = load i8** %1, align 8, !dbg !2089
   %4 = call i8* @memcpy(i8* %2, i8* %3, i64 4)
-  %5 = load i32* %r, align 4, !dbg !2089
-  ret i32 %5, !dbg !2089
+  %5 = load i32* %r, align 4, !dbg !2090
+  ret i32 %5, !dbg !2090
 }
 
 ; Function Attrs: inlinehint nounwind uwtable
@@ -4776,10 +4778,10 @@ define internal void @stl_he_p(i8* %ptr, i32 %v) #3 {
   %2 = alloca i32, align 4
   store i8* %ptr, i8** %1, align 8
   store i32 %v, i32* %2, align 4
-  %3 = load i8** %1, align 8, !dbg !2090
-  %4 = bitcast i32* %2 to i8*, !dbg !2090
+  %3 = load i8** %1, align 8, !dbg !2091
+  %4 = bitcast i32* %2 to i8*, !dbg !2091
   %5 = call i8* @memcpy(i8* %3, i8* %4, i64 4)
-  ret void, !dbg !2091
+  ret void, !dbg !2092
 }
 
 ; Function Attrs: inlinehint nounwind uwtable
@@ -4788,10 +4790,10 @@ define internal void @stw_he_p(i8* %ptr, i16 zeroext %v) #3 {
   %2 = alloca i16, align 2
   store i8* %ptr, i8** %1, align 8
   store i16 %v, i16* %2, align 2
-  %3 = load i8** %1, align 8, !dbg !2092
-  %4 = bitcast i16* %2 to i8*, !dbg !2092
+  %3 = load i8** %1, align 8, !dbg !2093
+  %4 = bitcast i16* %2 to i8*, !dbg !2093
   %5 = call i8* @memcpy(i8* %3, i8* %4, i64 2)
-  ret void, !dbg !2093
+  ret void, !dbg !2094
 }
 
 ; Function Attrs: nounwind uwtable
@@ -4799,10 +4801,10 @@ define internal i32 @rxbufsize(i32 %v) #0 {
   %1 = alloca i32, align 4
   %2 = alloca i32, align 4
   store i32 %v, i32* %2, align 4
-  %3 = load i32* %2, align 4, !dbg !2094
-  %4 = and i32 %3, 33751040, !dbg !2094
-  store i32 %4, i32* %2, align 4, !dbg !2094
-  %5 = load i32* %2, align 4, !dbg !2095
+  %3 = load i32* %2, align 4, !dbg !2095
+  %4 = and i32 %3, 33751040, !dbg !2095
+  store i32 %4, i32* %2, align 4, !dbg !2095
+  %5 = load i32* %2, align 4, !dbg !2096
   switch i32 %5, label %12 [
     i32 33619968, label %6
     i32 33685504, label %7
@@ -4810,39 +4812,39 @@ define internal i32 @rxbufsize(i32 %v) #0 {
     i32 65536, label %9
     i32 131072, label %10
     i32 196608, label %11
-  ], !dbg !2095
+  ], !dbg !2096
 
 ; <label>:6                                       ; preds = %0
-  store i32 16384, i32* %1, !dbg !2096
-  br label %13, !dbg !2096
+  store i32 16384, i32* %1, !dbg !2097
+  br label %13, !dbg !2097
 
 ; <label>:7                                       ; preds = %0
-  store i32 8192, i32* %1, !dbg !2098
-  br label %13, !dbg !2098
-
-; <label>:8                                       ; preds = %0
-  store i32 4096, i32* %1, !dbg !2099
+  store i32 8192, i32* %1, !dbg !2099
   br label %13, !dbg !2099
 
-; <label>:9                                       ; preds = %0
-  store i32 1024, i32* %1, !dbg !2100
+; <label>:8                                       ; preds = %0
+  store i32 4096, i32* %1, !dbg !2100
   br label %13, !dbg !2100
 
-; <label>:10                                      ; preds = %0
-  store i32 512, i32* %1, !dbg !2101
+; <label>:9                                       ; preds = %0
+  store i32 1024, i32* %1, !dbg !2101
   br label %13, !dbg !2101
 
-; <label>:11                                      ; preds = %0
-  store i32 256, i32* %1, !dbg !2102
+; <label>:10                                      ; preds = %0
+  store i32 512, i32* %1, !dbg !2102
   br label %13, !dbg !2102
 
-; <label>:12                                      ; preds = %0
-  store i32 2048, i32* %1, !dbg !2103
+; <label>:11                                      ; preds = %0
+  store i32 256, i32* %1, !dbg !2103
   br label %13, !dbg !2103
 
+; <label>:12                                      ; preds = %0
+  store i32 2048, i32* %1, !dbg !2104
+  br label %13, !dbg !2104
+
 ; <label>:13                                      ; preds = %12, %11, %10, %9, %8, %7, %6
-  %14 = load i32* %1, !dbg !2104
-  ret i32 %14, !dbg !2104
+  %14 = load i32* %1, !dbg !2105
+  ret i32 %14, !dbg !2105
 }
 
 ; Function Attrs: nounwind uwtable
@@ -4853,51 +4855,51 @@ define internal void @set_phy_ctrl(%struct.E1000State_st* %s, i32 %index, i16 ze
   store %struct.E1000State_st* %s, %struct.E1000State_st** %1, align 8
   store i32 %index, i32* %2, align 4
   store i16 %val, i16* %3, align 2
-  %4 = load %struct.E1000State_st** %1, align 8, !dbg !2105
-  %5 = getelementptr inbounds %struct.E1000State_st* %4, i32 0, i32 17, !dbg !2105
-  %6 = load i32* %5, align 4, !dbg !2105
-  %7 = and i32 %6, 1, !dbg !2105
-  %8 = icmp ne i32 %7, 0, !dbg !2105
-  br i1 %8, label %9, label %33, !dbg !2105
+  %4 = load %struct.E1000State_st** %1, align 8, !dbg !2106
+  %5 = getelementptr inbounds %struct.E1000State_st* %4, i32 0, i32 17, !dbg !2106
+  %6 = load i32* %5, align 4, !dbg !2106
+  %7 = and i32 %6, 1, !dbg !2106
+  %8 = icmp ne i32 %7, 0, !dbg !2106
+  br i1 %8, label %9, label %33, !dbg !2106
 
 ; <label>:9                                       ; preds = %0
-  %10 = load i16* %3, align 2, !dbg !2107
-  %11 = zext i16 %10 to i32, !dbg !2107
-  %12 = and i32 %11, 4096, !dbg !2107
-  %13 = icmp ne i32 %12, 0, !dbg !2107
-  br i1 %13, label %14, label %33, !dbg !2107
+  %10 = load i16* %3, align 2, !dbg !2108
+  %11 = zext i16 %10 to i32, !dbg !2108
+  %12 = and i32 %11, 4096, !dbg !2108
+  %13 = icmp ne i32 %12, 0, !dbg !2108
+  br i1 %13, label %14, label %33, !dbg !2108
 
 ; <label>:14                                      ; preds = %9
-  %15 = load i16* %3, align 2, !dbg !2107
-  %16 = zext i16 %15 to i32, !dbg !2107
-  %17 = and i32 %16, 512, !dbg !2107
-  %18 = icmp ne i32 %17, 0, !dbg !2107
-  br i1 %18, label %19, label %33, !dbg !2107
+  %15 = load i16* %3, align 2, !dbg !2108
+  %16 = zext i16 %15 to i32, !dbg !2108
+  %17 = and i32 %16, 512, !dbg !2108
+  %18 = icmp ne i32 %17, 0, !dbg !2108
+  br i1 %18, label %19, label %33, !dbg !2108
 
 ; <label>:19                                      ; preds = %14
-  %20 = load %struct.E1000State_st** %1, align 8, !dbg !2109
-  call void @e1000_link_down(%struct.E1000State_st* %20), !dbg !2109
-  %21 = load i32* @debugflags, align 4, !dbg !2111
-  %22 = and i32 %21, 8192, !dbg !2111
-  %23 = icmp ne i32 %22, 0, !dbg !2111
-  br i1 %23, label %24, label %27, !dbg !2111
+  %20 = load %struct.E1000State_st** %1, align 8, !dbg !2110
+  call void @e1000_link_down(%struct.E1000State_st* %20), !dbg !2110
+  %21 = load i32* @debugflags, align 4, !dbg !2112
+  %22 = and i32 %21, 8192, !dbg !2112
+  %23 = icmp ne i32 %22, 0, !dbg !2112
+  br i1 %23, label %24, label %27, !dbg !2112
 
 ; <label>:24                                      ; preds = %19
-  %25 = load %struct._IO_FILE** @stderr, align 8, !dbg !2111
-  %26 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %25, i8* getelementptr inbounds ([36 x i8]* @.str30, i32 0, i32 0)), !dbg !2111
-  br label %27, !dbg !2111
+  %25 = load %struct._IO_FILE** @stderr, align 8, !dbg !2112
+  %26 = call i32 (%struct._IO_FILE*, i8*, ...)* @fprintf(%struct._IO_FILE* %25, i8* getelementptr inbounds ([36 x i8]* @.str31, i32 0, i32 0)), !dbg !2112
+  br label %27, !dbg !2112
 
 ; <label>:27                                      ; preds = %19, %24
-  %28 = load %struct.E1000State_st** %1, align 8, !dbg !2114
-  %29 = getelementptr inbounds %struct.E1000State_st* %28, i32 0, i32 12, !dbg !2114
-  %30 = load %struct.QEMUTimer** %29, align 8, !dbg !2114
-  %31 = call i64 @qemu_clock_get_ms(i32 1), !dbg !2115
-  %32 = add nsw i64 %31, 500, !dbg !2115
-  call void @timer_mod(%struct.QEMUTimer* %30, i64 %32), !dbg !2114
-  br label %33, !dbg !2116
+  %28 = load %struct.E1000State_st** %1, align 8, !dbg !2115
+  %29 = getelementptr inbounds %struct.E1000State_st* %28, i32 0, i32 12, !dbg !2115
+  %30 = load %struct.QEMUTimer** %29, align 8, !dbg !2115
+  %31 = call i64 @qemu_clock_get_ms(i32 1), !dbg !2116
+  %32 = add nsw i64 %31, 500, !dbg !2116
+  call void @timer_mod(%struct.QEMUTimer* %30, i64 %32), !dbg !2115
+  br label %33, !dbg !2117
 
 ; <label>:33                                      ; preds = %0, %27, %14, %9
-  ret void, !dbg !2117
+  ret void, !dbg !2118
 }
 
 declare void @qemu_format_nic_info_str(%struct.NetClientState*, i8*) #1
@@ -4910,15 +4912,15 @@ declare i32 @llvm.bswap.i32(i32) #2
 
 ; Function Attrs: nounwind ssp uwtable
 define void @klee_div_zero_check(i64 %z) #6 {
-  %1 = icmp eq i64 %z, 0, !dbg !2118
-  br i1 %1, label %2, label %3, !dbg !2118
+  %1 = icmp eq i64 %z, 0, !dbg !2119
+  br i1 %1, label %2, label %3, !dbg !2119
 
 ; <label>:2                                       ; preds = %0
-  tail call void @klee_report_error(i8* getelementptr inbounds ([22 x i8]* @.str32, i64 0, i64 0), i32 14, i8* getelementptr inbounds ([15 x i8]* @.str133, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8]* @.str234, i64 0, i64 0)) #10, !dbg !2120
-  unreachable, !dbg !2120
+  tail call void @klee_report_error(i8* getelementptr inbounds ([22 x i8]* @.str33, i64 0, i64 0), i32 14, i8* getelementptr inbounds ([15 x i8]* @.str134, i64 0, i64 0), i8* getelementptr inbounds ([8 x i8]* @.str235, i64 0, i64 0)) #10, !dbg !2121
+  unreachable, !dbg !2121
 
 ; <label>:3                                       ; preds = %0
-  ret void, !dbg !2121
+  ret void, !dbg !2122
 }
 
 ; Function Attrs: noreturn
@@ -4930,80 +4932,80 @@ declare void @llvm.dbg.value(metadata, i64, metadata) #2
 ; Function Attrs: nounwind ssp uwtable
 define i32 @klee_int(i8* %name) #6 {
   %x = alloca i32, align 4
-  %1 = bitcast i32* %x to i8*, !dbg !2122
-  call void @klee_make_symbolic(i8* %1, i64 4, i8* %name) #11, !dbg !2122
-  %2 = load i32* %x, align 4, !dbg !2123, !tbaa !2124
-  ret i32 %2, !dbg !2123
+  %1 = bitcast i32* %x to i8*, !dbg !2123
+  call void @klee_make_symbolic(i8* %1, i64 4, i8* %name) #11, !dbg !2123
+  %2 = load i32* %x, align 4, !dbg !2124, !tbaa !2125
+  ret i32 %2, !dbg !2124
 }
 
 declare void @klee_make_symbolic(i8*, i64, i8*) #8
 
 ; Function Attrs: nounwind ssp uwtable
 define void @klee_overshift_check(i64 %bitWidth, i64 %shift) #6 {
-  %1 = icmp ult i64 %shift, %bitWidth, !dbg !2128
-  br i1 %1, label %3, label %2, !dbg !2128
+  %1 = icmp ult i64 %shift, %bitWidth, !dbg !2129
+  br i1 %1, label %3, label %2, !dbg !2129
 
 ; <label>:2                                       ; preds = %0
-  tail call void @klee_report_error(i8* getelementptr inbounds ([8 x i8]* @.str335, i64 0, i64 0), i32 0, i8* getelementptr inbounds ([16 x i8]* @.str1436, i64 0, i64 0), i8* getelementptr inbounds ([14 x i8]* @.str2537, i64 0, i64 0)) #10, !dbg !2130
-  unreachable, !dbg !2130
+  tail call void @klee_report_error(i8* getelementptr inbounds ([8 x i8]* @.str336, i64 0, i64 0), i32 0, i8* getelementptr inbounds ([16 x i8]* @.str1437, i64 0, i64 0), i8* getelementptr inbounds ([14 x i8]* @.str2538, i64 0, i64 0)) #10, !dbg !2131
+  unreachable, !dbg !2131
 
 ; <label>:3                                       ; preds = %0
-  ret void, !dbg !2132
+  ret void, !dbg !2133
 }
 
 ; Function Attrs: nounwind ssp uwtable
 define i32 @klee_range(i32 %start, i32 %end, i8* %name) #6 {
   %x = alloca i32, align 4
-  %1 = icmp slt i32 %start, %end, !dbg !2133
-  br i1 %1, label %3, label %2, !dbg !2133
+  %1 = icmp slt i32 %start, %end, !dbg !2134
+  br i1 %1, label %3, label %2, !dbg !2134
 
 ; <label>:2                                       ; preds = %0
-  call void @klee_report_error(i8* getelementptr inbounds ([13 x i8]* @.str638, i64 0, i64 0), i32 17, i8* getelementptr inbounds ([14 x i8]* @.str1739, i64 0, i64 0), i8* getelementptr inbounds ([5 x i8]* @.str2840, i64 0, i64 0)) #10, !dbg !2135
-  unreachable, !dbg !2135
+  call void @klee_report_error(i8* getelementptr inbounds ([13 x i8]* @.str639, i64 0, i64 0), i32 17, i8* getelementptr inbounds ([14 x i8]* @.str1740, i64 0, i64 0), i8* getelementptr inbounds ([5 x i8]* @.str2841, i64 0, i64 0)) #10, !dbg !2136
+  unreachable, !dbg !2136
 
 ; <label>:3                                       ; preds = %0
-  %4 = add nsw i32 %start, 1, !dbg !2136
-  %5 = icmp eq i32 %4, %end, !dbg !2136
-  br i1 %5, label %21, label %6, !dbg !2136
+  %4 = add nsw i32 %start, 1, !dbg !2137
+  %5 = icmp eq i32 %4, %end, !dbg !2137
+  br i1 %5, label %21, label %6, !dbg !2137
 
 ; <label>:6                                       ; preds = %3
-  %7 = bitcast i32* %x to i8*, !dbg !2138
-  call void @klee_make_symbolic(i8* %7, i64 4, i8* %name) #11, !dbg !2138
-  %8 = icmp eq i32 %start, 0, !dbg !2140
-  %9 = load i32* %x, align 4, !dbg !2142, !tbaa !2124
-  br i1 %8, label %10, label %13, !dbg !2140
+  %7 = bitcast i32* %x to i8*, !dbg !2139
+  call void @klee_make_symbolic(i8* %7, i64 4, i8* %name) #11, !dbg !2139
+  %8 = icmp eq i32 %start, 0, !dbg !2141
+  %9 = load i32* %x, align 4, !dbg !2143, !tbaa !2125
+  br i1 %8, label %10, label %13, !dbg !2141
 
 ; <label>:10                                      ; preds = %6
-  %11 = icmp ult i32 %9, %end, !dbg !2142
-  %12 = zext i1 %11 to i64, !dbg !2142
-  call void @klee_assume(i64 %12) #11, !dbg !2142
-  br label %19, !dbg !2144
+  %11 = icmp ult i32 %9, %end, !dbg !2143
+  %12 = zext i1 %11 to i64, !dbg !2143
+  call void @klee_assume(i64 %12) #11, !dbg !2143
+  br label %19, !dbg !2145
 
 ; <label>:13                                      ; preds = %6
-  %14 = icmp sge i32 %9, %start, !dbg !2145
-  %15 = zext i1 %14 to i64, !dbg !2145
-  call void @klee_assume(i64 %15) #11, !dbg !2145
-  %16 = load i32* %x, align 4, !dbg !2147, !tbaa !2124
-  %17 = icmp slt i32 %16, %end, !dbg !2147
-  %18 = zext i1 %17 to i64, !dbg !2147
-  call void @klee_assume(i64 %18) #11, !dbg !2147
+  %14 = icmp sge i32 %9, %start, !dbg !2146
+  %15 = zext i1 %14 to i64, !dbg !2146
+  call void @klee_assume(i64 %15) #11, !dbg !2146
+  %16 = load i32* %x, align 4, !dbg !2148, !tbaa !2125
+  %17 = icmp slt i32 %16, %end, !dbg !2148
+  %18 = zext i1 %17 to i64, !dbg !2148
+  call void @klee_assume(i64 %18) #11, !dbg !2148
   br label %19
 
 ; <label>:19                                      ; preds = %13, %10
-  %20 = load i32* %x, align 4, !dbg !2148, !tbaa !2124
-  br label %21, !dbg !2148
+  %20 = load i32* %x, align 4, !dbg !2149, !tbaa !2125
+  br label %21, !dbg !2149
 
 ; <label>:21                                      ; preds = %19, %3
   %.0 = phi i32 [ %20, %19 ], [ %start, %3 ]
-  ret i32 %.0, !dbg !2149
+  ret i32 %.0, !dbg !2150
 }
 
 declare void @klee_assume(i64) #8
 
 ; Function Attrs: nounwind ssp uwtable
 define weak i8* @memcpy(i8* %destaddr, i8* %srcaddr, i64 %len) #6 {
-  %1 = icmp eq i64 %len, 0, !dbg !2150
-  br i1 %1, label %._crit_edge, label %.lr.ph.preheader, !dbg !2150
+  %1 = icmp eq i64 %len, 0, !dbg !2151
+  br i1 %1, label %._crit_edge, label %.lr.ph.preheader, !dbg !2151
 
 .lr.ph.preheader:                                 ; preds = %0
   %n.vec = and i64 %len, -32
@@ -5026,20 +5028,20 @@ vector.body:                                      ; preds = %vector.body, %vecto
   %index = phi i64 [ %index.next, %vector.body ], [ 0, %vector.memcheck ]
   %next.gep = getelementptr i8* %srcaddr, i64 %index
   %next.gep103 = getelementptr i8* %destaddr, i64 %index
-  %3 = bitcast i8* %next.gep to <16 x i8>*, !dbg !2151
-  %wide.load = load <16 x i8>* %3, align 1, !dbg !2151
-  %next.gep.sum279 = or i64 %index, 16, !dbg !2151
-  %4 = getelementptr i8* %srcaddr, i64 %next.gep.sum279, !dbg !2151
-  %5 = bitcast i8* %4 to <16 x i8>*, !dbg !2151
-  %wide.load200 = load <16 x i8>* %5, align 1, !dbg !2151
-  %6 = bitcast i8* %next.gep103 to <16 x i8>*, !dbg !2151
-  store <16 x i8> %wide.load, <16 x i8>* %6, align 1, !dbg !2151
-  %7 = getelementptr i8* %destaddr, i64 %next.gep.sum279, !dbg !2151
-  %8 = bitcast i8* %7 to <16 x i8>*, !dbg !2151
-  store <16 x i8> %wide.load200, <16 x i8>* %8, align 1, !dbg !2151
+  %3 = bitcast i8* %next.gep to <16 x i8>*, !dbg !2152
+  %wide.load = load <16 x i8>* %3, align 1, !dbg !2152
+  %next.gep.sum279 = or i64 %index, 16, !dbg !2152
+  %4 = getelementptr i8* %srcaddr, i64 %next.gep.sum279, !dbg !2152
+  %5 = bitcast i8* %4 to <16 x i8>*, !dbg !2152
+  %wide.load200 = load <16 x i8>* %5, align 1, !dbg !2152
+  %6 = bitcast i8* %next.gep103 to <16 x i8>*, !dbg !2152
+  store <16 x i8> %wide.load, <16 x i8>* %6, align 1, !dbg !2152
+  %7 = getelementptr i8* %destaddr, i64 %next.gep.sum279, !dbg !2152
+  %8 = bitcast i8* %7 to <16 x i8>*, !dbg !2152
+  store <16 x i8> %wide.load200, <16 x i8>* %8, align 1, !dbg !2152
   %index.next = add i64 %index, 32
   %9 = icmp eq i64 %index.next, %n.vec
-  br i1 %9, label %middle.block, label %vector.body, !llvm.loop !2152
+  br i1 %9, label %middle.block, label %vector.body, !llvm.loop !2153
 
 middle.block:                                     ; preds = %vector.body, %vector.memcheck, %.lr.ph.preheader
   %resume.val = phi i8* [ %srcaddr, %.lr.ph.preheader ], [ %srcaddr, %vector.memcheck ], [ %ptr.ind.end, %vector.body ]
@@ -5053,30 +5055,30 @@ middle.block:                                     ; preds = %vector.body, %vecto
   %src.03 = phi i8* [ %11, %.lr.ph ], [ %resume.val, %middle.block ]
   %dest.02 = phi i8* [ %13, %.lr.ph ], [ %resume.val5, %middle.block ]
   %.01 = phi i64 [ %10, %.lr.ph ], [ %resume.val7, %middle.block ]
-  %10 = add i64 %.01, -1, !dbg !2150
-  %11 = getelementptr inbounds i8* %src.03, i64 1, !dbg !2151
-  %12 = load i8* %src.03, align 1, !dbg !2151, !tbaa !2155
-  %13 = getelementptr inbounds i8* %dest.02, i64 1, !dbg !2151
-  store i8 %12, i8* %dest.02, align 1, !dbg !2151, !tbaa !2155
-  %14 = icmp eq i64 %10, 0, !dbg !2150
-  br i1 %14, label %._crit_edge, label %.lr.ph, !dbg !2150, !llvm.loop !2156
+  %10 = add i64 %.01, -1, !dbg !2151
+  %11 = getelementptr inbounds i8* %src.03, i64 1, !dbg !2152
+  %12 = load i8* %src.03, align 1, !dbg !2152, !tbaa !2156
+  %13 = getelementptr inbounds i8* %dest.02, i64 1, !dbg !2152
+  store i8 %12, i8* %dest.02, align 1, !dbg !2152, !tbaa !2156
+  %14 = icmp eq i64 %10, 0, !dbg !2151
+  br i1 %14, label %._crit_edge, label %.lr.ph, !dbg !2151, !llvm.loop !2157
 
 ._crit_edge:                                      ; preds = %.lr.ph, %middle.block, %0
-  ret i8* %destaddr, !dbg !2157
+  ret i8* %destaddr, !dbg !2158
 }
 
 ; Function Attrs: nounwind ssp uwtable
 define weak i8* @memmove(i8* %dst, i8* %src, i64 %count) #6 {
-  %1 = icmp eq i8* %src, %dst, !dbg !2158
-  br i1 %1, label %.loopexit, label %2, !dbg !2158
+  %1 = icmp eq i8* %src, %dst, !dbg !2159
+  br i1 %1, label %.loopexit, label %2, !dbg !2159
 
 ; <label>:2                                       ; preds = %0
-  %3 = icmp ugt i8* %src, %dst, !dbg !2160
-  br i1 %3, label %.preheader, label %18, !dbg !2160
+  %3 = icmp ugt i8* %src, %dst, !dbg !2161
+  br i1 %3, label %.preheader, label %18, !dbg !2161
 
 .preheader:                                       ; preds = %2
-  %4 = icmp eq i64 %count, 0, !dbg !2162
-  br i1 %4, label %.loopexit, label %.lr.ph.preheader, !dbg !2162
+  %4 = icmp eq i64 %count, 0, !dbg !2163
+  br i1 %4, label %.loopexit, label %.lr.ph.preheader, !dbg !2163
 
 .lr.ph.preheader:                                 ; preds = %.preheader
   %n.vec = and i64 %count, -32
@@ -5099,20 +5101,20 @@ vector.body:                                      ; preds = %vector.body, %vecto
   %index = phi i64 [ %index.next, %vector.body ], [ 0, %vector.memcheck ]
   %next.gep = getelementptr i8* %src, i64 %index
   %next.gep110 = getelementptr i8* %dst, i64 %index
-  %6 = bitcast i8* %next.gep to <16 x i8>*, !dbg !2162
-  %wide.load = load <16 x i8>* %6, align 1, !dbg !2162
-  %next.gep.sum586 = or i64 %index, 16, !dbg !2162
-  %7 = getelementptr i8* %src, i64 %next.gep.sum586, !dbg !2162
-  %8 = bitcast i8* %7 to <16 x i8>*, !dbg !2162
-  %wide.load207 = load <16 x i8>* %8, align 1, !dbg !2162
-  %9 = bitcast i8* %next.gep110 to <16 x i8>*, !dbg !2162
-  store <16 x i8> %wide.load, <16 x i8>* %9, align 1, !dbg !2162
-  %10 = getelementptr i8* %dst, i64 %next.gep.sum586, !dbg !2162
-  %11 = bitcast i8* %10 to <16 x i8>*, !dbg !2162
-  store <16 x i8> %wide.load207, <16 x i8>* %11, align 1, !dbg !2162
+  %6 = bitcast i8* %next.gep to <16 x i8>*, !dbg !2163
+  %wide.load = load <16 x i8>* %6, align 1, !dbg !2163
+  %next.gep.sum586 = or i64 %index, 16, !dbg !2163
+  %7 = getelementptr i8* %src, i64 %next.gep.sum586, !dbg !2163
+  %8 = bitcast i8* %7 to <16 x i8>*, !dbg !2163
+  %wide.load207 = load <16 x i8>* %8, align 1, !dbg !2163
+  %9 = bitcast i8* %next.gep110 to <16 x i8>*, !dbg !2163
+  store <16 x i8> %wide.load, <16 x i8>* %9, align 1, !dbg !2163
+  %10 = getelementptr i8* %dst, i64 %next.gep.sum586, !dbg !2163
+  %11 = bitcast i8* %10 to <16 x i8>*, !dbg !2163
+  store <16 x i8> %wide.load207, <16 x i8>* %11, align 1, !dbg !2163
   %index.next = add i64 %index, 32
   %12 = icmp eq i64 %index.next, %n.vec
-  br i1 %12, label %middle.block, label %vector.body, !llvm.loop !2164
+  br i1 %12, label %middle.block, label %vector.body, !llvm.loop !2165
 
 middle.block:                                     ; preds = %vector.body, %vector.memcheck, %.lr.ph.preheader
   %resume.val = phi i8* [ %src, %.lr.ph.preheader ], [ %src, %vector.memcheck ], [ %ptr.ind.end, %vector.body ]
@@ -5126,22 +5128,22 @@ middle.block:                                     ; preds = %vector.body, %vecto
   %b.04 = phi i8* [ %14, %.lr.ph ], [ %resume.val, %middle.block ]
   %a.03 = phi i8* [ %16, %.lr.ph ], [ %resume.val12, %middle.block ]
   %.02 = phi i64 [ %13, %.lr.ph ], [ %resume.val14, %middle.block ]
-  %13 = add i64 %.02, -1, !dbg !2162
-  %14 = getelementptr inbounds i8* %b.04, i64 1, !dbg !2162
-  %15 = load i8* %b.04, align 1, !dbg !2162, !tbaa !2155
-  %16 = getelementptr inbounds i8* %a.03, i64 1, !dbg !2162
-  store i8 %15, i8* %a.03, align 1, !dbg !2162, !tbaa !2155
-  %17 = icmp eq i64 %13, 0, !dbg !2162
-  br i1 %17, label %.loopexit, label %.lr.ph, !dbg !2162, !llvm.loop !2165
+  %13 = add i64 %.02, -1, !dbg !2163
+  %14 = getelementptr inbounds i8* %b.04, i64 1, !dbg !2163
+  %15 = load i8* %b.04, align 1, !dbg !2163, !tbaa !2156
+  %16 = getelementptr inbounds i8* %a.03, i64 1, !dbg !2163
+  store i8 %15, i8* %a.03, align 1, !dbg !2163, !tbaa !2156
+  %17 = icmp eq i64 %13, 0, !dbg !2163
+  br i1 %17, label %.loopexit, label %.lr.ph, !dbg !2163, !llvm.loop !2166
 
 ; <label>:18                                      ; preds = %2
-  %19 = add i64 %count, -1, !dbg !2166
-  %20 = icmp eq i64 %count, 0, !dbg !2168
-  br i1 %20, label %.loopexit, label %.lr.ph9, !dbg !2168
+  %19 = add i64 %count, -1, !dbg !2167
+  %20 = icmp eq i64 %count, 0, !dbg !2169
+  br i1 %20, label %.loopexit, label %.lr.ph9, !dbg !2169
 
 .lr.ph9:                                          ; preds = %18
-  %21 = getelementptr inbounds i8* %src, i64 %19, !dbg !2169
-  %22 = getelementptr inbounds i8* %dst, i64 %19, !dbg !2166
+  %21 = getelementptr inbounds i8* %src, i64 %19, !dbg !2170
+  %22 = getelementptr inbounds i8* %dst, i64 %19, !dbg !2167
   %n.vec215 = and i64 %count, -32
   %cmp.zero217 = icmp eq i64 %n.vec215, 0
   br i1 %cmp.zero217, label %middle.block210, label %vector.memcheck224
@@ -5159,27 +5161,27 @@ vector.memcheck224:                               ; preds = %.lr.ph9
 vector.body209:                                   ; preds = %vector.body209, %vector.memcheck224
   %index212 = phi i64 [ %index.next234, %vector.body209 ], [ 0, %vector.memcheck224 ]
   %.sum440 = sub i64 %19, %index212
-  %next.gep236.sum = add i64 %.sum440, -15, !dbg !2168
-  %23 = getelementptr i8* %src, i64 %next.gep236.sum, !dbg !2168
-  %24 = bitcast i8* %23 to <16 x i8>*, !dbg !2168
-  %wide.load434 = load <16 x i8>* %24, align 1, !dbg !2168
-  %reverse = shufflevector <16 x i8> %wide.load434, <16 x i8> undef, <16 x i32> <i32 15, i32 14, i32 13, i32 12, i32 11, i32 10, i32 9, i32 8, i32 7, i32 6, i32 5, i32 4, i32 3, i32 2, i32 1, i32 0>, !dbg !2168
-  %.sum505 = add i64 %.sum440, -31, !dbg !2168
-  %25 = getelementptr i8* %src, i64 %.sum505, !dbg !2168
-  %26 = bitcast i8* %25 to <16 x i8>*, !dbg !2168
-  %wide.load435 = load <16 x i8>* %26, align 1, !dbg !2168
-  %reverse436 = shufflevector <16 x i8> %wide.load435, <16 x i8> undef, <16 x i32> <i32 15, i32 14, i32 13, i32 12, i32 11, i32 10, i32 9, i32 8, i32 7, i32 6, i32 5, i32 4, i32 3, i32 2, i32 1, i32 0>, !dbg !2168
-  %reverse437 = shufflevector <16 x i8> %reverse, <16 x i8> undef, <16 x i32> <i32 15, i32 14, i32 13, i32 12, i32 11, i32 10, i32 9, i32 8, i32 7, i32 6, i32 5, i32 4, i32 3, i32 2, i32 1, i32 0>, !dbg !2168
-  %27 = getelementptr i8* %dst, i64 %next.gep236.sum, !dbg !2168
-  %28 = bitcast i8* %27 to <16 x i8>*, !dbg !2168
-  store <16 x i8> %reverse437, <16 x i8>* %28, align 1, !dbg !2168
-  %reverse438 = shufflevector <16 x i8> %reverse436, <16 x i8> undef, <16 x i32> <i32 15, i32 14, i32 13, i32 12, i32 11, i32 10, i32 9, i32 8, i32 7, i32 6, i32 5, i32 4, i32 3, i32 2, i32 1, i32 0>, !dbg !2168
-  %29 = getelementptr i8* %dst, i64 %.sum505, !dbg !2168
-  %30 = bitcast i8* %29 to <16 x i8>*, !dbg !2168
-  store <16 x i8> %reverse438, <16 x i8>* %30, align 1, !dbg !2168
+  %next.gep236.sum = add i64 %.sum440, -15, !dbg !2169
+  %23 = getelementptr i8* %src, i64 %next.gep236.sum, !dbg !2169
+  %24 = bitcast i8* %23 to <16 x i8>*, !dbg !2169
+  %wide.load434 = load <16 x i8>* %24, align 1, !dbg !2169
+  %reverse = shufflevector <16 x i8> %wide.load434, <16 x i8> undef, <16 x i32> <i32 15, i32 14, i32 13, i32 12, i32 11, i32 10, i32 9, i32 8, i32 7, i32 6, i32 5, i32 4, i32 3, i32 2, i32 1, i32 0>, !dbg !2169
+  %.sum505 = add i64 %.sum440, -31, !dbg !2169
+  %25 = getelementptr i8* %src, i64 %.sum505, !dbg !2169
+  %26 = bitcast i8* %25 to <16 x i8>*, !dbg !2169
+  %wide.load435 = load <16 x i8>* %26, align 1, !dbg !2169
+  %reverse436 = shufflevector <16 x i8> %wide.load435, <16 x i8> undef, <16 x i32> <i32 15, i32 14, i32 13, i32 12, i32 11, i32 10, i32 9, i32 8, i32 7, i32 6, i32 5, i32 4, i32 3, i32 2, i32 1, i32 0>, !dbg !2169
+  %reverse437 = shufflevector <16 x i8> %reverse, <16 x i8> undef, <16 x i32> <i32 15, i32 14, i32 13, i32 12, i32 11, i32 10, i32 9, i32 8, i32 7, i32 6, i32 5, i32 4, i32 3, i32 2, i32 1, i32 0>, !dbg !2169
+  %27 = getelementptr i8* %dst, i64 %next.gep236.sum, !dbg !2169
+  %28 = bitcast i8* %27 to <16 x i8>*, !dbg !2169
+  store <16 x i8> %reverse437, <16 x i8>* %28, align 1, !dbg !2169
+  %reverse438 = shufflevector <16 x i8> %reverse436, <16 x i8> undef, <16 x i32> <i32 15, i32 14, i32 13, i32 12, i32 11, i32 10, i32 9, i32 8, i32 7, i32 6, i32 5, i32 4, i32 3, i32 2, i32 1, i32 0>, !dbg !2169
+  %29 = getelementptr i8* %dst, i64 %.sum505, !dbg !2169
+  %30 = bitcast i8* %29 to <16 x i8>*, !dbg !2169
+  store <16 x i8> %reverse438, <16 x i8>* %30, align 1, !dbg !2169
   %index.next234 = add i64 %index212, 32
   %31 = icmp eq i64 %index.next234, %n.vec215
-  br i1 %31, label %middle.block210, label %vector.body209, !llvm.loop !2170
+  br i1 %31, label %middle.block210, label %vector.body209, !llvm.loop !2171
 
 middle.block210:                                  ; preds = %vector.body209, %vector.memcheck224, %.lr.ph9
   %resume.val225 = phi i8* [ %21, %.lr.ph9 ], [ %21, %vector.memcheck224 ], [ %rev.ptr.ind.end, %vector.body209 ]
@@ -5193,22 +5195,22 @@ scalar.ph211:                                     ; preds = %scalar.ph211, %midd
   %b.18 = phi i8* [ %33, %scalar.ph211 ], [ %resume.val225, %middle.block210 ]
   %a.17 = phi i8* [ %35, %scalar.ph211 ], [ %resume.val227, %middle.block210 ]
   %.16 = phi i64 [ %32, %scalar.ph211 ], [ %resume.val230, %middle.block210 ]
-  %32 = add i64 %.16, -1, !dbg !2168
-  %33 = getelementptr inbounds i8* %b.18, i64 -1, !dbg !2168
-  %34 = load i8* %b.18, align 1, !dbg !2168, !tbaa !2155
-  %35 = getelementptr inbounds i8* %a.17, i64 -1, !dbg !2168
-  store i8 %34, i8* %a.17, align 1, !dbg !2168, !tbaa !2155
-  %36 = icmp eq i64 %32, 0, !dbg !2168
-  br i1 %36, label %.loopexit, label %scalar.ph211, !dbg !2168, !llvm.loop !2171
+  %32 = add i64 %.16, -1, !dbg !2169
+  %33 = getelementptr inbounds i8* %b.18, i64 -1, !dbg !2169
+  %34 = load i8* %b.18, align 1, !dbg !2169, !tbaa !2156
+  %35 = getelementptr inbounds i8* %a.17, i64 -1, !dbg !2169
+  store i8 %34, i8* %a.17, align 1, !dbg !2169, !tbaa !2156
+  %36 = icmp eq i64 %32, 0, !dbg !2169
+  br i1 %36, label %.loopexit, label %scalar.ph211, !dbg !2169, !llvm.loop !2172
 
 .loopexit:                                        ; preds = %scalar.ph211, %middle.block210, %18, %.lr.ph, %middle.block, %.preheader, %0
-  ret i8* %dst, !dbg !2172
+  ret i8* %dst, !dbg !2173
 }
 
 ; Function Attrs: nounwind ssp uwtable
 define weak i8* @mempcpy(i8* %destaddr, i8* %srcaddr, i64 %len) #6 {
-  %1 = icmp eq i64 %len, 0, !dbg !2173
-  br i1 %1, label %15, label %.lr.ph.preheader, !dbg !2173
+  %1 = icmp eq i64 %len, 0, !dbg !2174
+  br i1 %1, label %15, label %.lr.ph.preheader, !dbg !2174
 
 .lr.ph.preheader:                                 ; preds = %0
   %n.vec = and i64 %len, -32
@@ -5231,20 +5233,20 @@ vector.body:                                      ; preds = %vector.body, %vecto
   %index = phi i64 [ %index.next, %vector.body ], [ 0, %vector.memcheck ]
   %next.gep = getelementptr i8* %srcaddr, i64 %index
   %next.gep104 = getelementptr i8* %destaddr, i64 %index
-  %3 = bitcast i8* %next.gep to <16 x i8>*, !dbg !2174
-  %wide.load = load <16 x i8>* %3, align 1, !dbg !2174
-  %next.gep.sum280 = or i64 %index, 16, !dbg !2174
-  %4 = getelementptr i8* %srcaddr, i64 %next.gep.sum280, !dbg !2174
-  %5 = bitcast i8* %4 to <16 x i8>*, !dbg !2174
-  %wide.load201 = load <16 x i8>* %5, align 1, !dbg !2174
-  %6 = bitcast i8* %next.gep104 to <16 x i8>*, !dbg !2174
-  store <16 x i8> %wide.load, <16 x i8>* %6, align 1, !dbg !2174
-  %7 = getelementptr i8* %destaddr, i64 %next.gep.sum280, !dbg !2174
-  %8 = bitcast i8* %7 to <16 x i8>*, !dbg !2174
-  store <16 x i8> %wide.load201, <16 x i8>* %8, align 1, !dbg !2174
+  %3 = bitcast i8* %next.gep to <16 x i8>*, !dbg !2175
+  %wide.load = load <16 x i8>* %3, align 1, !dbg !2175
+  %next.gep.sum280 = or i64 %index, 16, !dbg !2175
+  %4 = getelementptr i8* %srcaddr, i64 %next.gep.sum280, !dbg !2175
+  %5 = bitcast i8* %4 to <16 x i8>*, !dbg !2175
+  %wide.load201 = load <16 x i8>* %5, align 1, !dbg !2175
+  %6 = bitcast i8* %next.gep104 to <16 x i8>*, !dbg !2175
+  store <16 x i8> %wide.load, <16 x i8>* %6, align 1, !dbg !2175
+  %7 = getelementptr i8* %destaddr, i64 %next.gep.sum280, !dbg !2175
+  %8 = bitcast i8* %7 to <16 x i8>*, !dbg !2175
+  store <16 x i8> %wide.load201, <16 x i8>* %8, align 1, !dbg !2175
   %index.next = add i64 %index, 32
   %9 = icmp eq i64 %index.next, %n.vec
-  br i1 %9, label %middle.block, label %vector.body, !llvm.loop !2175
+  br i1 %9, label %middle.block, label %vector.body, !llvm.loop !2176
 
 middle.block:                                     ; preds = %vector.body, %vector.memcheck, %.lr.ph.preheader
   %resume.val = phi i8* [ %srcaddr, %.lr.ph.preheader ], [ %srcaddr, %vector.memcheck ], [ %ptr.ind.end, %vector.body ]
@@ -5258,43 +5260,43 @@ middle.block:                                     ; preds = %vector.body, %vecto
   %src.03 = phi i8* [ %11, %.lr.ph ], [ %resume.val, %middle.block ]
   %dest.02 = phi i8* [ %13, %.lr.ph ], [ %resume.val6, %middle.block ]
   %.01 = phi i64 [ %10, %.lr.ph ], [ %resume.val8, %middle.block ]
-  %10 = add i64 %.01, -1, !dbg !2173
-  %11 = getelementptr inbounds i8* %src.03, i64 1, !dbg !2174
-  %12 = load i8* %src.03, align 1, !dbg !2174, !tbaa !2155
-  %13 = getelementptr inbounds i8* %dest.02, i64 1, !dbg !2174
-  store i8 %12, i8* %dest.02, align 1, !dbg !2174, !tbaa !2155
-  %14 = icmp eq i64 %10, 0, !dbg !2173
-  br i1 %14, label %._crit_edge, label %.lr.ph, !dbg !2173, !llvm.loop !2176
+  %10 = add i64 %.01, -1, !dbg !2174
+  %11 = getelementptr inbounds i8* %src.03, i64 1, !dbg !2175
+  %12 = load i8* %src.03, align 1, !dbg !2175, !tbaa !2156
+  %13 = getelementptr inbounds i8* %dest.02, i64 1, !dbg !2175
+  store i8 %12, i8* %dest.02, align 1, !dbg !2175, !tbaa !2156
+  %14 = icmp eq i64 %10, 0, !dbg !2174
+  br i1 %14, label %._crit_edge, label %.lr.ph, !dbg !2174, !llvm.loop !2177
 
 ._crit_edge:                                      ; preds = %.lr.ph, %middle.block
   %scevgep = getelementptr i8* %destaddr, i64 %len
-  br label %15, !dbg !2173
+  br label %15, !dbg !2174
 
 ; <label>:15                                      ; preds = %._crit_edge, %0
   %dest.0.lcssa = phi i8* [ %scevgep, %._crit_edge ], [ %destaddr, %0 ]
-  ret i8* %dest.0.lcssa, !dbg !2177
+  ret i8* %dest.0.lcssa, !dbg !2178
 }
 
 ; Function Attrs: nounwind ssp uwtable
 define weak i8* @memset(i8* %dst, i32 %s, i64 %count) #6 {
-  %1 = icmp eq i64 %count, 0, !dbg !2178
-  br i1 %1, label %._crit_edge, label %.lr.ph, !dbg !2178
+  %1 = icmp eq i64 %count, 0, !dbg !2179
+  br i1 %1, label %._crit_edge, label %.lr.ph, !dbg !2179
 
 .lr.ph:                                           ; preds = %0
-  %2 = trunc i32 %s to i8, !dbg !2179
-  br label %3, !dbg !2178
+  %2 = trunc i32 %s to i8, !dbg !2180
+  br label %3, !dbg !2179
 
 ; <label>:3                                       ; preds = %3, %.lr.ph
   %a.02 = phi i8* [ %dst, %.lr.ph ], [ %5, %3 ]
   %.01 = phi i64 [ %count, %.lr.ph ], [ %4, %3 ]
-  %4 = add i64 %.01, -1, !dbg !2178
-  %5 = getelementptr inbounds i8* %a.02, i64 1, !dbg !2179
-  store volatile i8 %2, i8* %a.02, align 1, !dbg !2179, !tbaa !2155
-  %6 = icmp eq i64 %4, 0, !dbg !2178
-  br i1 %6, label %._crit_edge, label %3, !dbg !2178
+  %4 = add i64 %.01, -1, !dbg !2179
+  %5 = getelementptr inbounds i8* %a.02, i64 1, !dbg !2180
+  store volatile i8 %2, i8* %a.02, align 1, !dbg !2180, !tbaa !2156
+  %6 = icmp eq i64 %4, 0, !dbg !2179
+  br i1 %6, label %._crit_edge, label %3, !dbg !2179
 
 ._crit_edge:                                      ; preds = %3, %0
-  ret i8* %dst, !dbg !2180
+  ret i8* %dst, !dbg !2181
 }
 
 attributes #0 = { nounwind uwtable "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float
@@ -5429,10 +5431,10 @@ attributes #11 = { nobuiltin nounwind }
 !112 = metadata !{metadata !113, metadata !114}
 !113 = metadata !{i32 786472, metadata !"DMA_DIRECTION_TO_DEVICE", i64 0} ; [ DW_TAG_enumerator ] [DMA_DIRECTION_TO_DEVICE :: 0]
 !114 = metadata !{i32 786472, metadata !"DMA_DIRECTION_FROM_DEVICE", i64 1} ; [ DW_TAG_enumerator ] [DMA_DIRECTION_FROM_DEVICE :: 1]
-!115 = metadata !{i32 786436, metadata !39, null, metadata !"", i32 1273, i64 32, i64 32, i32 0, i32 0, null, metadata !116, i32 0, null, null, null} ; [ DW_TAG_enumeration_type ] [line 1273, size 32, align 32, offset 0] [def] [from ]
+!115 = metadata !{i32 786436, metadata !39, null, metadata !"", i32 1275, i64 32, i64 32, i32 0, i32 0, null, metadata !116, i32 0, null, null, null} ; [ DW_TAG_enumeration_type ] [line 1275, size 32, align 32, offset 0] [def] [from ]
 !116 = metadata !{metadata !117}
 !117 = metadata !{i32 786472, metadata !"NREADOPS", i64 5845} ; [ DW_TAG_enumerator ] [NREADOPS :: 5845]
-!118 = metadata !{i32 786436, metadata !39, null, metadata !"", i32 1292, i64 32, i64 32, i32 0, i32 0, null, metadata !119, i32 0, null, null, null} ; [ DW_TAG_enumeration_type ] [line 1292, size 32, align 32, offset 0] [def] [from ]
+!118 = metadata !{i32 786436, metadata !39, null, metadata !"", i32 1294, i64 32, i64 32, i32 0, i32 0, null, metadata !119, i32 0, null, null, null} ; [ DW_TAG_enumeration_type ] [line 1294, size 32, align 32, offset 0] [def] [from ]
 !119 = metadata !{metadata !120}
 !120 = metadata !{i32 786472, metadata !"NWRITEOPS", i64 5845} ; [ DW_TAG_enumerator ] [NWRITEOPS :: 5845]
 !121 = metadata !{i32 786436, metadata !39, null, metadata !"", i32 217, i64 32, i64 32, i32 0, i32 0, null, metadata !122, i32 0, null, null, null} ; [ DW_TAG_enumeration_type ] [line 217, size 32, align 32, offset 0] [def] [from ]
@@ -5450,12 +5452,12 @@ attributes #11 = { nobuiltin nounwind }
 !133 = metadata !{i32 786453, i32 0, null, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, null, metadata !134, i32 0, null, null, null} ; [ DW_TAG_subroutine_type ] [line 0, size 0, align 0, offset 0] [from ]
 !134 = metadata !{metadata !135}
 !135 = metadata !{i32 786468, null, null, metadata !"int", i32 0, i64 32, i64 32, i64 0, i32 0, i32 5} ; [ DW_TAG_base_type ] [int] [line 0, size 32, align 32, offset 0, enc DW_ATE_signed]
-!136 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"e1000_bc_can_receive", metadata !"e1000_bc_can_receive", metadata !"", i32 943, metadata !138, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (i8*)* @e1000_bc_can_receive
+!136 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"e1000_bc_can_receive", metadata !"e1000_bc_can_receive", metadata !"", i32 945, metadata !138, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (i8*)* @e1000_bc_can_receive
 !137 = metadata !{i32 786473, metadata !39}       ; [ DW_TAG_file_type ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
 !138 = metadata !{i32 786453, i32 0, null, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, null, metadata !139, i32 0, null, null, null} ; [ DW_TAG_subroutine_type ] [line 0, size 0, align 0, offset 0] [from ]
 !139 = metadata !{metadata !135, metadata !140}
 !140 = metadata !{i32 786447, null, null, metadata !"", i32 0, i64 64, i64 64, i64 0, i32 0, null} ; [ DW_TAG_pointer_type ] [line 0, size 64, align 64, offset 0] [from ]
-!141 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"e1000_has_rxbufs", metadata !"e1000_has_rxbufs", metadata !"", i32 908, metadata !142, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i1 (%struct.E1000State_st*, i64)* @e1000
+!141 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"e1000_has_rxbufs", metadata !"e1000_has_rxbufs", metadata !"", i32 910, metadata !142, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i1 (%struct.E1000State_st*, i64)* @e1000
 !142 = metadata !{i32 786453, i32 0, null, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, null, metadata !143, i32 0, null, null, null} ; [ DW_TAG_subroutine_type ] [line 0, size 0, align 0, offset 0] [from ]
 !143 = metadata !{metadata !144, metadata !145, metadata !715}
 !144 = metadata !{i32 786468, null, null, metadata !"_Bool", i32 0, i64 8, i64 8, i64 0, i32 0, i32 2} ; [ DW_TAG_base_type ] [_Bool] [line 0, size 8, align 8, offset 0, enc DW_ATE_boolean]
@@ -6270,8 +6272,8 @@ attributes #11 = { nobuiltin nounwind }
 !953 = metadata !{i32 786445, metadata !39, metadata !147, metadata !"mit_irq_level", i32 135, i64 8, i64 8, i64 1663688, i32 0, metadata !144} ; [ DW_TAG_member ] [mit_irq_level] [line 135, size 8, align 8, offset 1663688] [from _Bool]
 !954 = metadata !{i32 786445, metadata !39, metadata !147, metadata !"mit_ide", i32 136, i64 32, i64 32, i64 1663712, i32 0, metadata !248} ; [ DW_TAG_member ] [mit_ide] [line 136, size 32, align 32, offset 1663712] [from uint32_t]
 !955 = metadata !{i32 786445, metadata !39, metadata !147, metadata !"compat_flags", i32 143, i64 32, i64 32, i64 1663744, i32 0, metadata !248} ; [ DW_TAG_member ] [compat_flags] [line 143, size 32, align 32, offset 1663744] [from uint32_t]
-!956 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"e1000_set_link_status", metadata !"e1000_set_link_status", metadata !"", i32 876, metadata !748, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.NetClientState*)
-!957 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"e1000_bc_set_link_status", metadata !"e1000_bc_set_link_status", metadata !"", i32 884, metadata !202, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (i8*)* @e1000_bc_se
+!956 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"e1000_set_link_status", metadata !"e1000_set_link_status", metadata !"", i32 878, metadata !748, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.NetClientState*)
+!957 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"e1000_bc_set_link_status", metadata !"e1000_bc_set_link_status", metadata !"", i32 886, metadata !202, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (i8*)* @e1000_bc_se
 !958 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_ics", metadata !"set_ics", metadata !"", i32 338, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @set_ics, null, n
 !959 = metadata !{i32 786453, i32 0, null, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, null, metadata !960, i32 0, null, null, null} ; [ DW_TAG_subroutine_type ] [line 0, size 0, align 0, offset 0] [from ]
 !960 = metadata !{null, metadata !145, metadata !135, metadata !248}
@@ -6288,14 +6290,14 @@ attributes #11 = { nobuiltin nounwind }
 !971 = metadata !{i32 786453, i32 0, null, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, null, metadata !972, i32 0, null, null, null} ; [ DW_TAG_subroutine_type ] [line 0, size 0, align 0, offset 0] [from ]
 !972 = metadata !{metadata !481, metadata !973}
 !973 = metadata !{i32 786454, metadata !87, null, metadata !"QEMUClockType", i32 46, i64 0, i64 0, i64 0, i32 0, metadata !86} ; [ DW_TAG_typedef ] [QEMUClockType] [line 46, size 0, align 0, offset 0] [from ]
-!974 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"have_autoneg", metadata !"have_autoneg", metadata !"", i32 866, metadata !975, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i1 (%struct.E1000State_st*)* @have_autoneg, null
+!974 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"have_autoneg", metadata !"have_autoneg", metadata !"", i32 868, metadata !975, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i1 (%struct.E1000State_st*)* @have_autoneg, null
 !975 = metadata !{i32 786453, i32 0, null, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, null, metadata !976, i32 0, null, null, null} ; [ DW_TAG_subroutine_type ] [line 0, size 0, align 0, offset 0] [from ]
 !976 = metadata !{metadata !144, metadata !145}
 !977 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"e1000_link_down", metadata !"e1000_link_down", metadata !"", i32 178, metadata !967, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*)* @e1000_link
-!978 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"e1000_bc_receive", metadata !"e1000_bc_receive", metadata !"", i32 1141, metadata !979, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i64 (i8*, i8*, i64)* @e1000_bc_receive,
+!978 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"e1000_bc_receive", metadata !"e1000_bc_receive", metadata !"", i32 1143, metadata !979, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i64 (i8*, i8*, i64)* @e1000_bc_receive,
 !979 = metadata !{i32 786453, i32 0, null, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, null, metadata !980, i32 0, null, null, null} ; [ DW_TAG_subroutine_type ] [line 0, size 0, align 0, offset 0] [from ]
 !980 = metadata !{metadata !721, metadata !140, metadata !725, metadata !715}
-!981 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"e1000_receive_iov", metadata !"e1000_receive_iov", metadata !"", i32 963, metadata !731, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i64 (%struct.NetClientState*, %struct.
+!981 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"e1000_receive_iov", metadata !"e1000_receive_iov", metadata !"", i32 965, metadata !731, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i64 (%struct.NetClientState*, %struct.
 !982 = metadata !{i32 786478, metadata !152, metadata !983, metadata !"pci_dma_write", metadata !"pci_dma_write", metadata !"", i32 691, metadata !984, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (%struct.PCIDevice*, i64, i8*, i64)* @pci
 !983 = metadata !{i32 786473, metadata !152}      ; [ DW_TAG_file_type ] [/home/qin/qklee/model/../qemu-2.1.2//include/hw/pci/pci.h]
 !984 = metadata !{i32 786453, i32 0, null, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, null, metadata !985, i32 0, null, null, null} ; [ DW_TAG_subroutine_type ] [line 0, size 0, align 0, offset 0] [from ]
@@ -6326,7 +6328,7 @@ attributes #11 = { nobuiltin nounwind }
 !1009 = metadata !{i32 786478, metadata !152, metadata !983, metadata !"pci_dma_read", metadata !"pci_dma_read", metadata !"", i32 685, metadata !1010, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (%struct.PCIDevice*, i64, i8*, i64)* @pci
 !1010 = metadata !{i32 786453, i32 0, null, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, null, metadata !1011, i32 0, null, null, null} ; [ DW_TAG_subroutine_type ] [line 0, size 0, align 0, offset 0] [from ]
 !1011 = metadata !{metadata !135, metadata !614, metadata !986, metadata !140, metadata !986}
-!1012 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"rx_desc_base", metadata !"rx_desc_base", metadata !"", i32 954, metadata !1013, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i64 (%struct.E1000State_st*)* @rx_desc_base, n
+!1012 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"rx_desc_base", metadata !"rx_desc_base", metadata !"", i32 956, metadata !1013, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i64 (%struct.E1000State_st*)* @rx_desc_base, n
 !1013 = metadata !{i32 786453, i32 0, null, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, null, metadata !1014, i32 0, null, null, null} ; [ DW_TAG_subroutine_type ] [line 0, size 0, align 0, offset 0] [from ]
 !1014 = metadata !{metadata !359, metadata !145}
 !1015 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"fcs_len", metadata !"fcs_len", metadata !"", i32 572, metadata !1016, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (%struct.E1000State_st*)* @fcs_len, null, null, meta
@@ -6348,7 +6350,7 @@ attributes #11 = { nobuiltin nounwind }
 !1031 = metadata !{i32 786478, metadata !1005, metadata !1006, metadata !"le16_to_cpup", metadata !"le16_to_cpup", metadata !"", i32 123, metadata !1019, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i16 (i16*)* @le16_to_cpup, null, null, meta
 !1032 = metadata !{i32 786478, metadata !1005, metadata !1006, metadata !"le16_to_cpu", metadata !"le16_to_cpu", metadata !"", i32 123, metadata !1024, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i16 (i16)* @le16_to_cpu, null, null, metadata
 !1033 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"vlan_enabled", metadata !"vlan_enabled", metadata !"", i32 544, metadata !1016, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (%struct.E1000State_st*)* @vlan_enabled, n
-!1034 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"receive_filter", metadata !"receive_filter", metadata !"", i32 813, metadata !1035, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (%struct.E1000State_st*, i8*, i32)* @r
+!1034 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"receive_filter", metadata !"receive_filter", metadata !"", i32 815, metadata !1035, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (%struct.E1000State_st*, i8*, i32)* @r
 !1035 = metadata !{i32 786453, i32 0, null, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, null, metadata !1036, i32 0, null, null, null} ; [ DW_TAG_subroutine_type ] [line 0, size 0, align 0, offset 0] [from ]
 !1036 = metadata !{metadata !135, metadata !145, metadata !725, metadata !135}
 !1037 = metadata !{i32 786478, metadata !1005, metadata !1006, metadata !"cpu_to_le32", metadata !"cpu_to_le32", metadata !"", i32 124, metadata !1038, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (i32)* @cpu_to_le32, null, null, metadata
@@ -6361,21 +6363,21 @@ attributes #11 = { nobuiltin nounwind }
 !1044 = metadata !{i32 786470, null, null, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, metadata !248} ; [ DW_TAG_const_type ] [line 0, size 0, align 0, offset 0] [from uint32_t]
 !1045 = metadata !{i32 786478, metadata !1005, metadata !1006, metadata !"le32_to_cpu", metadata !"le32_to_cpu", metadata !"", i32 124, metadata !1038, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (i32)* @le32_to_cpu, null, null, metadata
 !1046 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"vlan_rx_filter_enabled", metadata !"vlan_rx_filter_enabled", metadata !"", i32 550, metadata !1016, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (%struct.E1000State_st
-!1047 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"e1000_bc_mmio_read", metadata !"e1000_bc_mmio_read", metadata !"", i32 1331, metadata !377, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i64 (i8*, i64, i32)* @e1000_bc_mmi
-!1048 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"mac_read_clr8", metadata !"mac_read_clr8", metadata !"", i32 1180, metadata !1049, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (%struct.E1000State_st*, i32)* @mac_rea
+!1047 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"e1000_bc_mmio_read", metadata !"e1000_bc_mmio_read", metadata !"", i32 1333, metadata !377, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i64 (i8*, i64, i32)* @e1000_bc_mmi
+!1048 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"mac_read_clr8", metadata !"mac_read_clr8", metadata !"", i32 1182, metadata !1049, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (%struct.E1000State_st*, i32)* @mac_rea
 !1049 = metadata !{i32 786453, i32 0, null, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, null, metadata !1050, i32 0, null, null, null} ; [ DW_TAG_subroutine_type ] [line 0, size 0, align 0, offset 0] [from ]
 !1050 = metadata !{metadata !248, metadata !145, metadata !135}
-!1051 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"mac_read_clr4", metadata !"mac_read_clr4", metadata !"", i32 1171, metadata !1049, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (%struct.E1000State_st*, i32)* @mac_rea
-!1052 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"mac_icr_read", metadata !"mac_icr_read", metadata !"", i32 1161, metadata !1049, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (%struct.E1000State_st*, i32)* @mac_icr_r
+!1051 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"mac_read_clr4", metadata !"mac_read_clr4", metadata !"", i32 1173, metadata !1049, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (%struct.E1000State_st*, i32)* @mac_rea
+!1052 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"mac_icr_read", metadata !"mac_icr_read", metadata !"", i32 1163, metadata !1049, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (%struct.E1000State_st*, i32)* @mac_icr_r
 !1053 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"flash_eerd_read", metadata !"flash_eerd_read", metadata !"", i32 516, metadata !1049, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (%struct.E1000State_st*, i32)* @flas
 !1054 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"get_eecd", metadata !"get_eecd", metadata !"", i32 468, metadata !1049, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (%struct.E1000State_st*, i32)* @get_eecd, null, nu
-!1055 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"mac_readreg", metadata !"mac_readreg", metadata !"", i32 1155, metadata !1049, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (%struct.E1000State_st*, i32)* @mac_readreg
-!1056 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"e1000_bc_mmio_write", metadata !"e1000_bc_mmio_write", metadata !"", i32 1305, metadata !382, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (i8*, i64, i64, i32)* @e100
-!1057 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_rdt", metadata !"set_rdt", metadata !"", i32 1204, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @set_rdt, null,
-!1058 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_dlen", metadata !"set_dlen", metadata !"", i32 1219, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @set_dlen, nu
-!1059 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_tctl", metadata !"set_tctl", metadata !"", i32 1225, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @set_tctl, nu
-!1060 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"start_xmit", metadata !"start_xmit", metadata !"", i32 769, metadata !967, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*)* @start_xmit, null, n
-!1061 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"txdesc_writeback", metadata !"txdesc_writeback", metadata !"", i32 745, metadata !1062, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (%struct.E1000State_st*, i64, %str
+!1055 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"mac_readreg", metadata !"mac_readreg", metadata !"", i32 1157, metadata !1049, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (%struct.E1000State_st*, i32)* @mac_readreg
+!1056 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"e1000_bc_mmio_write", metadata !"e1000_bc_mmio_write", metadata !"", i32 1307, metadata !382, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (i8*, i64, i64, i32)* @e100
+!1057 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_rdt", metadata !"set_rdt", metadata !"", i32 1206, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @set_rdt, null,
+!1058 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_dlen", metadata !"set_dlen", metadata !"", i32 1221, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @set_dlen, nu
+!1059 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_tctl", metadata !"set_tctl", metadata !"", i32 1227, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @set_tctl, nu
+!1060 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"start_xmit", metadata !"start_xmit", metadata !"", i32 771, metadata !967, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*)* @start_xmit, null, n
+!1061 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"txdesc_writeback", metadata !"txdesc_writeback", metadata !"", i32 747, metadata !1062, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (%struct.E1000State_st*, i64, %str
 !1062 = metadata !{i32 786453, i32 0, null, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, null, metadata !1063, i32 0, null, null, null} ; [ DW_TAG_subroutine_type ] [line 0, size 0, align 0, offset 0] [from ]
 !1063 = metadata !{metadata !248, metadata !145, metadata !986, metadata !1064}
 !1064 = metadata !{i32 786447, null, null, metadata !"", i32 0, i64 64, i64 64, i64 0, i32 0, metadata !1065} ; [ DW_TAG_pointer_type ] [line 0, size 64, align 64, offset 0] [from e1000_tx_desc]
@@ -6403,10 +6405,10 @@ attributes #11 = { nobuiltin nounwind }
 !1086 = metadata !{i32 786445, metadata !1066, metadata !1084, metadata !"status", i32 722, i64 8, i64 8, i64 0, i32 0, metadata !336} ; [ DW_TAG_member ] [status] [line 722, size 8, align 8, offset 0] [from uint8_t]
 !1087 = metadata !{i32 786445, metadata !1066, metadata !1084, metadata !"css", i32 723, i64 8, i64 8, i64 8, i32 0, metadata !336} ; [ DW_TAG_member ] [css] [line 723, size 8, align 8, offset 8] [from uint8_t]
 !1088 = metadata !{i32 786445, metadata !1066, metadata !1084, metadata !"special", i32 724, i64 16, i64 16, i64 16, i32 0, metadata !646} ; [ DW_TAG_member ] [special] [line 724, size 16, align 16, offset 16] [from uint16_t]
-!1089 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"process_tx_desc", metadata !"process_tx_desc", metadata !"", i32 649, metadata !1090, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, %struct.e1
+!1089 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"process_tx_desc", metadata !"process_tx_desc", metadata !"", i32 651, metadata !1090, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, %struct.e1
 !1090 = metadata !{i32 786453, i32 0, null, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, null, metadata !1091, i32 0, null, null, null} ; [ DW_TAG_subroutine_type ] [line 0, size 0, align 0, offset 0] [from ]
 !1091 = metadata !{null, metadata !145, metadata !1064}
-!1092 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"xmit_seg", metadata !"xmit_seg", metadata !"", i32 593, metadata !967, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*)* @xmit_seg, null, null, m
+!1092 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"xmit_seg", metadata !"xmit_seg", metadata !"", i32 595, metadata !967, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*)* @xmit_seg, null, null, m
 !1093 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"e1000_send_packet", metadata !"e1000_send_packet", metadata !"", i32 578, metadata !1094, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i8*, i
 !1094 = metadata !{i32 786453, i32 0, null, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, null, metadata !1095, i32 0, null, null, null} ; [ DW_TAG_subroutine_type ] [line 0, size 0, align 0, offset 0] [from ]
 !1095 = metadata !{null, metadata !145, metadata !725, metadata !135}
@@ -6434,18 +6436,18 @@ attributes #11 = { nobuiltin nounwind }
 !1117 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"is_vlan_txd", metadata !"is_vlan_txd", metadata !"", i32 563, metadata !1118, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (i32)* @is_vlan_txd, null, null, metadata !1
 !1118 = metadata !{i32 786453, i32 0, null, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, null, metadata !1119, i32 0, null, null, null} ; [ DW_TAG_subroutine_type ] [line 0, size 0, align 0, offset 0] [from ]
 !1119 = metadata !{metadata !135, metadata !248}
-!1120 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"tx_desc_base", metadata !"tx_desc_base", metadata !"", i32 760, metadata !1013, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i64 (%struct.E1000State_st*)* @tx_desc_base, n
+!1120 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"tx_desc_base", metadata !"tx_desc_base", metadata !"", i32 762, metadata !1013, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i64 (%struct.E1000State_st*)* @tx_desc_base, n
 !1121 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_rx_control", metadata !"set_rx_control", metadata !"", i32 423, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @s
 !1122 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"rxbufsize", metadata !"rxbufsize", metadata !"", i32 359, metadata !1118, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, i32 (i32)* @rxbufsize, null, null, metadata !129, i3
-!1123 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_imc", metadata !"set_imc", metadata !"", i32 1241, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @set_imc, null,
-!1124 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_ims", metadata !"set_ims", metadata !"", i32 1248, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @set_ims, null,
-!1125 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_16bit", metadata !"set_16bit", metadata !"", i32 1213, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @set_16bit,
-!1126 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_icr", metadata !"set_icr", metadata !"", i32 1234, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @set_icr, null,
+!1123 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_imc", metadata !"set_imc", metadata !"", i32 1243, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @set_imc, null,
+!1124 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_ims", metadata !"set_ims", metadata !"", i32 1250, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @set_ims, null,
+!1125 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_16bit", metadata !"set_16bit", metadata !"", i32 1215, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @set_16bit,
+!1126 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_icr", metadata !"set_icr", metadata !"", i32 1236, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @set_icr, null,
 !1127 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_mdic", metadata !"set_mdic", metadata !"", i32 434, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @set_mdic, nul
 !1128 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_phy_ctrl", metadata !"set_phy_ctrl", metadata !"", i32 194, metadata !1129, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i16)* @set_
 !1129 = metadata !{i32 786453, i32 0, null, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, null, metadata !1130, i32 0, null, null, null} ; [ DW_TAG_subroutine_type ] [line 0, size 0, align 0, offset 0] [from ]
 !1130 = metadata !{null, metadata !145, metadata !135, metadata !646}
-!1131 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"mac_writereg", metadata !"mac_writereg", metadata !"", i32 1190, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @mac_
+!1131 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"mac_writereg", metadata !"mac_writereg", metadata !"", i32 1192, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @mac_
 !1132 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_eecd", metadata !"set_eecd", metadata !"", i32 482, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @set_eecd, nul
 !1133 = metadata !{i32 786478, metadata !39, metadata !137, metadata !"set_ctrl", metadata !"set_ctrl", metadata !"", i32 416, metadata !959, i1 true, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (%struct.E1000State_st*, i32, i32)* @set_ctrl, nul
 !1134 = metadata !{metadata !1135, metadata !1146, metadata !1147, metadata !1149, metadata !1152, metadata !1157, metadata !1160, metadata !1165}
@@ -6461,17 +6463,17 @@ attributes #11 = { nobuiltin nounwind }
 !1144 = metadata !{i32 786445, metadata !1, metadata !1137, metadata !"type", i32 12, i64 32, i64 32, i64 288, i32 0, metadata !135} ; [ DW_TAG_member ] [type] [line 12, size 32, align 32, offset 288] [from int]
 !1145 = metadata !{i32 786445, metadata !1, metadata !1137, metadata !"ret", i32 13, i64 32, i64 32, i64 320, i32 0, metadata !135} ; [ DW_TAG_member ] [ret] [line 13, size 32, align 32, offset 320] [from int]
 !1146 = metadata !{i32 786484, i32 0, null, metadata !"debugflags", metadata !"debugflags", metadata !"", metadata !137, i32 53, metadata !135, i32 1, i32 1, i32* @debugflags, null} ; [ DW_TAG_variable ] [debugflags] [line 53] [local] [def]
-!1147 = metadata !{i32 786484, i32 0, metadata !1034, metadata !"bcast", metadata !"bcast", metadata !"", metadata !137, i32 815, metadata !1148, i32 1, i32 1, [6 x i8]* @receive_filter.bcast, null} ; [ DW_TAG_variable ] [bcast] [line 815] [local] [def]
+!1147 = metadata !{i32 786484, i32 0, metadata !1034, metadata !"bcast", metadata !"bcast", metadata !"", metadata !137, i32 817, metadata !1148, i32 1, i32 1, [6 x i8]* @receive_filter.bcast, null} ; [ DW_TAG_variable ] [bcast] [line 817] [local] [def]
 !1148 = metadata !{i32 786433, null, null, metadata !"", i32 0, i64 48, i64 8, i32 0, i32 0, metadata !726, metadata !865, i32 0, null, null, null} ; [ DW_TAG_array_type ] [line 0, size 48, align 8, offset 0] [from ]
-!1149 = metadata !{i32 786484, i32 0, metadata !1034, metadata !"mta_shift", metadata !"mta_shift", metadata !"", metadata !137, i32 816, metadata !1150, i32 1, i32 1, [4 x i32]* @receive_filter.mta_shift, null} ; [ DW_TAG_variable ] [mta_shift] [line 81
+!1149 = metadata !{i32 786484, i32 0, metadata !1034, metadata !"mta_shift", metadata !"mta_shift", metadata !"", metadata !137, i32 818, metadata !1150, i32 1, i32 1, [4 x i32]* @receive_filter.mta_shift, null} ; [ DW_TAG_variable ] [mta_shift] [line 81
 !1150 = metadata !{i32 786433, null, null, metadata !"", i32 0, i64 128, i64 32, i32 0, i32 0, metadata !1151, metadata !189, i32 0, null, null, null} ; [ DW_TAG_array_type ] [line 0, size 128, align 32, offset 0] [from ]
 !1151 = metadata !{i32 786470, null, null, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, metadata !135} ; [ DW_TAG_const_type ] [line 0, size 0, align 0, offset 0] [from int]
-!1152 = metadata !{i32 786484, i32 0, null, metadata !"macreg_readops", metadata !"macreg_readops", metadata !"", metadata !137, i32 1255, metadata !1153, i32 1, i32 1, [5845 x i32 (%struct.E1000State_st*, i32)*]* @macreg_readops, null} ; [ DW_TAG_variab
+!1152 = metadata !{i32 786484, i32 0, null, metadata !"macreg_readops", metadata !"macreg_readops", metadata !"", metadata !137, i32 1257, metadata !1153, i32 1, i32 1, [5845 x i32 (%struct.E1000State_st*, i32)*]* @macreg_readops, null} ; [ DW_TAG_variab
 !1153 = metadata !{i32 786433, null, null, metadata !"", i32 0, i64 374080, i64 64, i32 0, i32 0, metadata !1154, metadata !1155, i32 0, null, null, null} ; [ DW_TAG_array_type ] [line 0, size 374080, align 64, offset 0] [from ]
 !1154 = metadata !{i32 786447, null, null, metadata !"", i32 0, i64 64, i64 64, i64 0, i32 0, metadata !1049} ; [ DW_TAG_pointer_type ] [line 0, size 64, align 64, offset 0] [from ]
 !1155 = metadata !{metadata !1156}
 !1156 = metadata !{i32 786465, i64 0, i64 5845}   ; [ DW_TAG_subrange_type ] [0, 5844]
-!1157 = metadata !{i32 786484, i32 0, null, metadata !"macreg_writeops", metadata !"macreg_writeops", metadata !"", metadata !137, i32 1276, metadata !1158, i32 1, i32 1, [5845 x void (%struct.E1000State_st*, i32, i32)*]* @macreg_writeops, null} ; [ DW_T
+!1157 = metadata !{i32 786484, i32 0, null, metadata !"macreg_writeops", metadata !"macreg_writeops", metadata !"", metadata !137, i32 1278, metadata !1158, i32 1, i32 1, [5845 x void (%struct.E1000State_st*, i32, i32)*]* @macreg_writeops, null} ; [ DW_T
 !1158 = metadata !{i32 786433, null, null, metadata !"", i32 0, i64 374080, i64 64, i32 0, i32 0, metadata !1159, metadata !1155, i32 0, null, null, null} ; [ DW_TAG_array_type ] [line 0, size 374080, align 64, offset 0] [from ]
 !1159 = metadata !{i32 786447, null, null, metadata !"", i32 0, i64 64, i64 64, i64 0, i32 0, metadata !959} ; [ DW_TAG_pointer_type ] [line 0, size 64, align 64, offset 0] [from ]
 !1160 = metadata !{i32 786484, i32 0, null, metadata !"phyreg_writeops", metadata !"phyreg_writeops", metadata !"", metadata !137, i32 211, metadata !1161, i32 1, i32 1, [1 x void (%struct.E1000State_st*, i32, i16)*]* @phyreg_writeops, null} ; [ DW_TAG_v
@@ -6607,95 +6609,95 @@ attributes #11 = { nobuiltin nounwind }
 !1290 = metadata !{i32 39, i32 0, metadata !1281, null}
 !1291 = metadata !{i32 43, i32 0, metadata !131, null}
 !1292 = metadata !{i32 44, i32 0, metadata !131, null}
-!1293 = metadata !{i32 1308, i32 0, metadata !1056, null}
-!1294 = metadata !{i32 1310, i32 0, metadata !1056, null}
-!1295 = metadata !{i32 1311, i32 0, metadata !1056, null}
-!1296 = metadata !{i32 1313, i32 0, metadata !1297, null}
-!1297 = metadata !{i32 786443, metadata !39, metadata !1056, i32 1313, i32 0, i32 110} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1298 = metadata !{i32 1314, i32 0, metadata !1299, null}
-!1299 = metadata !{i32 786443, metadata !39, metadata !1297, i32 1313, i32 0, i32 111} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1300 = metadata !{i32 1315, i32 0, metadata !1299, null}
-!1301 = metadata !{i32 1315, i32 0, metadata !1302, null}
-!1302 = metadata !{i32 786443, metadata !39, metadata !1297, i32 1315, i32 0, i32 112} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1303 = metadata !{i32 1316, i32 0, metadata !1304, null}
-!1304 = metadata !{i32 786443, metadata !39, metadata !1305, i32 1316, i32 0, i32 115} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1305 = metadata !{i32 786443, metadata !39, metadata !1306, i32 1316, i32 0, i32 114} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1306 = metadata !{i32 786443, metadata !39, metadata !1302, i32 1315, i32 0, i32 113} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1307 = metadata !{i32 1318, i32 0, metadata !1308, null}
-!1308 = metadata !{i32 786443, metadata !39, metadata !1309, i32 1318, i32 0, i32 118} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1309 = metadata !{i32 786443, metadata !39, metadata !1310, i32 1318, i32 0, i32 117} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1310 = metadata !{i32 786443, metadata !39, metadata !1302, i32 1317, i32 0, i32 116} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1311 = metadata !{i32 1321, i32 0, metadata !1056, null}
-!1312 = metadata !{i32 1333, i32 0, metadata !1047, null}
-!1313 = metadata !{i32 1334, i32 0, metadata !1047, null}
-!1314 = metadata !{i32 1335, i32 0, metadata !1047, null}
-!1315 = metadata !{i32 1337, i32 0, metadata !1316, null}
-!1316 = metadata !{i32 786443, metadata !39, metadata !1047, i32 1337, i32 0, i32 99} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1317 = metadata !{i32 1339, i32 0, metadata !1318, null}
-!1318 = metadata !{i32 786443, metadata !39, metadata !1316, i32 1338, i32 0, i32 100} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1319 = metadata !{i32 1341, i32 0, metadata !1320, null}
-!1320 = metadata !{i32 786443, metadata !39, metadata !1321, i32 1341, i32 0, i32 102} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1321 = metadata !{i32 786443, metadata !39, metadata !1047, i32 1341, i32 0, i32 101} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1322 = metadata !{i32 1342, i32 0, metadata !1047, null}
-!1323 = metadata !{i32 1343, i32 0, metadata !1047, null}
-!1324 = metadata !{i32 1143, i32 0, metadata !978, null}
-!1325 = metadata !{i32 1144, i32 0, metadata !978, null}
-!1326 = metadata !{i32 1146, i32 0, metadata !978, null}
-!1327 = metadata !{i32 1151, i32 0, metadata !978, null}
-!1328 = metadata !{i32 880, i32 0, metadata !956, null}
-!1329 = metadata !{i32 881, i32 0, metadata !956, null}
-!1330 = metadata !{i32 945, i32 0, metadata !1331, null}
+!1293 = metadata !{i32 1310, i32 0, metadata !1056, null}
+!1294 = metadata !{i32 1312, i32 0, metadata !1056, null}
+!1295 = metadata !{i32 1313, i32 0, metadata !1056, null}
+!1296 = metadata !{i32 1315, i32 0, metadata !1297, null}
+!1297 = metadata !{i32 786443, metadata !39, metadata !1056, i32 1315, i32 0, i32 110} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1298 = metadata !{i32 1316, i32 0, metadata !1299, null}
+!1299 = metadata !{i32 786443, metadata !39, metadata !1297, i32 1315, i32 0, i32 111} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1300 = metadata !{i32 1317, i32 0, metadata !1299, null}
+!1301 = metadata !{i32 1317, i32 0, metadata !1302, null}
+!1302 = metadata !{i32 786443, metadata !39, metadata !1297, i32 1317, i32 0, i32 112} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1303 = metadata !{i32 1318, i32 0, metadata !1304, null}
+!1304 = metadata !{i32 786443, metadata !39, metadata !1305, i32 1318, i32 0, i32 115} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1305 = metadata !{i32 786443, metadata !39, metadata !1306, i32 1318, i32 0, i32 114} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1306 = metadata !{i32 786443, metadata !39, metadata !1302, i32 1317, i32 0, i32 113} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1307 = metadata !{i32 1320, i32 0, metadata !1308, null}
+!1308 = metadata !{i32 786443, metadata !39, metadata !1309, i32 1320, i32 0, i32 118} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1309 = metadata !{i32 786443, metadata !39, metadata !1310, i32 1320, i32 0, i32 117} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1310 = metadata !{i32 786443, metadata !39, metadata !1302, i32 1319, i32 0, i32 116} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1311 = metadata !{i32 1323, i32 0, metadata !1056, null}
+!1312 = metadata !{i32 1335, i32 0, metadata !1047, null}
+!1313 = metadata !{i32 1336, i32 0, metadata !1047, null}
+!1314 = metadata !{i32 1337, i32 0, metadata !1047, null}
+!1315 = metadata !{i32 1339, i32 0, metadata !1316, null}
+!1316 = metadata !{i32 786443, metadata !39, metadata !1047, i32 1339, i32 0, i32 99} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1317 = metadata !{i32 1341, i32 0, metadata !1318, null}
+!1318 = metadata !{i32 786443, metadata !39, metadata !1316, i32 1340, i32 0, i32 100} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1319 = metadata !{i32 1343, i32 0, metadata !1320, null}
+!1320 = metadata !{i32 786443, metadata !39, metadata !1321, i32 1343, i32 0, i32 102} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1321 = metadata !{i32 786443, metadata !39, metadata !1047, i32 1343, i32 0, i32 101} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1322 = metadata !{i32 1344, i32 0, metadata !1047, null}
+!1323 = metadata !{i32 1345, i32 0, metadata !1047, null}
+!1324 = metadata !{i32 1145, i32 0, metadata !978, null}
+!1325 = metadata !{i32 1146, i32 0, metadata !978, null}
+!1326 = metadata !{i32 1148, i32 0, metadata !978, null}
+!1327 = metadata !{i32 1153, i32 0, metadata !978, null}
+!1328 = metadata !{i32 882, i32 0, metadata !956, null}
+!1329 = metadata !{i32 883, i32 0, metadata !956, null}
+!1330 = metadata !{i32 947, i32 0, metadata !1331, null}
 !1331 = metadata !{i32 786443, metadata !39, metadata !136} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1332 = metadata !{i32 947, i32 0, metadata !1331, null}
-!1333 = metadata !{i32 950, i32 0, metadata !1331, null}
-!1334 = metadata !{i32 951, i32 0, metadata !1331, null}
-!1335 = metadata !{i32 952, i32 0, metadata !1331, null}
-!1336 = metadata !{i32 912, i32 0, metadata !1337, null}
-!1337 = metadata !{i32 786443, metadata !39, metadata !141, i32 912, i32 0, i32 1} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1338 = metadata !{i32 913, i32 0, metadata !1339, null}
-!1339 = metadata !{i32 786443, metadata !39, metadata !1337, i32 912, i32 0, i32 2} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1340 = metadata !{i32 915, i32 0, metadata !1341, null}
-!1341 = metadata !{i32 786443, metadata !39, metadata !141, i32 915, i32 0, i32 3} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1342 = metadata !{i32 916, i32 0, metadata !1343, null}
-!1343 = metadata !{i32 786443, metadata !39, metadata !1341, i32 915, i32 0, i32 4} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1344 = metadata !{i32 917, i32 0, metadata !1343, null}
-!1345 = metadata !{i32 917, i32 0, metadata !1346, null}
-!1346 = metadata !{i32 786443, metadata !39, metadata !1341, i32 917, i32 0, i32 5} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1347 = metadata !{i32 918, i32 0, metadata !1348, null}
-!1348 = metadata !{i32 786443, metadata !39, metadata !1346, i32 917, i32 0, i32 6} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1349 = metadata !{i32 921, i32 0, metadata !1350, null}
-!1350 = metadata !{i32 786443, metadata !39, metadata !1346, i32 920, i32 0, i32 7} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1351 = metadata !{i32 923, i32 0, metadata !141, null}
-!1352 = metadata !{i32 924, i32 0, metadata !141, null}
-!1353 = metadata !{i32 887, i32 0, metadata !957, null}
-!1354 = metadata !{i32 888, i32 0, metadata !957, null}
-!1355 = metadata !{i32 889, i32 0, metadata !957, null}
-!1356 = metadata !{i32 891, i32 0, metadata !1357, null}
-!1357 = metadata !{i32 786443, metadata !39, metadata !957, i32 891, i32 0, i32 8} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1358 = metadata !{i32 892, i32 0, metadata !1359, null}
-!1359 = metadata !{i32 786443, metadata !39, metadata !1357, i32 891, i32 0, i32 9} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1360 = metadata !{i32 893, i32 0, metadata !1359, null}
-!1361 = metadata !{i32 894, i32 0, metadata !1362, null}
-!1362 = metadata !{i32 786443, metadata !39, metadata !1363, i32 894, i32 0, i32 11} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1363 = metadata !{i32 786443, metadata !39, metadata !1357, i32 893, i32 0, i32 10} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1364 = metadata !{i32 897, i32 0, metadata !1365, null}
-!1365 = metadata !{i32 786443, metadata !39, metadata !1362, i32 895, i32 0, i32 12} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1366 = metadata !{i32 898, i32 23, metadata !1365, null}
-!1367 = metadata !{i32 899, i32 0, metadata !1365, null}
-!1368 = metadata !{i32 900, i32 0, metadata !1369, null}
-!1369 = metadata !{i32 786443, metadata !39, metadata !1362, i32 899, i32 0, i32 13} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1370 = metadata !{i32 904, i32 0, metadata !1371, null}
-!1371 = metadata !{i32 786443, metadata !39, metadata !957, i32 904, i32 0, i32 14} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1372 = metadata !{i32 905, i32 0, metadata !1371, null}
-!1373 = metadata !{i32 906, i32 0, metadata !957, null}
+!1332 = metadata !{i32 949, i32 0, metadata !1331, null}
+!1333 = metadata !{i32 952, i32 0, metadata !1331, null}
+!1334 = metadata !{i32 953, i32 0, metadata !1331, null}
+!1335 = metadata !{i32 954, i32 0, metadata !1331, null}
+!1336 = metadata !{i32 914, i32 0, metadata !1337, null}
+!1337 = metadata !{i32 786443, metadata !39, metadata !141, i32 914, i32 0, i32 1} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1338 = metadata !{i32 915, i32 0, metadata !1339, null}
+!1339 = metadata !{i32 786443, metadata !39, metadata !1337, i32 914, i32 0, i32 2} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1340 = metadata !{i32 917, i32 0, metadata !1341, null}
+!1341 = metadata !{i32 786443, metadata !39, metadata !141, i32 917, i32 0, i32 3} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1342 = metadata !{i32 918, i32 0, metadata !1343, null}
+!1343 = metadata !{i32 786443, metadata !39, metadata !1341, i32 917, i32 0, i32 4} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1344 = metadata !{i32 919, i32 0, metadata !1343, null}
+!1345 = metadata !{i32 919, i32 0, metadata !1346, null}
+!1346 = metadata !{i32 786443, metadata !39, metadata !1341, i32 919, i32 0, i32 5} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1347 = metadata !{i32 920, i32 0, metadata !1348, null}
+!1348 = metadata !{i32 786443, metadata !39, metadata !1346, i32 919, i32 0, i32 6} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1349 = metadata !{i32 923, i32 0, metadata !1350, null}
+!1350 = metadata !{i32 786443, metadata !39, metadata !1346, i32 922, i32 0, i32 7} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1351 = metadata !{i32 925, i32 0, metadata !141, null}
+!1352 = metadata !{i32 926, i32 0, metadata !141, null}
+!1353 = metadata !{i32 889, i32 0, metadata !957, null}
+!1354 = metadata !{i32 890, i32 0, metadata !957, null}
+!1355 = metadata !{i32 891, i32 0, metadata !957, null}
+!1356 = metadata !{i32 893, i32 0, metadata !1357, null}
+!1357 = metadata !{i32 786443, metadata !39, metadata !957, i32 893, i32 0, i32 8} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1358 = metadata !{i32 894, i32 0, metadata !1359, null}
+!1359 = metadata !{i32 786443, metadata !39, metadata !1357, i32 893, i32 0, i32 9} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1360 = metadata !{i32 895, i32 0, metadata !1359, null}
+!1361 = metadata !{i32 896, i32 0, metadata !1362, null}
+!1362 = metadata !{i32 786443, metadata !39, metadata !1363, i32 896, i32 0, i32 11} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1363 = metadata !{i32 786443, metadata !39, metadata !1357, i32 895, i32 0, i32 10} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1364 = metadata !{i32 899, i32 0, metadata !1365, null}
+!1365 = metadata !{i32 786443, metadata !39, metadata !1362, i32 897, i32 0, i32 12} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1366 = metadata !{i32 900, i32 23, metadata !1365, null}
+!1367 = metadata !{i32 901, i32 0, metadata !1365, null}
+!1368 = metadata !{i32 902, i32 0, metadata !1369, null}
+!1369 = metadata !{i32 786443, metadata !39, metadata !1362, i32 901, i32 0, i32 13} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1370 = metadata !{i32 906, i32 0, metadata !1371, null}
+!1371 = metadata !{i32 786443, metadata !39, metadata !957, i32 906, i32 0, i32 14} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1372 = metadata !{i32 907, i32 0, metadata !1371, null}
+!1373 = metadata !{i32 908, i32 0, metadata !957, null}
 !1374 = metadata !{i32 180, i32 0, metadata !977, null}
 !1375 = metadata !{i32 181, i32 0, metadata !977, null}
 !1376 = metadata !{i32 182, i32 0, metadata !977, null}
 !1377 = metadata !{i32 183, i32 0, metadata !977, null}
 !1378 = metadata !{i32 184, i32 0, metadata !977, null}
-!1379 = metadata !{i32 868, i32 0, metadata !1380, null}
+!1379 = metadata !{i32 870, i32 0, metadata !1380, null}
 !1380 = metadata !{i32 786443, metadata !39, metadata !974} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1381 = metadata !{i32 871, i32 0, metadata !1380, null}
+!1381 = metadata !{i32 873, i32 0, metadata !1380, null}
 !1382 = metadata !{i32 94, i32 0, metadata !1383, null}
 !1383 = metadata !{i32 786443, metadata !87, metadata !969} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//include/qemu/timer.h]
 !1384 = metadata !{i32 189, i32 0, metadata !966, null}
@@ -6747,202 +6749,202 @@ attributes #11 = { nobuiltin nounwind }
 !1430 = metadata !{i32 786443, metadata !39, metadata !1428, i32 257, i32 0, i32 30} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
 !1431 = metadata !{i32 259, i32 0, metadata !1430, null}
 !1432 = metadata !{i32 260, i32 0, metadata !962, null}
-!1433 = metadata !{i32 965, i32 0, metadata !981, null}
-!1434 = metadata !{i32 966, i32 0, metadata !981, null}
-!1435 = metadata !{i32 971, i32 0, metadata !981, null}
-!1436 = metadata !{i32 972, i32 0, metadata !981, null}
-!1437 = metadata !{i32 975, i32 0, metadata !981, null}
-!1438 = metadata !{i32 976, i32 0, metadata !981, null}
-!1439 = metadata !{i32 977, i32 0, metadata !981, null}
-!1440 = metadata !{i32 982, i32 0, metadata !1441, null}
-!1441 = metadata !{i32 786443, metadata !39, metadata !981, i32 982, i32 0, i32 31} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1442 = metadata !{i32 983, i32 0, metadata !1443, null}
-!1443 = metadata !{i32 786443, metadata !39, metadata !1441, i32 982, i32 0, i32 32} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1444 = metadata !{i32 986, i32 0, metadata !1445, null}
-!1445 = metadata !{i32 786443, metadata !39, metadata !981, i32 986, i32 0, i32 33} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1446 = metadata !{i32 987, i32 0, metadata !1447, null}
-!1447 = metadata !{i32 786443, metadata !39, metadata !1445, i32 986, i32 0, i32 34} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1448 = metadata !{i32 991, i32 0, metadata !1449, null}
-!1449 = metadata !{i32 786443, metadata !39, metadata !981, i32 991, i32 0, i32 35} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1450 = metadata !{i32 992, i32 0, metadata !1451, null}
-!1451 = metadata !{i32 786443, metadata !39, metadata !1449, i32 991, i32 0, i32 36} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1452 = metadata !{i32 993, i32 0, metadata !1451, null}
-!1453 = metadata !{i32 994, i32 0, metadata !1451, null}
-!1454 = metadata !{i32 995, i32 0, metadata !1451, null}
-!1455 = metadata !{i32 996, i32 0, metadata !1451, null}
-!1456 = metadata !{i32 997, i32 0, metadata !1451, null}
-!1457 = metadata !{i32 998, i32 0, metadata !1451, null}
-!1458 = metadata !{i32 998, i32 0, metadata !1459, null}
-!1459 = metadata !{i32 786443, metadata !39, metadata !1449, i32 998, i32 0, i32 37} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1460 = metadata !{i32 1000, i32 0, metadata !1461, null}
-!1461 = metadata !{i32 786443, metadata !39, metadata !1459, i32 998, i32 0, i32 38} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1462 = metadata !{i32 1001, i32 0, metadata !1461, null}
-!1463 = metadata !{i32 1002, i32 0, metadata !1461, null}
-!1464 = metadata !{i32 1005, i32 0, metadata !1465, null}
-!1465 = metadata !{i32 786443, metadata !39, metadata !981, i32 1005, i32 0, i32 39} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1466 = metadata !{i32 1009, i32 0, metadata !1467, null}
-!1467 = metadata !{i32 786443, metadata !39, metadata !1465, i32 1008, i32 0, i32 40} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1468 = metadata !{i32 1012, i32 0, metadata !1469, null}
-!1469 = metadata !{i32 786443, metadata !39, metadata !981, i32 1012, i32 0, i32 41} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1470 = metadata !{i32 1013, i32 0, metadata !1471, null}
-!1471 = metadata !{i32 786443, metadata !39, metadata !1469, i32 1012, i32 0, i32 42} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1472 = metadata !{i32 1016, i32 9, metadata !1473, null}
-!1473 = metadata !{i32 786443, metadata !39, metadata !981, i32 1016, i32 0, i32 43} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1474 = metadata !{i32 1016, i32 28, metadata !1473, null}
-!1475 = metadata !{i32 1017, i32 36, metadata !1476, null}
-!1476 = metadata !{i32 786443, metadata !39, metadata !1473, i32 1016, i32 0, i32 44} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1477 = metadata !{i32 1017, i32 24, metadata !1476, null}
-!1478 = metadata !{i32 1019, i32 0, metadata !1476, null}
-!1479 = metadata !{i32 1020, i32 0, metadata !1480, null}
-!1480 = metadata !{i32 786443, metadata !39, metadata !1476, i32 1020, i32 0, i32 45} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1481 = metadata !{i32 1021, i32 0, metadata !1482, null}
-!1482 = metadata !{i32 786443, metadata !39, metadata !1480, i32 1020, i32 0, i32 46} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1483 = metadata !{i32 1022, i32 0, metadata !1482, null}
-!1484 = metadata !{i32 1023, i32 0, metadata !1485, null}
-!1485 = metadata !{i32 786443, metadata !39, metadata !1480, i32 1022, i32 0, i32 47} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1486 = metadata !{i32 1024, i32 0, metadata !1485, null}
-!1487 = metadata !{i32 1025, i32 0, metadata !1488, null}
-!1488 = metadata !{i32 786443, metadata !39, metadata !1485, i32 1024, i32 0, i32 48} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1489 = metadata !{i32 1026, i32 0, metadata !1488, null}
-!1490 = metadata !{i32 1027, i32 0, metadata !1488, null}
-!1491 = metadata !{i32 1029, i32 0, metadata !1476, null}
-!1492 = metadata !{i32 1030, i32 0, metadata !1476, null}
-!1493 = metadata !{i32 1031, i32 0, metadata !1476, null}
-!1494 = metadata !{i32 1033, i32 0, metadata !981, null}
-!1495 = metadata !{i32 1034, i32 0, metadata !981, null}
-!1496 = metadata !{i32 1035, i32 0, metadata !981, null}
-!1497 = metadata !{i32 1035, i32 25, metadata !981, null}
-!1498 = metadata !{i32 1036, i32 0, metadata !1499, null}
-!1499 = metadata !{i32 786443, metadata !39, metadata !981, i32 1036, i32 0, i32 49} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1500 = metadata !{i32 1037, i32 0, metadata !1501, null}
-!1501 = metadata !{i32 786443, metadata !39, metadata !1499, i32 1036, i32 0, i32 50} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1502 = metadata !{i32 1038, i32 0, metadata !1501, null}
-!1503 = metadata !{i32 1044, i32 0, metadata !1504, null}
-!1504 = metadata !{i32 786443, metadata !39, metadata !981, i32 1043, i32 0, i32 51} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1505 = metadata !{i32 1045, i32 0, metadata !1506, null}
-!1506 = metadata !{i32 786443, metadata !39, metadata !1504, i32 1045, i32 0, i32 52} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1507 = metadata !{i32 1046, i32 0, metadata !1508, null}
-!1508 = metadata !{i32 786443, metadata !39, metadata !1506, i32 1045, i32 0, i32 53} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1509 = metadata !{i32 1047, i32 0, metadata !1508, null}
-!1510 = metadata !{i32 1048, i32 0, metadata !1504, null}
-!1511 = metadata !{i32 1049, i32 0, metadata !1504, null}
-!1512 = metadata !{i32 1050, i32 0, metadata !1504, null}
-!1513 = metadata !{i32 1051, i32 0, metadata !1504, null}
-!1514 = metadata !{i32 1052, i32 0, metadata !1515, null}
-!1515 = metadata !{i32 786443, metadata !39, metadata !1504, i32 1052, i32 0, i32 54} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1516 = metadata !{i32 1053, i32 0, metadata !1517, null}
-!1517 = metadata !{i32 786443, metadata !39, metadata !1518, i32 1053, i32 0, i32 56} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1518 = metadata !{i32 786443, metadata !39, metadata !1515, i32 1052, i32 0, i32 55} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1519 = metadata !{i32 1055, i32 29, metadata !1520, null}
-!1520 = metadata !{i32 786443, metadata !39, metadata !1517, i32 1053, i32 0, i32 57} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1521 = metadata !{i32 1056, i32 0, metadata !1520, null}
-!1522 = metadata !{i32 1057, i32 0, metadata !1523, null}
-!1523 = metadata !{i32 786443, metadata !39, metadata !1520, i32 1057, i32 0, i32 58} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1524 = metadata !{i32 1058, i32 0, metadata !1525, null}
-!1525 = metadata !{i32 786443, metadata !39, metadata !1523, i32 1057, i32 0, i32 59} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1526 = metadata !{i32 1059, i32 0, metadata !1525, null}
-!1527 = metadata !{i32 1061, i32 0, metadata !1528, null}
-!1528 = metadata !{i32 786443, metadata !39, metadata !1520, i32 1060, i32 0, i32 60} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1529 = metadata !{i32 1062, i32 0, metadata !1528, null}
-!1530 = metadata !{i32 1063, i32 0, metadata !1528, null}
-!1531 = metadata !{i32 1064, i32 0, metadata !1528, null}
-!1532 = metadata !{i32 1065, i32 0, metadata !1528, null}
-!1533 = metadata !{i32 1066, i32 0, metadata !1534, null}
-!1534 = metadata !{i32 786443, metadata !39, metadata !1528, i32 1066, i32 0, i32 61} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1535 = metadata !{i32 1067, i32 0, metadata !1536, null}
-!1536 = metadata !{i32 786443, metadata !39, metadata !1534, i32 1066, i32 0, i32 62} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1537 = metadata !{i32 1068, i32 0, metadata !1536, null}
-!1538 = metadata !{i32 1069, i32 0, metadata !1536, null}
-!1539 = metadata !{i32 1070, i32 0, metadata !1528, null}
-!1540 = metadata !{i32 1072, i32 0, metadata !1518, null}
-!1541 = metadata !{i32 1073, i32 27, metadata !1518, null}
-!1542 = metadata !{i32 1074, i32 0, metadata !1543, null}
-!1543 = metadata !{i32 786443, metadata !39, metadata !1518, i32 1074, i32 0, i32 63} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1544 = metadata !{i32 1075, i32 0, metadata !1545, null}
-!1545 = metadata !{i32 786443, metadata !39, metadata !1543, i32 1074, i32 0, i32 64} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1546 = metadata !{i32 1076, i32 0, metadata !1545, null}
-!1547 = metadata !{i32 1079, i32 0, metadata !1548, null}
-!1548 = metadata !{i32 786443, metadata !39, metadata !1543, i32 1076, i32 0, i32 65} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1549 = metadata !{i32 1082, i32 0, metadata !1550, null}
-!1550 = metadata !{i32 786443, metadata !39, metadata !1551, i32 1082, i32 0, i32 68} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1551 = metadata !{i32 786443, metadata !39, metadata !1552, i32 1082, i32 0, i32 67} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1552 = metadata !{i32 786443, metadata !39, metadata !1515, i32 1081, i32 0, i32 66} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1553 = metadata !{i32 1084, i32 0, metadata !1504, null}
-!1554 = metadata !{i32 1086, i32 0, metadata !1555, null}
-!1555 = metadata !{i32 786443, metadata !39, metadata !1504, i32 1086, i32 0, i32 69} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1556 = metadata !{i32 1087, i32 0, metadata !1555, null}
-!1557 = metadata !{i32 1089, i32 0, metadata !1558, null}
-!1558 = metadata !{i32 786443, metadata !39, metadata !1504, i32 1089, i32 0, i32 70} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1559 = metadata !{i32 1090, i32 0, metadata !1560, null}
-!1560 = metadata !{i32 786443, metadata !39, metadata !1561, i32 1090, i32 0, i32 73} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1561 = metadata !{i32 786443, metadata !39, metadata !1562, i32 1090, i32 0, i32 72} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1562 = metadata !{i32 786443, metadata !39, metadata !1558, i32 1089, i32 0, i32 71} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1563 = metadata !{i32 1092, i32 0, metadata !1562, null}
-!1564 = metadata !{i32 1093, i32 0, metadata !1562, null}
-!1565 = metadata !{i32 1095, i32 0, metadata !1504, null}
-!1566 = metadata !{i32 1097, i32 0, metadata !981, null}
-!1567 = metadata !{i32 1098, i32 0, metadata !981, null}
-!1568 = metadata !{i32 1103, i32 0, metadata !981, null}
-!1569 = metadata !{i32 1104, i32 0, metadata !1570, null}
-!1570 = metadata !{i32 786443, metadata !39, metadata !981, i32 1104, i32 0, i32 74} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1571 = metadata !{i32 1105, i32 0, metadata !1570, null}
-!1572 = metadata !{i32 1106, i32 0, metadata !981, null}
-!1573 = metadata !{i32 1108, i32 0, metadata !981, null}
-!1574 = metadata !{i32 1109, i32 0, metadata !1575, null}
-!1575 = metadata !{i32 786443, metadata !39, metadata !981, i32 1109, i32 0, i32 75} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1576 = metadata !{i32 1110, i32 0, metadata !1575, null}
-!1577 = metadata !{i32 1111, i32 0, metadata !1578, null}
-!1578 = metadata !{i32 786443, metadata !39, metadata !981, i32 1111, i32 0, i32 76} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1579 = metadata !{i32 1113, i32 0, metadata !1578, null}
-!1580 = metadata !{i32 1115, i32 0, metadata !981, null}
-!1581 = metadata !{i32 1117, i32 0, metadata !981, null}
-!1582 = metadata !{i32 1118, i32 0, metadata !981, null}
-!1583 = metadata !{i32 817, i32 0, metadata !1034, null}
-!1584 = metadata !{i32 819, i32 9, metadata !1585, null}
-!1585 = metadata !{i32 786443, metadata !39, metadata !1034, i32 819, i32 0, i32 81} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1586 = metadata !{i32 819, i32 35, metadata !1585, null}
-!1587 = metadata !{i32 820, i32 24, metadata !1588, null}
-!1588 = metadata !{i32 786443, metadata !39, metadata !1585, i32 819, i32 0, i32 82} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1589 = metadata !{i32 821, i32 25, metadata !1588, null}
-!1590 = metadata !{i32 823, i32 0, metadata !1591, null}
-!1591 = metadata !{i32 786443, metadata !39, metadata !1588, i32 823, i32 0, i32 83} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1592 = metadata !{i32 824, i32 0, metadata !1591, null}
-!1593 = metadata !{i32 827, i32 0, metadata !1594, null}
-!1594 = metadata !{i32 786443, metadata !39, metadata !1034, i32 827, i32 0, i32 84} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1595 = metadata !{i32 828, i32 0, metadata !1594, null}
-!1596 = metadata !{i32 830, i32 0, metadata !1597, null}
-!1597 = metadata !{i32 786443, metadata !39, metadata !1034, i32 830, i32 0, i32 85} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1598 = metadata !{i32 831, i32 0, metadata !1597, null}
-!1599 = metadata !{i32 833, i32 0, metadata !1600, null}
-!1600 = metadata !{i32 786443, metadata !39, metadata !1034, i32 833, i32 0, i32 86} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1601 = metadata !{i32 834, i32 0, metadata !1600, null}
-!1602 = metadata !{i32 836, i32 0, metadata !1603, null}
-!1603 = metadata !{i32 786443, metadata !39, metadata !1034, i32 836, i32 0, i32 87} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1604 = metadata !{i32 837, i32 0, metadata !1605, null}
-!1605 = metadata !{i32 786443, metadata !39, metadata !1606, i32 837, i32 0, i32 89} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1606 = metadata !{i32 786443, metadata !39, metadata !1603, i32 836, i32 0, i32 88} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1607 = metadata !{i32 839, i32 17, metadata !1606, null}
-!1608 = metadata !{i32 840, i32 17, metadata !1606, null}
-!1609 = metadata !{i32 841, i32 0, metadata !1610, null}
-!1610 = metadata !{i32 786443, metadata !39, metadata !1606, i32 841, i32 0, i32 90} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1611 = metadata !{i32 842, i32 0, metadata !1612, null}
-!1612 = metadata !{i32 786443, metadata !39, metadata !1613, i32 842, i32 0, i32 93} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1613 = metadata !{i32 786443, metadata !39, metadata !1614, i32 842, i32 0, i32 92} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1614 = metadata !{i32 786443, metadata !39, metadata !1610, i32 841, i32 0, i32 91} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1615 = metadata !{i32 846, i32 0, metadata !1614, null}
-!1616 = metadata !{i32 849, i32 0, metadata !1617, null}
-!1617 = metadata !{i32 786443, metadata !39, metadata !1618, i32 849, i32 0, i32 95} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1618 = metadata !{i32 786443, metadata !39, metadata !1034, i32 849, i32 0, i32 94} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1619 = metadata !{i32 852, i32 0, metadata !1034, null}
-!1620 = metadata !{i32 853, i32 0, metadata !1034, null}
-!1621 = metadata !{i32 854, i32 0, metadata !1622, null}
-!1622 = metadata !{i32 786443, metadata !39, metadata !1034, i32 854, i32 0, i32 96} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1623 = metadata !{i32 855, i32 0, metadata !1622, null}
-!1624 = metadata !{i32 856, i32 0, metadata !1625, null}
-!1625 = metadata !{i32 786443, metadata !39, metadata !1626, i32 856, i32 0, i32 98} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1626 = metadata !{i32 786443, metadata !39, metadata !1034, i32 856, i32 0, i32 97} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1627 = metadata !{i32 862, i32 0, metadata !1034, null}
-!1628 = metadata !{i32 863, i32 0, metadata !1034, null}
+!1433 = metadata !{i32 967, i32 0, metadata !981, null}
+!1434 = metadata !{i32 968, i32 0, metadata !981, null}
+!1435 = metadata !{i32 973, i32 0, metadata !981, null}
+!1436 = metadata !{i32 974, i32 0, metadata !981, null}
+!1437 = metadata !{i32 977, i32 0, metadata !981, null}
+!1438 = metadata !{i32 978, i32 0, metadata !981, null}
+!1439 = metadata !{i32 979, i32 0, metadata !981, null}
+!1440 = metadata !{i32 984, i32 0, metadata !1441, null}
+!1441 = metadata !{i32 786443, metadata !39, metadata !981, i32 984, i32 0, i32 31} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1442 = metadata !{i32 985, i32 0, metadata !1443, null}
+!1443 = metadata !{i32 786443, metadata !39, metadata !1441, i32 984, i32 0, i32 32} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1444 = metadata !{i32 988, i32 0, metadata !1445, null}
+!1445 = metadata !{i32 786443, metadata !39, metadata !981, i32 988, i32 0, i32 33} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1446 = metadata !{i32 989, i32 0, metadata !1447, null}
+!1447 = metadata !{i32 786443, metadata !39, metadata !1445, i32 988, i32 0, i32 34} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1448 = metadata !{i32 993, i32 0, metadata !1449, null}
+!1449 = metadata !{i32 786443, metadata !39, metadata !981, i32 993, i32 0, i32 35} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1450 = metadata !{i32 994, i32 0, metadata !1451, null}
+!1451 = metadata !{i32 786443, metadata !39, metadata !1449, i32 993, i32 0, i32 36} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1452 = metadata !{i32 995, i32 0, metadata !1451, null}
+!1453 = metadata !{i32 996, i32 0, metadata !1451, null}
+!1454 = metadata !{i32 997, i32 0, metadata !1451, null}
+!1455 = metadata !{i32 998, i32 0, metadata !1451, null}
+!1456 = metadata !{i32 999, i32 0, metadata !1451, null}
+!1457 = metadata !{i32 1000, i32 0, metadata !1451, null}
+!1458 = metadata !{i32 1000, i32 0, metadata !1459, null}
+!1459 = metadata !{i32 786443, metadata !39, metadata !1449, i32 1000, i32 0, i32 37} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1460 = metadata !{i32 1002, i32 0, metadata !1461, null}
+!1461 = metadata !{i32 786443, metadata !39, metadata !1459, i32 1000, i32 0, i32 38} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1462 = metadata !{i32 1003, i32 0, metadata !1461, null}
+!1463 = metadata !{i32 1004, i32 0, metadata !1461, null}
+!1464 = metadata !{i32 1007, i32 0, metadata !1465, null}
+!1465 = metadata !{i32 786443, metadata !39, metadata !981, i32 1007, i32 0, i32 39} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1466 = metadata !{i32 1011, i32 0, metadata !1467, null}
+!1467 = metadata !{i32 786443, metadata !39, metadata !1465, i32 1010, i32 0, i32 40} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1468 = metadata !{i32 1014, i32 0, metadata !1469, null}
+!1469 = metadata !{i32 786443, metadata !39, metadata !981, i32 1014, i32 0, i32 41} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1470 = metadata !{i32 1015, i32 0, metadata !1471, null}
+!1471 = metadata !{i32 786443, metadata !39, metadata !1469, i32 1014, i32 0, i32 42} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1472 = metadata !{i32 1018, i32 9, metadata !1473, null}
+!1473 = metadata !{i32 786443, metadata !39, metadata !981, i32 1018, i32 0, i32 43} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1474 = metadata !{i32 1018, i32 28, metadata !1473, null}
+!1475 = metadata !{i32 1019, i32 36, metadata !1476, null}
+!1476 = metadata !{i32 786443, metadata !39, metadata !1473, i32 1018, i32 0, i32 44} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1477 = metadata !{i32 1019, i32 24, metadata !1476, null}
+!1478 = metadata !{i32 1021, i32 0, metadata !1476, null}
+!1479 = metadata !{i32 1022, i32 0, metadata !1480, null}
+!1480 = metadata !{i32 786443, metadata !39, metadata !1476, i32 1022, i32 0, i32 45} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1481 = metadata !{i32 1023, i32 0, metadata !1482, null}
+!1482 = metadata !{i32 786443, metadata !39, metadata !1480, i32 1022, i32 0, i32 46} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1483 = metadata !{i32 1024, i32 0, metadata !1482, null}
+!1484 = metadata !{i32 1025, i32 0, metadata !1485, null}
+!1485 = metadata !{i32 786443, metadata !39, metadata !1480, i32 1024, i32 0, i32 47} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1486 = metadata !{i32 1026, i32 0, metadata !1485, null}
+!1487 = metadata !{i32 1027, i32 0, metadata !1488, null}
+!1488 = metadata !{i32 786443, metadata !39, metadata !1485, i32 1026, i32 0, i32 48} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1489 = metadata !{i32 1028, i32 0, metadata !1488, null}
+!1490 = metadata !{i32 1029, i32 0, metadata !1488, null}
+!1491 = metadata !{i32 1031, i32 0, metadata !1476, null}
+!1492 = metadata !{i32 1032, i32 0, metadata !1476, null}
+!1493 = metadata !{i32 1033, i32 0, metadata !1476, null}
+!1494 = metadata !{i32 1035, i32 0, metadata !981, null}
+!1495 = metadata !{i32 1036, i32 0, metadata !981, null}
+!1496 = metadata !{i32 1037, i32 0, metadata !981, null}
+!1497 = metadata !{i32 1037, i32 25, metadata !981, null}
+!1498 = metadata !{i32 1038, i32 0, metadata !1499, null}
+!1499 = metadata !{i32 786443, metadata !39, metadata !981, i32 1038, i32 0, i32 49} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1500 = metadata !{i32 1039, i32 0, metadata !1501, null}
+!1501 = metadata !{i32 786443, metadata !39, metadata !1499, i32 1038, i32 0, i32 50} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1502 = metadata !{i32 1040, i32 0, metadata !1501, null}
+!1503 = metadata !{i32 1046, i32 0, metadata !1504, null}
+!1504 = metadata !{i32 786443, metadata !39, metadata !981, i32 1045, i32 0, i32 51} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1505 = metadata !{i32 1047, i32 0, metadata !1506, null}
+!1506 = metadata !{i32 786443, metadata !39, metadata !1504, i32 1047, i32 0, i32 52} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1507 = metadata !{i32 1048, i32 0, metadata !1508, null}
+!1508 = metadata !{i32 786443, metadata !39, metadata !1506, i32 1047, i32 0, i32 53} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1509 = metadata !{i32 1049, i32 0, metadata !1508, null}
+!1510 = metadata !{i32 1050, i32 0, metadata !1504, null}
+!1511 = metadata !{i32 1051, i32 0, metadata !1504, null}
+!1512 = metadata !{i32 1052, i32 0, metadata !1504, null}
+!1513 = metadata !{i32 1053, i32 0, metadata !1504, null}
+!1514 = metadata !{i32 1054, i32 0, metadata !1515, null}
+!1515 = metadata !{i32 786443, metadata !39, metadata !1504, i32 1054, i32 0, i32 54} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1516 = metadata !{i32 1055, i32 0, metadata !1517, null}
+!1517 = metadata !{i32 786443, metadata !39, metadata !1518, i32 1055, i32 0, i32 56} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1518 = metadata !{i32 786443, metadata !39, metadata !1515, i32 1054, i32 0, i32 55} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1519 = metadata !{i32 1057, i32 29, metadata !1520, null}
+!1520 = metadata !{i32 786443, metadata !39, metadata !1517, i32 1055, i32 0, i32 57} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1521 = metadata !{i32 1058, i32 0, metadata !1520, null}
+!1522 = metadata !{i32 1059, i32 0, metadata !1523, null}
+!1523 = metadata !{i32 786443, metadata !39, metadata !1520, i32 1059, i32 0, i32 58} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1524 = metadata !{i32 1060, i32 0, metadata !1525, null}
+!1525 = metadata !{i32 786443, metadata !39, metadata !1523, i32 1059, i32 0, i32 59} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1526 = metadata !{i32 1061, i32 0, metadata !1525, null}
+!1527 = metadata !{i32 1063, i32 0, metadata !1528, null}
+!1528 = metadata !{i32 786443, metadata !39, metadata !1520, i32 1062, i32 0, i32 60} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1529 = metadata !{i32 1064, i32 0, metadata !1528, null}
+!1530 = metadata !{i32 1065, i32 0, metadata !1528, null}
+!1531 = metadata !{i32 1066, i32 0, metadata !1528, null}
+!1532 = metadata !{i32 1067, i32 0, metadata !1528, null}
+!1533 = metadata !{i32 1068, i32 0, metadata !1534, null}
+!1534 = metadata !{i32 786443, metadata !39, metadata !1528, i32 1068, i32 0, i32 61} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1535 = metadata !{i32 1069, i32 0, metadata !1536, null}
+!1536 = metadata !{i32 786443, metadata !39, metadata !1534, i32 1068, i32 0, i32 62} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1537 = metadata !{i32 1070, i32 0, metadata !1536, null}
+!1538 = metadata !{i32 1071, i32 0, metadata !1536, null}
+!1539 = metadata !{i32 1072, i32 0, metadata !1528, null}
+!1540 = metadata !{i32 1074, i32 0, metadata !1518, null}
+!1541 = metadata !{i32 1075, i32 27, metadata !1518, null}
+!1542 = metadata !{i32 1076, i32 0, metadata !1543, null}
+!1543 = metadata !{i32 786443, metadata !39, metadata !1518, i32 1076, i32 0, i32 63} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1544 = metadata !{i32 1077, i32 0, metadata !1545, null}
+!1545 = metadata !{i32 786443, metadata !39, metadata !1543, i32 1076, i32 0, i32 64} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1546 = metadata !{i32 1078, i32 0, metadata !1545, null}
+!1547 = metadata !{i32 1081, i32 0, metadata !1548, null}
+!1548 = metadata !{i32 786443, metadata !39, metadata !1543, i32 1078, i32 0, i32 65} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1549 = metadata !{i32 1084, i32 0, metadata !1550, null}
+!1550 = metadata !{i32 786443, metadata !39, metadata !1551, i32 1084, i32 0, i32 68} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1551 = metadata !{i32 786443, metadata !39, metadata !1552, i32 1084, i32 0, i32 67} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1552 = metadata !{i32 786443, metadata !39, metadata !1515, i32 1083, i32 0, i32 66} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1553 = metadata !{i32 1086, i32 0, metadata !1504, null}
+!1554 = metadata !{i32 1088, i32 0, metadata !1555, null}
+!1555 = metadata !{i32 786443, metadata !39, metadata !1504, i32 1088, i32 0, i32 69} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1556 = metadata !{i32 1089, i32 0, metadata !1555, null}
+!1557 = metadata !{i32 1091, i32 0, metadata !1558, null}
+!1558 = metadata !{i32 786443, metadata !39, metadata !1504, i32 1091, i32 0, i32 70} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1559 = metadata !{i32 1092, i32 0, metadata !1560, null}
+!1560 = metadata !{i32 786443, metadata !39, metadata !1561, i32 1092, i32 0, i32 73} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1561 = metadata !{i32 786443, metadata !39, metadata !1562, i32 1092, i32 0, i32 72} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1562 = metadata !{i32 786443, metadata !39, metadata !1558, i32 1091, i32 0, i32 71} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1563 = metadata !{i32 1094, i32 0, metadata !1562, null}
+!1564 = metadata !{i32 1095, i32 0, metadata !1562, null}
+!1565 = metadata !{i32 1097, i32 0, metadata !1504, null}
+!1566 = metadata !{i32 1099, i32 0, metadata !981, null}
+!1567 = metadata !{i32 1100, i32 0, metadata !981, null}
+!1568 = metadata !{i32 1105, i32 0, metadata !981, null}
+!1569 = metadata !{i32 1106, i32 0, metadata !1570, null}
+!1570 = metadata !{i32 786443, metadata !39, metadata !981, i32 1106, i32 0, i32 74} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1571 = metadata !{i32 1107, i32 0, metadata !1570, null}
+!1572 = metadata !{i32 1108, i32 0, metadata !981, null}
+!1573 = metadata !{i32 1110, i32 0, metadata !981, null}
+!1574 = metadata !{i32 1111, i32 0, metadata !1575, null}
+!1575 = metadata !{i32 786443, metadata !39, metadata !981, i32 1111, i32 0, i32 75} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1576 = metadata !{i32 1112, i32 0, metadata !1575, null}
+!1577 = metadata !{i32 1113, i32 0, metadata !1578, null}
+!1578 = metadata !{i32 786443, metadata !39, metadata !981, i32 1113, i32 0, i32 76} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1579 = metadata !{i32 1115, i32 0, metadata !1578, null}
+!1580 = metadata !{i32 1117, i32 0, metadata !981, null}
+!1581 = metadata !{i32 1119, i32 0, metadata !981, null}
+!1582 = metadata !{i32 1120, i32 0, metadata !981, null}
+!1583 = metadata !{i32 819, i32 0, metadata !1034, null}
+!1584 = metadata !{i32 821, i32 9, metadata !1585, null}
+!1585 = metadata !{i32 786443, metadata !39, metadata !1034, i32 821, i32 0, i32 81} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1586 = metadata !{i32 821, i32 35, metadata !1585, null}
+!1587 = metadata !{i32 822, i32 24, metadata !1588, null}
+!1588 = metadata !{i32 786443, metadata !39, metadata !1585, i32 821, i32 0, i32 82} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1589 = metadata !{i32 823, i32 25, metadata !1588, null}
+!1590 = metadata !{i32 825, i32 0, metadata !1591, null}
+!1591 = metadata !{i32 786443, metadata !39, metadata !1588, i32 825, i32 0, i32 83} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1592 = metadata !{i32 826, i32 0, metadata !1591, null}
+!1593 = metadata !{i32 829, i32 0, metadata !1594, null}
+!1594 = metadata !{i32 786443, metadata !39, metadata !1034, i32 829, i32 0, i32 84} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1595 = metadata !{i32 830, i32 0, metadata !1594, null}
+!1596 = metadata !{i32 832, i32 0, metadata !1597, null}
+!1597 = metadata !{i32 786443, metadata !39, metadata !1034, i32 832, i32 0, i32 85} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1598 = metadata !{i32 833, i32 0, metadata !1597, null}
+!1599 = metadata !{i32 835, i32 0, metadata !1600, null}
+!1600 = metadata !{i32 786443, metadata !39, metadata !1034, i32 835, i32 0, i32 86} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1601 = metadata !{i32 836, i32 0, metadata !1600, null}
+!1602 = metadata !{i32 838, i32 0, metadata !1603, null}
+!1603 = metadata !{i32 786443, metadata !39, metadata !1034, i32 838, i32 0, i32 87} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1604 = metadata !{i32 839, i32 0, metadata !1605, null}
+!1605 = metadata !{i32 786443, metadata !39, metadata !1606, i32 839, i32 0, i32 89} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1606 = metadata !{i32 786443, metadata !39, metadata !1603, i32 838, i32 0, i32 88} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1607 = metadata !{i32 841, i32 17, metadata !1606, null}
+!1608 = metadata !{i32 842, i32 17, metadata !1606, null}
+!1609 = metadata !{i32 843, i32 0, metadata !1610, null}
+!1610 = metadata !{i32 786443, metadata !39, metadata !1606, i32 843, i32 0, i32 90} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1611 = metadata !{i32 844, i32 0, metadata !1612, null}
+!1612 = metadata !{i32 786443, metadata !39, metadata !1613, i32 844, i32 0, i32 93} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1613 = metadata !{i32 786443, metadata !39, metadata !1614, i32 844, i32 0, i32 92} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1614 = metadata !{i32 786443, metadata !39, metadata !1610, i32 843, i32 0, i32 91} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1615 = metadata !{i32 848, i32 0, metadata !1614, null}
+!1616 = metadata !{i32 851, i32 0, metadata !1617, null}
+!1617 = metadata !{i32 786443, metadata !39, metadata !1618, i32 851, i32 0, i32 95} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1618 = metadata !{i32 786443, metadata !39, metadata !1034, i32 851, i32 0, i32 94} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1619 = metadata !{i32 854, i32 0, metadata !1034, null}
+!1620 = metadata !{i32 855, i32 0, metadata !1034, null}
+!1621 = metadata !{i32 856, i32 0, metadata !1622, null}
+!1622 = metadata !{i32 786443, metadata !39, metadata !1034, i32 856, i32 0, i32 96} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1623 = metadata !{i32 857, i32 0, metadata !1622, null}
+!1624 = metadata !{i32 858, i32 0, metadata !1625, null}
+!1625 = metadata !{i32 786443, metadata !39, metadata !1626, i32 858, i32 0, i32 98} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1626 = metadata !{i32 786443, metadata !39, metadata !1034, i32 858, i32 0, i32 97} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1627 = metadata !{i32 864, i32 0, metadata !1034, null}
+!1628 = metadata !{i32 865, i32 0, metadata !1034, null}
 !1629 = metadata !{i32 546, i32 0, metadata !1630, null}
 !1630 = metadata !{i32 786443, metadata !39, metadata !1033} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
 !1631 = metadata !{i32 558, i32 13, metadata !1632, null}
@@ -6952,10 +6954,10 @@ attributes #11 = { nobuiltin nounwind }
 !1635 = metadata !{i32 119, i32 0, metadata !1636, null}
 !1636 = metadata !{i32 786443, metadata !1005, metadata !1018} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//include/qemu/bswap.h]
 !1637 = metadata !{i32 574, i32 0, metadata !1015, null}
-!1638 = metadata !{i32 956, i32 0, metadata !1639, null}
+!1638 = metadata !{i32 958, i32 0, metadata !1639, null}
 !1639 = metadata !{i32 786443, metadata !39, metadata !1012} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1640 = metadata !{i32 957, i32 0, metadata !1639, null}
-!1641 = metadata !{i32 959, i32 0, metadata !1639, null}
+!1640 = metadata !{i32 959, i32 0, metadata !1639, null}
+!1641 = metadata !{i32 961, i32 0, metadata !1639, null}
 !1642 = metadata !{i32 688, i32 12, metadata !1643, null}
 !1643 = metadata !{i32 786443, metadata !152, metadata !1009} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//include/hw/pci/pci.h]
 !1644 = metadata !{i32 125, i32 0, metadata !1645, null}
@@ -6990,7 +6992,7 @@ attributes #11 = { nobuiltin nounwind }
 !1673 = metadata !{i32 124, i32 0, metadata !1674, null}
 !1674 = metadata !{i32 786443, metadata !1005, metadata !1037} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//include/qemu/bswap.h]
 !1675 = metadata !{i32 124, i32 0, metadata !1045, null}
-!1676 = metadata !{i32 1157, i32 0, metadata !1055, null}
+!1676 = metadata !{i32 1159, i32 0, metadata !1055, null}
 !1677 = metadata !{i32 470, i32 0, metadata !1054, null}
 !1678 = metadata !{i32 472, i32 0, metadata !1679, null}
 !1679 = metadata !{i32 786443, metadata !39, metadata !1680, i32 472, i32 0, i32 108} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
@@ -7008,19 +7010,19 @@ attributes #11 = { nobuiltin nounwind }
 !1691 = metadata !{i32 524, i32 0, metadata !1690, null}
 !1692 = metadata !{i32 526, i32 0, metadata !1053, null}
 !1693 = metadata !{i32 528, i32 0, metadata !1053, null}
-!1694 = metadata !{i32 1163, i32 0, metadata !1052, null}
-!1695 = metadata !{i32 1165, i32 0, metadata !1696, null}
-!1696 = metadata !{i32 786443, metadata !39, metadata !1697, i32 1165, i32 0, i32 104} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1697 = metadata !{i32 786443, metadata !39, metadata !1052, i32 1165, i32 0, i32 103} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1698 = metadata !{i32 1166, i32 0, metadata !1052, null}
-!1699 = metadata !{i32 1167, i32 0, metadata !1052, null}
-!1700 = metadata !{i32 1173, i32 0, metadata !1051, null}
-!1701 = metadata !{i32 1175, i32 0, metadata !1051, null}
-!1702 = metadata !{i32 1176, i32 0, metadata !1051, null}
-!1703 = metadata !{i32 1182, i32 0, metadata !1048, null}
-!1704 = metadata !{i32 1184, i32 0, metadata !1048, null}
-!1705 = metadata !{i32 1185, i32 0, metadata !1048, null}
-!1706 = metadata !{i32 1186, i32 0, metadata !1048, null}
+!1694 = metadata !{i32 1165, i32 0, metadata !1052, null}
+!1695 = metadata !{i32 1167, i32 0, metadata !1696, null}
+!1696 = metadata !{i32 786443, metadata !39, metadata !1697, i32 1167, i32 0, i32 104} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1697 = metadata !{i32 786443, metadata !39, metadata !1052, i32 1167, i32 0, i32 103} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1698 = metadata !{i32 1168, i32 0, metadata !1052, null}
+!1699 = metadata !{i32 1169, i32 0, metadata !1052, null}
+!1700 = metadata !{i32 1175, i32 0, metadata !1051, null}
+!1701 = metadata !{i32 1177, i32 0, metadata !1051, null}
+!1702 = metadata !{i32 1178, i32 0, metadata !1051, null}
+!1703 = metadata !{i32 1184, i32 0, metadata !1048, null}
+!1704 = metadata !{i32 1186, i32 0, metadata !1048, null}
+!1705 = metadata !{i32 1187, i32 0, metadata !1048, null}
+!1706 = metadata !{i32 1188, i32 0, metadata !1048, null}
 !1707 = metadata !{i32 419, i32 0, metadata !1133, null}
 !1708 = metadata !{i32 420, i32 0, metadata !1133, null}
 !1709 = metadata !{i32 484, i32 0, metadata !1132, null}
@@ -7056,15 +7058,15 @@ attributes #11 = { nobuiltin nounwind }
 !1739 = metadata !{i32 786443, metadata !39, metadata !1740, i32 510, i32 0, i32 234} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
 !1740 = metadata !{i32 786443, metadata !39, metadata !1132, i32 510, i32 0, i32 233} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
 !1741 = metadata !{i32 513, i32 0, metadata !1132, null}
-!1742 = metadata !{i32 1194, i32 0, metadata !1131, null}
-!1743 = metadata !{i32 1196, i32 0, metadata !1744, null}
-!1744 = metadata !{i32 786443, metadata !39, metadata !1131, i32 1196, i32 0, i32 222} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1745 = metadata !{i32 1197, i32 22, metadata !1746, null}
-!1746 = metadata !{i32 786443, metadata !39, metadata !1744, i32 1196, i32 0, i32 223} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1747 = metadata !{i32 1198, i32 22, metadata !1746, null}
-!1748 = metadata !{i32 1199, i32 0, metadata !1746, null}
-!1749 = metadata !{i32 1200, i32 0, metadata !1746, null}
-!1750 = metadata !{i32 1201, i32 0, metadata !1131, null}
+!1742 = metadata !{i32 1196, i32 0, metadata !1131, null}
+!1743 = metadata !{i32 1198, i32 0, metadata !1744, null}
+!1744 = metadata !{i32 786443, metadata !39, metadata !1131, i32 1198, i32 0, i32 222} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1745 = metadata !{i32 1199, i32 22, metadata !1746, null}
+!1746 = metadata !{i32 786443, metadata !39, metadata !1744, i32 1198, i32 0, i32 223} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1747 = metadata !{i32 1200, i32 22, metadata !1746, null}
+!1748 = metadata !{i32 1201, i32 0, metadata !1746, null}
+!1749 = metadata !{i32 1202, i32 0, metadata !1746, null}
+!1750 = metadata !{i32 1203, i32 0, metadata !1131, null}
 !1751 = metadata !{i32 436, i32 0, metadata !1127, null}
 !1752 = metadata !{i32 437, i32 0, metadata !1127, null}
 !1753 = metadata !{i32 439, i32 0, metadata !1754, null}
@@ -7113,19 +7115,19 @@ attributes #11 = { nobuiltin nounwind }
 !1796 = metadata !{i32 786443, metadata !39, metadata !1794, i32 462, i32 0, i32 215} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
 !1797 = metadata !{i32 464, i32 0, metadata !1796, null}
 !1798 = metadata !{i32 465, i32 0, metadata !1127, null}
-!1799 = metadata !{i32 1236, i32 0, metadata !1800, null}
-!1800 = metadata !{i32 786443, metadata !39, metadata !1801, i32 1236, i32 0, i32 193} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1801 = metadata !{i32 786443, metadata !39, metadata !1126, i32 1236, i32 0, i32 192} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1802 = metadata !{i32 1237, i32 0, metadata !1126, null}
-!1803 = metadata !{i32 1238, i32 0, metadata !1126, null}
-!1804 = metadata !{i32 1215, i32 0, metadata !1125, null}
-!1805 = metadata !{i32 1216, i32 0, metadata !1125, null}
-!1806 = metadata !{i32 1250, i32 0, metadata !1124, null}
-!1807 = metadata !{i32 1251, i32 0, metadata !1124, null}
-!1808 = metadata !{i32 1252, i32 0, metadata !1124, null}
-!1809 = metadata !{i32 1243, i32 0, metadata !1123, null}
-!1810 = metadata !{i32 1244, i32 0, metadata !1123, null}
-!1811 = metadata !{i32 1245, i32 0, metadata !1123, null}
+!1799 = metadata !{i32 1238, i32 0, metadata !1800, null}
+!1800 = metadata !{i32 786443, metadata !39, metadata !1801, i32 1238, i32 0, i32 193} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1801 = metadata !{i32 786443, metadata !39, metadata !1126, i32 1238, i32 0, i32 192} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1802 = metadata !{i32 1239, i32 0, metadata !1126, null}
+!1803 = metadata !{i32 1240, i32 0, metadata !1126, null}
+!1804 = metadata !{i32 1217, i32 0, metadata !1125, null}
+!1805 = metadata !{i32 1218, i32 0, metadata !1125, null}
+!1806 = metadata !{i32 1252, i32 0, metadata !1124, null}
+!1807 = metadata !{i32 1253, i32 0, metadata !1124, null}
+!1808 = metadata !{i32 1254, i32 0, metadata !1124, null}
+!1809 = metadata !{i32 1245, i32 0, metadata !1123, null}
+!1810 = metadata !{i32 1246, i32 0, metadata !1123, null}
+!1811 = metadata !{i32 1247, i32 0, metadata !1123, null}
 !1812 = metadata !{i32 425, i32 0, metadata !1121, null}
 !1813 = metadata !{i32 426, i32 0, metadata !1121, null}
 !1814 = metadata !{i32 427, i32 0, metadata !1121, null}
@@ -7134,241 +7136,241 @@ attributes #11 = { nobuiltin nounwind }
 !1817 = metadata !{i32 786443, metadata !39, metadata !1121, i32 428, i32 0, i32 189} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
 !1818 = metadata !{i32 430, i32 0, metadata !1121, null}
 !1819 = metadata !{i32 431, i32 0, metadata !1121, null}
-!1820 = metadata !{i32 1228, i32 0, metadata !1059, null}
-!1821 = metadata !{i32 1229, i32 0, metadata !1059, null}
-!1822 = metadata !{i32 1230, i32 0, metadata !1059, null}
-!1823 = metadata !{i32 1231, i32 0, metadata !1059, null}
-!1824 = metadata !{i32 1221, i32 0, metadata !1058, null}
-!1825 = metadata !{i32 1222, i32 0, metadata !1058, null}
-!1826 = metadata !{i32 1206, i32 0, metadata !1057, null}
-!1827 = metadata !{i32 1207, i32 0, metadata !1828, null}
-!1828 = metadata !{i32 786443, metadata !39, metadata !1057, i32 1207, i32 0, i32 119} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1829 = metadata !{i32 1208, i32 0, metadata !1830, null}
-!1830 = metadata !{i32 786443, metadata !39, metadata !1828, i32 1207, i32 0, i32 120} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1831 = metadata !{i32 1209, i32 0, metadata !1830, null}
-!1832 = metadata !{i32 1210, i32 0, metadata !1057, null}
-!1833 = metadata !{i32 771, i32 0, metadata !1060, null}
-!1834 = metadata !{i32 774, i32 0, metadata !1060, null}
-!1835 = metadata !{i32 776, i32 0, metadata !1836, null}
-!1836 = metadata !{i32 786443, metadata !39, metadata !1060, i32 776, i32 0, i32 121} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1837 = metadata !{i32 777, i32 0, metadata !1838, null}
-!1838 = metadata !{i32 786443, metadata !39, metadata !1839, i32 777, i32 0, i32 124} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1839 = metadata !{i32 786443, metadata !39, metadata !1840, i32 777, i32 0, i32 123} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1840 = metadata !{i32 786443, metadata !39, metadata !1836, i32 776, i32 0, i32 122} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1841 = metadata !{i32 783, i32 0, metadata !1060, null}
-!1842 = metadata !{i32 784, i32 0, metadata !1843, null}
-!1843 = metadata !{i32 786443, metadata !39, metadata !1060, i32 783, i32 0, i32 125} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1844 = metadata !{i32 786, i32 0, metadata !1843, null}
-!1845 = metadata !{i32 788, i32 0, metadata !1846, null}
-!1846 = metadata !{i32 786443, metadata !39, metadata !1847, i32 788, i32 0, i32 127} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1847 = metadata !{i32 786443, metadata !39, metadata !1843, i32 788, i32 0, i32 126} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1848 = metadata !{i32 792, i32 0, metadata !1843, null}
-!1849 = metadata !{i32 794, i32 0, metadata !1843, null}
-!1850 = metadata !{i32 796, i32 0, metadata !1851, null}
-!1851 = metadata !{i32 786443, metadata !39, metadata !1843, i32 796, i32 0, i32 128} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1852 = metadata !{i32 797, i32 0, metadata !1851, null}
-!1853 = metadata !{i32 803, i32 0, metadata !1854, null}
-!1854 = metadata !{i32 786443, metadata !39, metadata !1843, i32 803, i32 0, i32 129} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1855 = metadata !{i32 804, i32 0, metadata !1856, null}
-!1856 = metadata !{i32 786443, metadata !39, metadata !1857, i32 804, i32 0, i32 132} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1857 = metadata !{i32 786443, metadata !39, metadata !1858, i32 804, i32 0, i32 131} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1858 = metadata !{i32 786443, metadata !39, metadata !1854, i32 803, i32 0, i32 130} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1859 = metadata !{i32 809, i32 0, metadata !1060, null}
-!1860 = metadata !{i32 810, i32 0, metadata !1060, null}
-!1861 = metadata !{i32 762, i32 0, metadata !1120, null}
-!1862 = metadata !{i32 763, i32 0, metadata !1120, null}
-!1863 = metadata !{i32 765, i32 0, metadata !1120, null}
-!1864 = metadata !{i32 651, i32 0, metadata !1089, null}
-!1865 = metadata !{i32 652, i32 26, metadata !1089, null}
-!1866 = metadata !{i32 653, i32 0, metadata !1089, null}
-!1867 = metadata !{i32 654, i32 0, metadata !1089, null}
-!1868 = metadata !{i32 655, i32 0, metadata !1089, null}
-!1869 = metadata !{i32 657, i32 0, metadata !1089, null}
-!1870 = metadata !{i32 658, i32 0, metadata !1089, null}
-!1871 = metadata !{i32 660, i32 0, metadata !1089, null}
-!1872 = metadata !{i32 661, i32 0, metadata !1873, null}
-!1873 = metadata !{i32 786443, metadata !39, metadata !1089, i32 661, i32 0, i32 134} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1874 = metadata !{i32 662, i32 14, metadata !1875, null}
-!1875 = metadata !{i32 786443, metadata !39, metadata !1873, i32 661, i32 0, i32 135} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1876 = metadata !{i32 663, i32 0, metadata !1875, null}
-!1877 = metadata !{i32 664, i32 0, metadata !1875, null}
-!1878 = metadata !{i32 665, i32 21, metadata !1875, null}
-!1879 = metadata !{i32 666, i32 0, metadata !1875, null}
-!1880 = metadata !{i32 667, i32 0, metadata !1875, null}
-!1881 = metadata !{i32 668, i32 21, metadata !1875, null}
-!1882 = metadata !{i32 669, i32 0, metadata !1875, null}
-!1883 = metadata !{i32 670, i32 0, metadata !1875, null}
-!1884 = metadata !{i32 671, i32 19, metadata !1875, null}
-!1885 = metadata !{i32 672, i32 0, metadata !1875, null}
-!1886 = metadata !{i32 673, i32 0, metadata !1875, null}
-!1887 = metadata !{i32 674, i32 0, metadata !1875, null}
-!1888 = metadata !{i32 675, i32 0, metadata !1875, null}
-!1889 = metadata !{i32 676, i32 0, metadata !1890, null}
-!1890 = metadata !{i32 786443, metadata !39, metadata !1875, i32 676, i32 0, i32 136} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1891 = metadata !{i32 677, i32 0, metadata !1892, null}
-!1892 = metadata !{i32 786443, metadata !39, metadata !1893, i32 677, i32 0, i32 139} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1893 = metadata !{i32 786443, metadata !39, metadata !1894, i32 677, i32 0, i32 138} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1894 = metadata !{i32 786443, metadata !39, metadata !1890, i32 676, i32 0, i32 137} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1895 = metadata !{i32 678, i32 0, metadata !1894, null}
-!1896 = metadata !{i32 679, i32 0, metadata !1894, null}
-!1897 = metadata !{i32 681, i32 0, metadata !1898, null}
-!1898 = metadata !{i32 786443, metadata !39, metadata !1873, i32 681, i32 0, i32 140} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1899 = metadata !{i32 683, i32 0, metadata !1900, null}
-!1900 = metadata !{i32 786443, metadata !39, metadata !1901, i32 683, i32 0, i32 142} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1901 = metadata !{i32 786443, metadata !39, metadata !1898, i32 681, i32 0, i32 141} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1902 = metadata !{i32 684, i32 30, metadata !1903, null}
-!1903 = metadata !{i32 786443, metadata !39, metadata !1900, i32 683, i32 0, i32 143} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1904 = metadata !{i32 685, i32 0, metadata !1903, null}
-!1905 = metadata !{i32 686, i32 0, metadata !1901, null}
-!1906 = metadata !{i32 687, i32 0, metadata !1901, null}
-!1907 = metadata !{i32 689, i32 0, metadata !1908, null}
-!1908 = metadata !{i32 786443, metadata !39, metadata !1898, i32 687, i32 0, i32 144} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1909 = metadata !{i32 692, i32 9, metadata !1910, null}
-!1910 = metadata !{i32 786443, metadata !39, metadata !1089, i32 692, i32 0, i32 145} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1911 = metadata !{i32 692, i32 28, metadata !1910, null}
-!1912 = metadata !{i32 694, i32 0, metadata !1913, null}
-!1913 = metadata !{i32 786443, metadata !39, metadata !1910, i32 693, i32 0, i32 146} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1914 = metadata !{i32 695, i32 0, metadata !1913, null}
-!1915 = metadata !{i32 696, i32 23, metadata !1913, null}
-!1916 = metadata !{i32 695, i32 9, metadata !1913, null}
-!1917 = metadata !{i32 697, i32 0, metadata !1913, null}
-!1918 = metadata !{i32 698, i32 23, metadata !1913, null}
-!1919 = metadata !{i32 697, i32 9, metadata !1913, null}
-!1920 = metadata !{i32 699, i32 0, metadata !1913, null}
-!1921 = metadata !{i32 701, i32 12, metadata !1089, null}
-!1922 = metadata !{i32 702, i32 0, metadata !1923, null}
-!1923 = metadata !{i32 786443, metadata !39, metadata !1089, i32 702, i32 0, i32 147} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1924 = metadata !{i32 703, i32 0, metadata !1925, null}
-!1925 = metadata !{i32 786443, metadata !39, metadata !1923, i32 702, i32 0, i32 148} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1926 = metadata !{i32 704, i32 0, metadata !1925, null}
-!1927 = metadata !{i32 705, i32 0, metadata !1928, null}
-!1928 = metadata !{i32 786443, metadata !39, metadata !1925, i32 704, i32 0, i32 149} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1929 = metadata !{i32 706, i32 0, metadata !1930, null}
-!1930 = metadata !{i32 786443, metadata !39, metadata !1928, i32 706, i32 0, i32 150} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1931 = metadata !{i32 707, i32 0, metadata !1930, null}
-!1932 = metadata !{i32 709, i32 0, metadata !1928, null}
-!1933 = metadata !{i32 710, i32 0, metadata !1928, null}
-!1934 = metadata !{i32 711, i32 0, metadata !1928, null}
-!1935 = metadata !{i32 712, i32 0, metadata !1936, null}
-!1936 = metadata !{i32 786443, metadata !39, metadata !1928, i32 712, i32 0, i32 151} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1937 = metadata !{i32 713, i32 0, metadata !1938, null}
-!1938 = metadata !{i32 786443, metadata !39, metadata !1936, i32 712, i32 0, i32 152} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1939 = metadata !{i32 714, i32 0, metadata !1938, null}
-!1940 = metadata !{i32 715, i32 0, metadata !1928, null}
-!1941 = metadata !{i32 716, i32 0, metadata !1928, null}
-!1942 = metadata !{i32 717, i32 0, metadata !1943, null}
-!1943 = metadata !{i32 786443, metadata !39, metadata !1928, i32 717, i32 0, i32 153} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1944 = metadata !{i32 718, i32 0, metadata !1945, null}
-!1945 = metadata !{i32 786443, metadata !39, metadata !1943, i32 717, i32 0, i32 154} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1946 = metadata !{i32 719, i32 0, metadata !1945, null}
-!1947 = metadata !{i32 720, i32 0, metadata !1945, null}
-!1948 = metadata !{i32 721, i32 0, metadata !1945, null}
-!1949 = metadata !{i32 722, i32 0, metadata !1928, null}
-!1950 = metadata !{i32 723, i32 0, metadata !1951, null}
-!1951 = metadata !{i32 786443, metadata !39, metadata !1923, i32 723, i32 0, i32 155} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1952 = metadata !{i32 725, i32 0, metadata !1953, null}
-!1953 = metadata !{i32 786443, metadata !39, metadata !1954, i32 725, i32 0, i32 158} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1954 = metadata !{i32 786443, metadata !39, metadata !1955, i32 725, i32 0, i32 157} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1955 = metadata !{i32 786443, metadata !39, metadata !1951, i32 723, i32 0, i32 156} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1956 = metadata !{i32 727, i32 0, metadata !1957, null}
-!1957 = metadata !{i32 786443, metadata !39, metadata !1951, i32 726, i32 0, i32 159} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1958 = metadata !{i32 728, i32 0, metadata !1957, null}
-!1959 = metadata !{i32 729, i32 0, metadata !1957, null}
-!1960 = metadata !{i32 732, i32 0, metadata !1961, null}
-!1961 = metadata !{i32 786443, metadata !39, metadata !1089, i32 732, i32 0, i32 160} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1962 = metadata !{i32 734, i32 0, metadata !1963, null}
-!1963 = metadata !{i32 786443, metadata !39, metadata !1089, i32 734, i32 0, i32 161} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1964 = metadata !{i32 735, i32 0, metadata !1965, null}
-!1965 = metadata !{i32 786443, metadata !39, metadata !1963, i32 734, i32 0, i32 162} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1966 = metadata !{i32 736, i32 0, metadata !1965, null}
-!1967 = metadata !{i32 737, i32 0, metadata !1089, null}
-!1968 = metadata !{i32 738, i32 0, metadata !1089, null}
-!1969 = metadata !{i32 739, i32 0, metadata !1089, null}
-!1970 = metadata !{i32 740, i32 0, metadata !1089, null}
-!1971 = metadata !{i32 741, i32 0, metadata !1089, null}
-!1972 = metadata !{i32 742, i32 0, metadata !1089, null}
-!1973 = metadata !{i32 747, i32 0, metadata !1061, null}
-!1974 = metadata !{i32 748, i32 37, metadata !1061, null}
-!1975 = metadata !{i32 750, i32 0, metadata !1976, null}
-!1976 = metadata !{i32 786443, metadata !39, metadata !1061, i32 750, i32 0, i32 133} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1977 = metadata !{i32 751, i32 0, metadata !1976, null}
-!1978 = metadata !{i32 752, i32 18, metadata !1061, null}
-!1979 = metadata !{i32 754, i32 22, metadata !1061, null}
-!1980 = metadata !{i32 755, i32 0, metadata !1061, null}
-!1981 = metadata !{i32 757, i32 0, metadata !1061, null}
-!1982 = metadata !{i32 758, i32 0, metadata !1061, null}
+!1820 = metadata !{i32 1230, i32 0, metadata !1059, null}
+!1821 = metadata !{i32 1231, i32 0, metadata !1059, null}
+!1822 = metadata !{i32 1232, i32 0, metadata !1059, null}
+!1823 = metadata !{i32 1233, i32 0, metadata !1059, null}
+!1824 = metadata !{i32 1223, i32 0, metadata !1058, null}
+!1825 = metadata !{i32 1224, i32 0, metadata !1058, null}
+!1826 = metadata !{i32 1208, i32 0, metadata !1057, null}
+!1827 = metadata !{i32 1209, i32 0, metadata !1828, null}
+!1828 = metadata !{i32 786443, metadata !39, metadata !1057, i32 1209, i32 0, i32 119} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1829 = metadata !{i32 1210, i32 0, metadata !1830, null}
+!1830 = metadata !{i32 786443, metadata !39, metadata !1828, i32 1209, i32 0, i32 120} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1831 = metadata !{i32 1211, i32 0, metadata !1830, null}
+!1832 = metadata !{i32 1212, i32 0, metadata !1057, null}
+!1833 = metadata !{i32 773, i32 0, metadata !1060, null}
+!1834 = metadata !{i32 776, i32 0, metadata !1060, null}
+!1835 = metadata !{i32 778, i32 0, metadata !1836, null}
+!1836 = metadata !{i32 786443, metadata !39, metadata !1060, i32 778, i32 0, i32 121} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1837 = metadata !{i32 779, i32 0, metadata !1838, null}
+!1838 = metadata !{i32 786443, metadata !39, metadata !1839, i32 779, i32 0, i32 124} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1839 = metadata !{i32 786443, metadata !39, metadata !1840, i32 779, i32 0, i32 123} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1840 = metadata !{i32 786443, metadata !39, metadata !1836, i32 778, i32 0, i32 122} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1841 = metadata !{i32 785, i32 0, metadata !1060, null}
+!1842 = metadata !{i32 786, i32 0, metadata !1843, null}
+!1843 = metadata !{i32 786443, metadata !39, metadata !1060, i32 785, i32 0, i32 125} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1844 = metadata !{i32 788, i32 0, metadata !1843, null}
+!1845 = metadata !{i32 790, i32 0, metadata !1846, null}
+!1846 = metadata !{i32 786443, metadata !39, metadata !1847, i32 790, i32 0, i32 127} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1847 = metadata !{i32 786443, metadata !39, metadata !1843, i32 790, i32 0, i32 126} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1848 = metadata !{i32 794, i32 0, metadata !1843, null}
+!1849 = metadata !{i32 796, i32 0, metadata !1843, null}
+!1850 = metadata !{i32 798, i32 0, metadata !1851, null}
+!1851 = metadata !{i32 786443, metadata !39, metadata !1843, i32 798, i32 0, i32 128} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1852 = metadata !{i32 799, i32 0, metadata !1851, null}
+!1853 = metadata !{i32 805, i32 0, metadata !1854, null}
+!1854 = metadata !{i32 786443, metadata !39, metadata !1843, i32 805, i32 0, i32 129} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1855 = metadata !{i32 806, i32 0, metadata !1856, null}
+!1856 = metadata !{i32 786443, metadata !39, metadata !1857, i32 806, i32 0, i32 132} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1857 = metadata !{i32 786443, metadata !39, metadata !1858, i32 806, i32 0, i32 131} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1858 = metadata !{i32 786443, metadata !39, metadata !1854, i32 805, i32 0, i32 130} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1859 = metadata !{i32 811, i32 0, metadata !1060, null}
+!1860 = metadata !{i32 812, i32 0, metadata !1060, null}
+!1861 = metadata !{i32 764, i32 0, metadata !1120, null}
+!1862 = metadata !{i32 765, i32 0, metadata !1120, null}
+!1863 = metadata !{i32 767, i32 0, metadata !1120, null}
+!1864 = metadata !{i32 653, i32 0, metadata !1089, null}
+!1865 = metadata !{i32 654, i32 26, metadata !1089, null}
+!1866 = metadata !{i32 655, i32 0, metadata !1089, null}
+!1867 = metadata !{i32 656, i32 0, metadata !1089, null}
+!1868 = metadata !{i32 657, i32 0, metadata !1089, null}
+!1869 = metadata !{i32 659, i32 0, metadata !1089, null}
+!1870 = metadata !{i32 660, i32 0, metadata !1089, null}
+!1871 = metadata !{i32 662, i32 0, metadata !1089, null}
+!1872 = metadata !{i32 663, i32 0, metadata !1873, null}
+!1873 = metadata !{i32 786443, metadata !39, metadata !1089, i32 663, i32 0, i32 134} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1874 = metadata !{i32 664, i32 14, metadata !1875, null}
+!1875 = metadata !{i32 786443, metadata !39, metadata !1873, i32 663, i32 0, i32 135} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1876 = metadata !{i32 665, i32 0, metadata !1875, null}
+!1877 = metadata !{i32 666, i32 0, metadata !1875, null}
+!1878 = metadata !{i32 667, i32 21, metadata !1875, null}
+!1879 = metadata !{i32 668, i32 0, metadata !1875, null}
+!1880 = metadata !{i32 669, i32 0, metadata !1875, null}
+!1881 = metadata !{i32 670, i32 21, metadata !1875, null}
+!1882 = metadata !{i32 671, i32 0, metadata !1875, null}
+!1883 = metadata !{i32 672, i32 0, metadata !1875, null}
+!1884 = metadata !{i32 673, i32 19, metadata !1875, null}
+!1885 = metadata !{i32 674, i32 0, metadata !1875, null}
+!1886 = metadata !{i32 675, i32 0, metadata !1875, null}
+!1887 = metadata !{i32 676, i32 0, metadata !1875, null}
+!1888 = metadata !{i32 677, i32 0, metadata !1875, null}
+!1889 = metadata !{i32 678, i32 0, metadata !1890, null}
+!1890 = metadata !{i32 786443, metadata !39, metadata !1875, i32 678, i32 0, i32 136} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1891 = metadata !{i32 679, i32 0, metadata !1892, null}
+!1892 = metadata !{i32 786443, metadata !39, metadata !1893, i32 679, i32 0, i32 139} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1893 = metadata !{i32 786443, metadata !39, metadata !1894, i32 679, i32 0, i32 138} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1894 = metadata !{i32 786443, metadata !39, metadata !1890, i32 678, i32 0, i32 137} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1895 = metadata !{i32 680, i32 0, metadata !1894, null}
+!1896 = metadata !{i32 681, i32 0, metadata !1894, null}
+!1897 = metadata !{i32 683, i32 0, metadata !1898, null}
+!1898 = metadata !{i32 786443, metadata !39, metadata !1873, i32 683, i32 0, i32 140} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1899 = metadata !{i32 685, i32 0, metadata !1900, null}
+!1900 = metadata !{i32 786443, metadata !39, metadata !1901, i32 685, i32 0, i32 142} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1901 = metadata !{i32 786443, metadata !39, metadata !1898, i32 683, i32 0, i32 141} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1902 = metadata !{i32 686, i32 30, metadata !1903, null}
+!1903 = metadata !{i32 786443, metadata !39, metadata !1900, i32 685, i32 0, i32 143} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1904 = metadata !{i32 687, i32 0, metadata !1903, null}
+!1905 = metadata !{i32 688, i32 0, metadata !1901, null}
+!1906 = metadata !{i32 689, i32 0, metadata !1901, null}
+!1907 = metadata !{i32 691, i32 0, metadata !1908, null}
+!1908 = metadata !{i32 786443, metadata !39, metadata !1898, i32 689, i32 0, i32 144} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1909 = metadata !{i32 694, i32 9, metadata !1910, null}
+!1910 = metadata !{i32 786443, metadata !39, metadata !1089, i32 694, i32 0, i32 145} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1911 = metadata !{i32 694, i32 28, metadata !1910, null}
+!1912 = metadata !{i32 696, i32 0, metadata !1913, null}
+!1913 = metadata !{i32 786443, metadata !39, metadata !1910, i32 695, i32 0, i32 146} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1914 = metadata !{i32 697, i32 0, metadata !1913, null}
+!1915 = metadata !{i32 698, i32 23, metadata !1913, null}
+!1916 = metadata !{i32 697, i32 9, metadata !1913, null}
+!1917 = metadata !{i32 699, i32 0, metadata !1913, null}
+!1918 = metadata !{i32 700, i32 23, metadata !1913, null}
+!1919 = metadata !{i32 699, i32 9, metadata !1913, null}
+!1920 = metadata !{i32 701, i32 0, metadata !1913, null}
+!1921 = metadata !{i32 703, i32 12, metadata !1089, null}
+!1922 = metadata !{i32 704, i32 0, metadata !1923, null}
+!1923 = metadata !{i32 786443, metadata !39, metadata !1089, i32 704, i32 0, i32 147} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1924 = metadata !{i32 705, i32 0, metadata !1925, null}
+!1925 = metadata !{i32 786443, metadata !39, metadata !1923, i32 704, i32 0, i32 148} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1926 = metadata !{i32 706, i32 0, metadata !1925, null}
+!1927 = metadata !{i32 707, i32 0, metadata !1928, null}
+!1928 = metadata !{i32 786443, metadata !39, metadata !1925, i32 706, i32 0, i32 149} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1929 = metadata !{i32 708, i32 0, metadata !1930, null}
+!1930 = metadata !{i32 786443, metadata !39, metadata !1928, i32 708, i32 0, i32 150} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1931 = metadata !{i32 709, i32 0, metadata !1930, null}
+!1932 = metadata !{i32 711, i32 0, metadata !1928, null}
+!1933 = metadata !{i32 712, i32 0, metadata !1928, null}
+!1934 = metadata !{i32 713, i32 0, metadata !1928, null}
+!1935 = metadata !{i32 714, i32 0, metadata !1936, null}
+!1936 = metadata !{i32 786443, metadata !39, metadata !1928, i32 714, i32 0, i32 151} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1937 = metadata !{i32 715, i32 0, metadata !1938, null}
+!1938 = metadata !{i32 786443, metadata !39, metadata !1936, i32 714, i32 0, i32 152} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1939 = metadata !{i32 716, i32 0, metadata !1938, null}
+!1940 = metadata !{i32 717, i32 0, metadata !1928, null}
+!1941 = metadata !{i32 718, i32 0, metadata !1928, null}
+!1942 = metadata !{i32 719, i32 0, metadata !1943, null}
+!1943 = metadata !{i32 786443, metadata !39, metadata !1928, i32 719, i32 0, i32 153} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1944 = metadata !{i32 720, i32 0, metadata !1945, null}
+!1945 = metadata !{i32 786443, metadata !39, metadata !1943, i32 719, i32 0, i32 154} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1946 = metadata !{i32 721, i32 0, metadata !1945, null}
+!1947 = metadata !{i32 722, i32 0, metadata !1945, null}
+!1948 = metadata !{i32 723, i32 0, metadata !1945, null}
+!1949 = metadata !{i32 724, i32 0, metadata !1928, null}
+!1950 = metadata !{i32 725, i32 0, metadata !1951, null}
+!1951 = metadata !{i32 786443, metadata !39, metadata !1923, i32 725, i32 0, i32 155} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1952 = metadata !{i32 727, i32 0, metadata !1953, null}
+!1953 = metadata !{i32 786443, metadata !39, metadata !1954, i32 727, i32 0, i32 158} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1954 = metadata !{i32 786443, metadata !39, metadata !1955, i32 727, i32 0, i32 157} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1955 = metadata !{i32 786443, metadata !39, metadata !1951, i32 725, i32 0, i32 156} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1956 = metadata !{i32 729, i32 0, metadata !1957, null}
+!1957 = metadata !{i32 786443, metadata !39, metadata !1951, i32 728, i32 0, i32 159} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1958 = metadata !{i32 730, i32 0, metadata !1957, null}
+!1959 = metadata !{i32 731, i32 0, metadata !1957, null}
+!1960 = metadata !{i32 734, i32 0, metadata !1961, null}
+!1961 = metadata !{i32 786443, metadata !39, metadata !1089, i32 734, i32 0, i32 160} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1962 = metadata !{i32 736, i32 0, metadata !1963, null}
+!1963 = metadata !{i32 786443, metadata !39, metadata !1089, i32 736, i32 0, i32 161} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1964 = metadata !{i32 737, i32 0, metadata !1965, null}
+!1965 = metadata !{i32 786443, metadata !39, metadata !1963, i32 736, i32 0, i32 162} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1966 = metadata !{i32 738, i32 0, metadata !1965, null}
+!1967 = metadata !{i32 739, i32 0, metadata !1089, null}
+!1968 = metadata !{i32 740, i32 0, metadata !1089, null}
+!1969 = metadata !{i32 741, i32 0, metadata !1089, null}
+!1970 = metadata !{i32 742, i32 0, metadata !1089, null}
+!1971 = metadata !{i32 743, i32 0, metadata !1089, null}
+!1972 = metadata !{i32 744, i32 0, metadata !1089, null}
+!1973 = metadata !{i32 749, i32 0, metadata !1061, null}
+!1974 = metadata !{i32 750, i32 37, metadata !1061, null}
+!1975 = metadata !{i32 752, i32 0, metadata !1976, null}
+!1976 = metadata !{i32 786443, metadata !39, metadata !1061, i32 752, i32 0, i32 133} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1977 = metadata !{i32 753, i32 0, metadata !1976, null}
+!1978 = metadata !{i32 754, i32 18, metadata !1061, null}
+!1979 = metadata !{i32 756, i32 22, metadata !1061, null}
+!1980 = metadata !{i32 757, i32 0, metadata !1061, null}
+!1981 = metadata !{i32 759, i32 0, metadata !1061, null}
+!1982 = metadata !{i32 760, i32 0, metadata !1061, null}
 !1983 = metadata !{i32 565, i32 0, metadata !1984, null}
 !1984 = metadata !{i32 786443, metadata !39, metadata !1117} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
 !1985 = metadata !{i32 373, i32 0, metadata !1113, null}
 !1986 = metadata !{i32 373, i32 19, metadata !1113, null}
 !1987 = metadata !{i32 373, i32 5, metadata !1113, null}
 !1988 = metadata !{i32 374, i32 0, metadata !1113, null}
-!1989 = metadata !{i32 596, i32 0, metadata !1092, null}
-!1990 = metadata !{i32 597, i32 0, metadata !1092, null}
-!1991 = metadata !{i32 599, i32 0, metadata !1992, null}
-!1992 = metadata !{i32 786443, metadata !39, metadata !1092, i32 599, i32 0, i32 163} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1993 = metadata !{i32 600, i32 0, metadata !1994, null}
-!1994 = metadata !{i32 786443, metadata !39, metadata !1992, i32 599, i32 0, i32 164} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1995 = metadata !{i32 601, i32 0, metadata !1996, null}
-!1996 = metadata !{i32 786443, metadata !39, metadata !1997, i32 601, i32 0, i32 166} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1997 = metadata !{i32 786443, metadata !39, metadata !1994, i32 601, i32 0, i32 165} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!1998 = metadata !{i32 603, i32 0, metadata !1999, null}
-!1999 = metadata !{i32 786443, metadata !39, metadata !1994, i32 603, i32 0, i32 167} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2000 = metadata !{i32 604, i32 0, metadata !2001, null}
-!2001 = metadata !{i32 786443, metadata !39, metadata !1999, i32 603, i32 0, i32 168} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2002 = metadata !{i32 605, i32 0, metadata !2001, null}
-!2003 = metadata !{i32 606, i32 27, metadata !2001, null}
-!2004 = metadata !{i32 605, i32 13, metadata !2001, null}
-!2005 = metadata !{i32 607, i32 0, metadata !2001, null}
-!2006 = metadata !{i32 608, i32 0, metadata !1999, null}
-!2007 = metadata !{i32 609, i32 0, metadata !1994, null}
-!2008 = metadata !{i32 610, i32 0, metadata !1994, null}
-!2009 = metadata !{i32 611, i32 0, metadata !2010, null}
-!2010 = metadata !{i32 786443, metadata !39, metadata !2011, i32 611, i32 0, i32 170} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2011 = metadata !{i32 786443, metadata !39, metadata !1994, i32 611, i32 0, i32 169} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2012 = metadata !{i32 612, i32 0, metadata !2013, null}
-!2013 = metadata !{i32 786443, metadata !39, metadata !1994, i32 612, i32 0, i32 171} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2014 = metadata !{i32 613, i32 0, metadata !2015, null}
-!2015 = metadata !{i32 786443, metadata !39, metadata !2013, i32 612, i32 0, i32 172} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2016 = metadata !{i32 614, i32 0, metadata !2015, null}
-!2017 = metadata !{i32 614, i32 38, metadata !2015, null}
-!2018 = metadata !{i32 614, i32 13, metadata !2015, null}
-!2019 = metadata !{i32 615, i32 0, metadata !2020, null}
-!2020 = metadata !{i32 786443, metadata !39, metadata !2015, i32 615, i32 0, i32 173} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2021 = metadata !{i32 616, i32 0, metadata !2020, null}
-!2022 = metadata !{i32 618, i32 0, metadata !2013, null}
-!2023 = metadata !{i32 619, i32 0, metadata !2024, null}
-!2024 = metadata !{i32 786443, metadata !39, metadata !1994, i32 619, i32 0, i32 174} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2025 = metadata !{i32 622, i32 0, metadata !2026, null}
-!2026 = metadata !{i32 786443, metadata !39, metadata !2024, i32 619, i32 0, i32 175} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2027 = metadata !{i32 623, i32 21, metadata !2026, null}
-!2028 = metadata !{i32 624, i32 0, metadata !2026, null}
-!2029 = metadata !{i32 625, i32 0, metadata !2026, null}
-!2030 = metadata !{i32 626, i32 0, metadata !2026, null}
-!2031 = metadata !{i32 627, i32 0, metadata !1994, null}
-!2032 = metadata !{i32 628, i32 0, metadata !1994, null}
-!2033 = metadata !{i32 630, i32 0, metadata !2034, null}
-!2034 = metadata !{i32 786443, metadata !39, metadata !1092, i32 630, i32 0, i32 176} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2035 = metadata !{i32 631, i32 0, metadata !2034, null}
-!2036 = metadata !{i32 632, i32 0, metadata !2037, null}
-!2037 = metadata !{i32 786443, metadata !39, metadata !1092, i32 632, i32 0, i32 177} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2038 = metadata !{i32 633, i32 0, metadata !2037, null}
-!2039 = metadata !{i32 634, i32 0, metadata !2040, null}
-!2040 = metadata !{i32 786443, metadata !39, metadata !1092, i32 634, i32 0, i32 178} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2041 = metadata !{i32 635, i32 0, metadata !2042, null}
-!2042 = metadata !{i32 786443, metadata !39, metadata !2040, i32 634, i32 0, i32 179} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2043 = metadata !{i32 636, i32 0, metadata !2042, null}
-!2044 = metadata !{i32 637, i32 0, metadata !2042, null}
-!2045 = metadata !{i32 638, i32 0, metadata !2042, null}
-!2046 = metadata !{i32 639, i32 0, metadata !2042, null}
-!2047 = metadata !{i32 640, i32 0, metadata !2040, null}
-!2048 = metadata !{i32 641, i32 0, metadata !1092, null}
-!2049 = metadata !{i32 642, i32 0, metadata !1092, null}
-!2050 = metadata !{i32 643, i32 0, metadata !1092, null}
-!2051 = metadata !{i32 644, i32 0, metadata !2052, null}
-!2052 = metadata !{i32 786443, metadata !39, metadata !1092, i32 644, i32 0, i32 180} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2053 = metadata !{i32 645, i32 0, metadata !2052, null}
-!2054 = metadata !{i32 646, i32 0, metadata !1092, null}
+!1989 = metadata !{i32 598, i32 0, metadata !1092, null}
+!1990 = metadata !{i32 599, i32 0, metadata !1092, null}
+!1991 = metadata !{i32 601, i32 0, metadata !1992, null}
+!1992 = metadata !{i32 786443, metadata !39, metadata !1092, i32 601, i32 0, i32 163} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1993 = metadata !{i32 602, i32 0, metadata !1994, null}
+!1994 = metadata !{i32 786443, metadata !39, metadata !1992, i32 601, i32 0, i32 164} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1995 = metadata !{i32 603, i32 0, metadata !1996, null}
+!1996 = metadata !{i32 786443, metadata !39, metadata !1997, i32 603, i32 0, i32 166} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1997 = metadata !{i32 786443, metadata !39, metadata !1994, i32 603, i32 0, i32 165} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!1998 = metadata !{i32 605, i32 0, metadata !1999, null}
+!1999 = metadata !{i32 786443, metadata !39, metadata !1994, i32 605, i32 0, i32 167} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2000 = metadata !{i32 606, i32 0, metadata !2001, null}
+!2001 = metadata !{i32 786443, metadata !39, metadata !1999, i32 605, i32 0, i32 168} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2002 = metadata !{i32 607, i32 0, metadata !2001, null}
+!2003 = metadata !{i32 608, i32 27, metadata !2001, null}
+!2004 = metadata !{i32 607, i32 13, metadata !2001, null}
+!2005 = metadata !{i32 609, i32 0, metadata !2001, null}
+!2006 = metadata !{i32 610, i32 0, metadata !1999, null}
+!2007 = metadata !{i32 611, i32 0, metadata !1994, null}
+!2008 = metadata !{i32 612, i32 0, metadata !1994, null}
+!2009 = metadata !{i32 613, i32 0, metadata !2010, null}
+!2010 = metadata !{i32 786443, metadata !39, metadata !2011, i32 613, i32 0, i32 170} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2011 = metadata !{i32 786443, metadata !39, metadata !1994, i32 613, i32 0, i32 169} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2012 = metadata !{i32 614, i32 0, metadata !2013, null}
+!2013 = metadata !{i32 786443, metadata !39, metadata !1994, i32 614, i32 0, i32 171} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2014 = metadata !{i32 615, i32 0, metadata !2015, null}
+!2015 = metadata !{i32 786443, metadata !39, metadata !2013, i32 614, i32 0, i32 172} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2016 = metadata !{i32 616, i32 0, metadata !2015, null}
+!2017 = metadata !{i32 616, i32 38, metadata !2015, null}
+!2018 = metadata !{i32 616, i32 13, metadata !2015, null}
+!2019 = metadata !{i32 617, i32 0, metadata !2020, null}
+!2020 = metadata !{i32 786443, metadata !39, metadata !2015, i32 617, i32 0, i32 173} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2021 = metadata !{i32 618, i32 0, metadata !2020, null}
+!2022 = metadata !{i32 620, i32 0, metadata !2013, null}
+!2023 = metadata !{i32 621, i32 0, metadata !2024, null}
+!2024 = metadata !{i32 786443, metadata !39, metadata !1994, i32 621, i32 0, i32 174} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2025 = metadata !{i32 624, i32 0, metadata !2026, null}
+!2026 = metadata !{i32 786443, metadata !39, metadata !2024, i32 621, i32 0, i32 175} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2027 = metadata !{i32 625, i32 21, metadata !2026, null}
+!2028 = metadata !{i32 626, i32 0, metadata !2026, null}
+!2029 = metadata !{i32 627, i32 0, metadata !2026, null}
+!2030 = metadata !{i32 628, i32 0, metadata !2026, null}
+!2031 = metadata !{i32 629, i32 0, metadata !1994, null}
+!2032 = metadata !{i32 630, i32 0, metadata !1994, null}
+!2033 = metadata !{i32 632, i32 0, metadata !2034, null}
+!2034 = metadata !{i32 786443, metadata !39, metadata !1092, i32 632, i32 0, i32 176} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2035 = metadata !{i32 633, i32 0, metadata !2034, null}
+!2036 = metadata !{i32 634, i32 0, metadata !2037, null}
+!2037 = metadata !{i32 786443, metadata !39, metadata !1092, i32 634, i32 0, i32 177} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2038 = metadata !{i32 635, i32 0, metadata !2037, null}
+!2039 = metadata !{i32 636, i32 0, metadata !2040, null}
+!2040 = metadata !{i32 786443, metadata !39, metadata !1092, i32 636, i32 0, i32 178} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2041 = metadata !{i32 637, i32 0, metadata !2042, null}
+!2042 = metadata !{i32 786443, metadata !39, metadata !2040, i32 636, i32 0, i32 179} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2043 = metadata !{i32 638, i32 0, metadata !2042, null}
+!2044 = metadata !{i32 639, i32 0, metadata !2042, null}
+!2045 = metadata !{i32 640, i32 0, metadata !2042, null}
+!2046 = metadata !{i32 641, i32 0, metadata !2042, null}
+!2047 = metadata !{i32 642, i32 0, metadata !2040, null}
+!2048 = metadata !{i32 643, i32 0, metadata !1092, null}
+!2049 = metadata !{i32 644, i32 0, metadata !1092, null}
+!2050 = metadata !{i32 645, i32 0, metadata !1092, null}
+!2051 = metadata !{i32 646, i32 0, metadata !2052, null}
+!2052 = metadata !{i32 786443, metadata !39, metadata !1092, i32 646, i32 0, i32 180} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2053 = metadata !{i32 647, i32 0, metadata !2052, null}
+!2054 = metadata !{i32 648, i32 0, metadata !1092, null}
 !2055 = metadata !{i32 378, i32 0, metadata !1109, null}
 !2056 = metadata !{i32 378, i32 19, metadata !1109, null}
 !2057 = metadata !{i32 378, i32 5, metadata !1109, null}
@@ -7395,103 +7397,104 @@ attributes #11 = { nobuiltin nounwind }
 !2078 = metadata !{i32 587, i32 0, metadata !2076, null}
 !2079 = metadata !{i32 588, i32 0, metadata !2080, null}
 !2080 = metadata !{i32 786443, metadata !39, metadata !2074, i32 587, i32 0, i32 183} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2081 = metadata !{i32 590, i32 0, metadata !1093, null}
-!2082 = metadata !{i32 33, i32 0, metadata !2083, null}
-!2083 = metadata !{i32 786443, metadata !1100, metadata !1099} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//include/net/checksum.h]
-!2084 = metadata !{i32 26, i32 0, metadata !2085, null}
-!2085 = metadata !{i32 786443, metadata !1005, metadata !1108, i32 26, i32 0, i32 187} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//include/qemu/bswap.h]
-!2086 = metadata !{i32 26, i32 0, metadata !2087, null}
-!2087 = metadata !{i32 786443, metadata !1005, metadata !2085, i32 26, i32 0, i32 188} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//include/qemu/bswap.h]
-!2088 = metadata !{i32 265, i32 0, metadata !1107, null}
-!2089 = metadata !{i32 266, i32 0, metadata !1107, null}
-!2090 = metadata !{i32 271, i32 0, metadata !1112, null}
-!2091 = metadata !{i32 272, i32 0, metadata !1112, null}
-!2092 = metadata !{i32 259, i32 0, metadata !1116, null}
-!2093 = metadata !{i32 260, i32 0, metadata !1116, null}
-!2094 = metadata !{i32 361, i32 0, metadata !1122, null}
-!2095 = metadata !{i32 364, i32 0, metadata !1122, null}
-!2096 = metadata !{i32 366, i32 0, metadata !2097, null}
-!2097 = metadata !{i32 786443, metadata !39, metadata !1122, i32 364, i32 0, i32 191} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2098 = metadata !{i32 368, i32 0, metadata !2097, null}
-!2099 = metadata !{i32 370, i32 0, metadata !2097, null}
-!2100 = metadata !{i32 372, i32 0, metadata !2097, null}
-!2101 = metadata !{i32 374, i32 0, metadata !2097, null}
-!2102 = metadata !{i32 376, i32 0, metadata !2097, null}
-!2103 = metadata !{i32 378, i32 0, metadata !1122, null}
-!2104 = metadata !{i32 379, i32 0, metadata !1122, null}
-!2105 = metadata !{i32 201, i32 0, metadata !2106, null}
-!2106 = metadata !{i32 786443, metadata !39, metadata !1128, i32 201, i32 0, i32 216} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2107 = metadata !{i32 204, i32 0, metadata !2108, null}
-!2108 = metadata !{i32 786443, metadata !39, metadata !1128, i32 204, i32 0, i32 218} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2109 = metadata !{i32 205, i32 0, metadata !2110, null}
-!2110 = metadata !{i32 786443, metadata !39, metadata !2108, i32 204, i32 0, i32 219} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2111 = metadata !{i32 206, i32 0, metadata !2112, null}
-!2112 = metadata !{i32 786443, metadata !39, metadata !2113, i32 206, i32 0, i32 221} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2113 = metadata !{i32 786443, metadata !39, metadata !2110, i32 206, i32 0, i32 220} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
-!2114 = metadata !{i32 207, i32 0, metadata !2110, null}
-!2115 = metadata !{i32 207, i32 37, metadata !2110, null}
-!2116 = metadata !{i32 208, i32 0, metadata !2110, null}
-!2117 = metadata !{i32 209, i32 0, metadata !1128, null}
-!2118 = metadata !{i32 13, i32 0, metadata !2119, null}
-!2119 = metadata !{i32 786443, metadata !1171, metadata !1170, i32 13, i32 0, i32 0} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/klee_div_zero_check.c]
-!2120 = metadata !{i32 14, i32 0, metadata !2119, null}
-!2121 = metadata !{i32 15, i32 0, metadata !1170, null}
-!2122 = metadata !{i32 15, i32 0, metadata !1181, null}
-!2123 = metadata !{i32 16, i32 0, metadata !1181, null}
-!2124 = metadata !{metadata !2125, metadata !2125, i64 0}
-!2125 = metadata !{metadata !"int", metadata !2126, i64 0}
-!2126 = metadata !{metadata !"omnipotent char", metadata !2127, i64 0}
-!2127 = metadata !{metadata !"Simple C/C++ TBAA"}
-!2128 = metadata !{i32 21, i32 0, metadata !2129, null}
-!2129 = metadata !{i32 786443, metadata !1193, metadata !1192, i32 21, i32 0, i32 0} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/klee_overshift_check.c]
-!2130 = metadata !{i32 27, i32 0, metadata !2131, null}
-!2131 = metadata !{i32 786443, metadata !1193, metadata !2129, i32 21, i32 0, i32 1} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/klee_overshift_check.c]
-!2132 = metadata !{i32 29, i32 0, metadata !1192, null}
-!2133 = metadata !{i32 16, i32 0, metadata !2134, null}
-!2134 = metadata !{i32 786443, metadata !1205, metadata !1204, i32 16, i32 0, i32 0} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/klee_range.c]
-!2135 = metadata !{i32 17, i32 0, metadata !2134, null}
-!2136 = metadata !{i32 19, i32 0, metadata !2137, null}
-!2137 = metadata !{i32 786443, metadata !1205, metadata !1204, i32 19, i32 0, i32 1} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/klee_range.c]
-!2138 = metadata !{i32 22, i32 0, metadata !2139, null}
-!2139 = metadata !{i32 786443, metadata !1205, metadata !2137, i32 21, i32 0, i32 3} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/klee_range.c]
-!2140 = metadata !{i32 25, i32 0, metadata !2141, null}
-!2141 = metadata !{i32 786443, metadata !1205, metadata !2139, i32 25, i32 0, i32 4} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/klee_range.c]
-!2142 = metadata !{i32 26, i32 0, metadata !2143, null}
-!2143 = metadata !{i32 786443, metadata !1205, metadata !2141, i32 25, i32 0, i32 5} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/klee_range.c]
-!2144 = metadata !{i32 27, i32 0, metadata !2143, null}
-!2145 = metadata !{i32 28, i32 0, metadata !2146, null}
-!2146 = metadata !{i32 786443, metadata !1205, metadata !2141, i32 27, i32 0, i32 6} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/klee_range.c]
-!2147 = metadata !{i32 29, i32 0, metadata !2146, null}
-!2148 = metadata !{i32 32, i32 0, metadata !2139, null}
-!2149 = metadata !{i32 34, i32 0, metadata !1204, null}
-!2150 = metadata !{i32 16, i32 0, metadata !1217, null}
-!2151 = metadata !{i32 17, i32 0, metadata !1217, null}
-!2152 = metadata !{metadata !2152, metadata !2153, metadata !2154}
-!2153 = metadata !{metadata !"llvm.vectorizer.width", i32 1}
-!2154 = metadata !{metadata !"llvm.vectorizer.unroll", i32 1}
-!2155 = metadata !{metadata !2126, metadata !2126, i64 0}
-!2156 = metadata !{metadata !2156, metadata !2153, metadata !2154}
-!2157 = metadata !{i32 18, i32 0, metadata !1217, null}
-!2158 = metadata !{i32 16, i32 0, metadata !2159, null}
-!2159 = metadata !{i32 786443, metadata !1233, metadata !1232, i32 16, i32 0, i32 0} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/memmove.c]
-!2160 = metadata !{i32 19, i32 0, metadata !2161, null}
-!2161 = metadata !{i32 786443, metadata !1233, metadata !1232, i32 19, i32 0, i32 1} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/memmove.c]
-!2162 = metadata !{i32 20, i32 0, metadata !2163, null}
-!2163 = metadata !{i32 786443, metadata !1233, metadata !2161, i32 19, i32 0, i32 2} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/memmove.c]
-!2164 = metadata !{metadata !2164, metadata !2153, metadata !2154}
-!2165 = metadata !{metadata !2165, metadata !2153, metadata !2154}
-!2166 = metadata !{i32 22, i32 0, metadata !2167, null}
-!2167 = metadata !{i32 786443, metadata !1233, metadata !2161, i32 21, i32 0, i32 3} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/memmove.c]
-!2168 = metadata !{i32 24, i32 0, metadata !2167, null}
-!2169 = metadata !{i32 23, i32 0, metadata !2167, null}
-!2170 = metadata !{metadata !2170, metadata !2153, metadata !2154}
-!2171 = metadata !{metadata !2171, metadata !2153, metadata !2154}
-!2172 = metadata !{i32 28, i32 0, metadata !1232, null}
-!2173 = metadata !{i32 15, i32 0, metadata !1247, null}
-!2174 = metadata !{i32 16, i32 0, metadata !1247, null}
-!2175 = metadata !{metadata !2175, metadata !2153, metadata !2154}
-!2176 = metadata !{metadata !2176, metadata !2153, metadata !2154}
-!2177 = metadata !{i32 17, i32 0, metadata !1247, null}
-!2178 = metadata !{i32 13, i32 0, metadata !1262, null}
-!2179 = metadata !{i32 14, i32 0, metadata !1262, null}
-!2180 = metadata !{i32 15, i32 0, metadata !1262, null}
+!2081 = metadata !{i32 589, i32 0, metadata !2080, null}
+!2082 = metadata !{i32 592, i32 0, metadata !1093, null}
+!2083 = metadata !{i32 33, i32 0, metadata !2084, null}
+!2084 = metadata !{i32 786443, metadata !1100, metadata !1099} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//include/net/checksum.h]
+!2085 = metadata !{i32 26, i32 0, metadata !2086, null}
+!2086 = metadata !{i32 786443, metadata !1005, metadata !1108, i32 26, i32 0, i32 187} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//include/qemu/bswap.h]
+!2087 = metadata !{i32 26, i32 0, metadata !2088, null}
+!2088 = metadata !{i32 786443, metadata !1005, metadata !2086, i32 26, i32 0, i32 188} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//include/qemu/bswap.h]
+!2089 = metadata !{i32 265, i32 0, metadata !1107, null}
+!2090 = metadata !{i32 266, i32 0, metadata !1107, null}
+!2091 = metadata !{i32 271, i32 0, metadata !1112, null}
+!2092 = metadata !{i32 272, i32 0, metadata !1112, null}
+!2093 = metadata !{i32 259, i32 0, metadata !1116, null}
+!2094 = metadata !{i32 260, i32 0, metadata !1116, null}
+!2095 = metadata !{i32 361, i32 0, metadata !1122, null}
+!2096 = metadata !{i32 364, i32 0, metadata !1122, null}
+!2097 = metadata !{i32 366, i32 0, metadata !2098, null}
+!2098 = metadata !{i32 786443, metadata !39, metadata !1122, i32 364, i32 0, i32 191} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2099 = metadata !{i32 368, i32 0, metadata !2098, null}
+!2100 = metadata !{i32 370, i32 0, metadata !2098, null}
+!2101 = metadata !{i32 372, i32 0, metadata !2098, null}
+!2102 = metadata !{i32 374, i32 0, metadata !2098, null}
+!2103 = metadata !{i32 376, i32 0, metadata !2098, null}
+!2104 = metadata !{i32 378, i32 0, metadata !1122, null}
+!2105 = metadata !{i32 379, i32 0, metadata !1122, null}
+!2106 = metadata !{i32 201, i32 0, metadata !2107, null}
+!2107 = metadata !{i32 786443, metadata !39, metadata !1128, i32 201, i32 0, i32 216} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2108 = metadata !{i32 204, i32 0, metadata !2109, null}
+!2109 = metadata !{i32 786443, metadata !39, metadata !1128, i32 204, i32 0, i32 218} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2110 = metadata !{i32 205, i32 0, metadata !2111, null}
+!2111 = metadata !{i32 786443, metadata !39, metadata !2109, i32 204, i32 0, i32 219} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2112 = metadata !{i32 206, i32 0, metadata !2113, null}
+!2113 = metadata !{i32 786443, metadata !39, metadata !2114, i32 206, i32 0, i32 221} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2114 = metadata !{i32 786443, metadata !39, metadata !2111, i32 206, i32 0, i32 220} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/model/../qemu-2.1.2//hw/net/e1000.c]
+!2115 = metadata !{i32 207, i32 0, metadata !2111, null}
+!2116 = metadata !{i32 207, i32 37, metadata !2111, null}
+!2117 = metadata !{i32 208, i32 0, metadata !2111, null}
+!2118 = metadata !{i32 209, i32 0, metadata !1128, null}
+!2119 = metadata !{i32 13, i32 0, metadata !2120, null}
+!2120 = metadata !{i32 786443, metadata !1171, metadata !1170, i32 13, i32 0, i32 0} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/klee_div_zero_check.c]
+!2121 = metadata !{i32 14, i32 0, metadata !2120, null}
+!2122 = metadata !{i32 15, i32 0, metadata !1170, null}
+!2123 = metadata !{i32 15, i32 0, metadata !1181, null}
+!2124 = metadata !{i32 16, i32 0, metadata !1181, null}
+!2125 = metadata !{metadata !2126, metadata !2126, i64 0}
+!2126 = metadata !{metadata !"int", metadata !2127, i64 0}
+!2127 = metadata !{metadata !"omnipotent char", metadata !2128, i64 0}
+!2128 = metadata !{metadata !"Simple C/C++ TBAA"}
+!2129 = metadata !{i32 21, i32 0, metadata !2130, null}
+!2130 = metadata !{i32 786443, metadata !1193, metadata !1192, i32 21, i32 0, i32 0} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/klee_overshift_check.c]
+!2131 = metadata !{i32 27, i32 0, metadata !2132, null}
+!2132 = metadata !{i32 786443, metadata !1193, metadata !2130, i32 21, i32 0, i32 1} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/klee_overshift_check.c]
+!2133 = metadata !{i32 29, i32 0, metadata !1192, null}
+!2134 = metadata !{i32 16, i32 0, metadata !2135, null}
+!2135 = metadata !{i32 786443, metadata !1205, metadata !1204, i32 16, i32 0, i32 0} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/klee_range.c]
+!2136 = metadata !{i32 17, i32 0, metadata !2135, null}
+!2137 = metadata !{i32 19, i32 0, metadata !2138, null}
+!2138 = metadata !{i32 786443, metadata !1205, metadata !1204, i32 19, i32 0, i32 1} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/klee_range.c]
+!2139 = metadata !{i32 22, i32 0, metadata !2140, null}
+!2140 = metadata !{i32 786443, metadata !1205, metadata !2138, i32 21, i32 0, i32 3} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/klee_range.c]
+!2141 = metadata !{i32 25, i32 0, metadata !2142, null}
+!2142 = metadata !{i32 786443, metadata !1205, metadata !2140, i32 25, i32 0, i32 4} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/klee_range.c]
+!2143 = metadata !{i32 26, i32 0, metadata !2144, null}
+!2144 = metadata !{i32 786443, metadata !1205, metadata !2142, i32 25, i32 0, i32 5} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/klee_range.c]
+!2145 = metadata !{i32 27, i32 0, metadata !2144, null}
+!2146 = metadata !{i32 28, i32 0, metadata !2147, null}
+!2147 = metadata !{i32 786443, metadata !1205, metadata !2142, i32 27, i32 0, i32 6} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/klee_range.c]
+!2148 = metadata !{i32 29, i32 0, metadata !2147, null}
+!2149 = metadata !{i32 32, i32 0, metadata !2140, null}
+!2150 = metadata !{i32 34, i32 0, metadata !1204, null}
+!2151 = metadata !{i32 16, i32 0, metadata !1217, null}
+!2152 = metadata !{i32 17, i32 0, metadata !1217, null}
+!2153 = metadata !{metadata !2153, metadata !2154, metadata !2155}
+!2154 = metadata !{metadata !"llvm.vectorizer.width", i32 1}
+!2155 = metadata !{metadata !"llvm.vectorizer.unroll", i32 1}
+!2156 = metadata !{metadata !2127, metadata !2127, i64 0}
+!2157 = metadata !{metadata !2157, metadata !2154, metadata !2155}
+!2158 = metadata !{i32 18, i32 0, metadata !1217, null}
+!2159 = metadata !{i32 16, i32 0, metadata !2160, null}
+!2160 = metadata !{i32 786443, metadata !1233, metadata !1232, i32 16, i32 0, i32 0} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/memmove.c]
+!2161 = metadata !{i32 19, i32 0, metadata !2162, null}
+!2162 = metadata !{i32 786443, metadata !1233, metadata !1232, i32 19, i32 0, i32 1} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/memmove.c]
+!2163 = metadata !{i32 20, i32 0, metadata !2164, null}
+!2164 = metadata !{i32 786443, metadata !1233, metadata !2162, i32 19, i32 0, i32 2} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/memmove.c]
+!2165 = metadata !{metadata !2165, metadata !2154, metadata !2155}
+!2166 = metadata !{metadata !2166, metadata !2154, metadata !2155}
+!2167 = metadata !{i32 22, i32 0, metadata !2168, null}
+!2168 = metadata !{i32 786443, metadata !1233, metadata !2162, i32 21, i32 0, i32 3} ; [ DW_TAG_lexical_block ] [/home/qin/qklee/klee/runtime/Intrinsic/memmove.c]
+!2169 = metadata !{i32 24, i32 0, metadata !2168, null}
+!2170 = metadata !{i32 23, i32 0, metadata !2168, null}
+!2171 = metadata !{metadata !2171, metadata !2154, metadata !2155}
+!2172 = metadata !{metadata !2172, metadata !2154, metadata !2155}
+!2173 = metadata !{i32 28, i32 0, metadata !1232, null}
+!2174 = metadata !{i32 15, i32 0, metadata !1247, null}
+!2175 = metadata !{i32 16, i32 0, metadata !1247, null}
+!2176 = metadata !{metadata !2176, metadata !2154, metadata !2155}
+!2177 = metadata !{metadata !2177, metadata !2154, metadata !2155}
+!2178 = metadata !{i32 17, i32 0, metadata !1247, null}
+!2179 = metadata !{i32 13, i32 0, metadata !1262, null}
+!2180 = metadata !{i32 14, i32 0, metadata !1262, null}
+!2181 = metadata !{i32 15, i32 0, metadata !1262, null}

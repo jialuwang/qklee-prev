@@ -497,7 +497,7 @@ ssize_t qemu_deliver_packet(NetClientState *sender,
         ret = nc->info->receive_raw(nc, data, size);
     } else {
 //Qin
-	fprintf(stderr, "qemu_deliver_packet call e1000_receive %p\n", nc);
+//	fprintf(stderr, "qemu_deliver_packet call e1000_receive %p\n", nc);
         ret = nc->info->receive(nc, data, size);
     }
 

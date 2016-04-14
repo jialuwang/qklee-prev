@@ -134,6 +134,9 @@ using namespace metaSMT::solver;
 //Qin
 #include "externalcall.h"
 bool isKleeExternal = false;
+bool dumpTrace = false;
+//llvm::raw_fd_ostream trace;
+
 
 namespace {
   cl::opt<bool>
@@ -459,6 +462,8 @@ MemoryObject * Executor::addExternalObject(ExecutionState &state,
     os->write8(i, ((uint8_t*)addr)[i]);
   if(isReadOnly)
     os->setReadOnly(true);  
+  //Qin
+  mo->isExternal = true;
   return mo;
 }
 
@@ -1157,6 +1162,11 @@ void Executor::stepInstruction(ExecutionState &state) {
     llvm::errs().indent(10) << stats::instructions << " ";
     llvm::errs() << *(state.pc->inst) << '\n';
   }
+
+//Qin
+  if (dumpTrace) {
+    llvm::errs() << *(state.pc->inst) << '\n';
+  } 
 
   if (statsTracker)
     statsTracker->stepInstruction(state);
@@ -3186,6 +3196,31 @@ void Executor::executeMemoryOperation(ExecutionState &state,
         } else {
           ObjectState *wos = state.addressSpace.getWriteable(mo, os);
           wos->write(offset, value);
+
+	//Qin: write memory back to QEMU space
+	  if (mo->isExternal) {
+//	    klee_warning("write memory back to QEMU address space");
+	    assert(isa<ConstantExpr>(address));
+	    uint64_t addr = cast<ConstantExpr>(address)->getZExtValue();
+	    ConstantExpr *CE = dyn_cast<ConstantExpr>(value);
+	    assert(CE);
+	    uint64_t val = CE->getZExtValue();
+	    switch(bytes) {
+	      default: assert(0 && "writeBack to QEMU: Invalid byte size!");
+	      case 1:
+		* (uint8_t *) addr = (uint8_t)val; 
+		break;
+	      case 2:	
+		* (uint16_t *) addr = (uint16_t)val;
+		break;
+	      case 4:   
+		* (uint32_t *) addr = (uint32_t)val;
+		break;
+	      case 8:
+		* (uint64_t *) addr = (uint64_t)val;
+		break;
+	    }	    
+	  }
         }          
       } else {
         ref<Expr> result = os->read(offset, type);
