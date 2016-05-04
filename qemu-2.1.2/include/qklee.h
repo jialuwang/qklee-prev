@@ -18,5 +18,6 @@ void qklee_finish_once(void);
 
 void qklee_mem_cpy(void * dst, void *src, unsigned size);
 void qklee_request_cpy(void *dst, unsigned size);
+void qklee_correlate(char* vname, uint64_t addr);
 
 #endif

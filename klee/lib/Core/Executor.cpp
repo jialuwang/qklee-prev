@@ -458,8 +458,11 @@ MemoryObject * Executor::addExternalObject(ExecutionState &state,
   MemoryObject *mo = memory->allocateFixed((uint64_t) (unsigned long) addr, 
                                            size, 0);
   ObjectState *os = bindObjectInState(state, mo, false);
-  for(unsigned i = 0; i < size; i++)
+  klee_message("Add new external object");
+  for(unsigned i = 0; i < size; i++) {
     os->write8(i, ((uint8_t*)addr)[i]);
+    klee_message("\t\t::addr 0x%"PRIx64", value 0x%02x", addr + i, ((uint8_t*)addr)[i]); 
+  }
   if(isReadOnly)
     os->setReadOnly(true);  
   //Qin
@@ -1968,7 +1971,7 @@ void Executor::executeInstruction(ExecutionState &state, KInstruction *ki) {
     executeMemoryOperation(state, false, base, 0, ki);
     break;
   }
-  case Instruction::Store: { //Qin start here to synchronize
+  case Instruction::Store: { //
     ref<Expr> base = eval(ki, 1, state).value;
     ref<Expr> value = eval(ki, 0, state).value;
     executeMemoryOperation(state, true, base, value, 0);
@@ -3419,6 +3422,7 @@ void Executor::executorInit(Function *f,
 				 int argc,
 				 char **argv,
 				 char **envp) {
+  klee_warning("executorInit");
   std::vector<ref<Expr> > arguments;
 
   // force deterministic initialization of memory objects
@@ -3510,23 +3514,25 @@ void Executor::executorInit(Function *f,
 void Executor::executorRun(void) {
 //void Executor::executorRun(int enableQKLEE, unsigned long requestAddress) {
   ExecutionState *state = new ExecutionState(*initState); // every execution is from initState
-
+  static int counter = 0;
 //  if(enableQKLEE) {
 //	  state->requestAddress = requestAddress;
 //  }
 
   processTree = new PTree(state);
   state->ptreeNode = processTree->root;
-  klee_warning("start executorRun ---->");
+  klee_warning("start executorRun %d---->", counter);
   run(*state);
 //  klee_warning("done executorRun run(*state)"); 
 
   delete processTree;
   processTree = 0;
-  klee_warning("\t\t------>done executorRun");
+  klee_warning("\t\t------>done executorRun %d", counter);
+  counter++;
 }
 
 void Executor::executorExit(void) {
+  klee_warning("executorExit");
   // hack to clear memory objects
   delete memory;
   memory = new MemoryManager();

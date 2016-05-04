@@ -1300,6 +1300,9 @@ static uint64_t e1000_bc_mmio_read(void *opaque, hwaddr addr, unsigned size);
 static void e1000_mmio_write(void *opaque, hwaddr addr, uint64_t val,
                  unsigned size)
 {
+//    E1000State *s = opaque;
+//    fprintf(stderr, "qklee/qemu-2.1.2/hw/net/e1000.c:e1000_mmio_write E1000State s@%p\n", s);
+//    fprintf(stderr, "offset s->nic %lx, s->mac_reg %lx, s->phy_reg %lx, s->tx %lx, s->eecd_state %lx, s->autoneg_timer %lx, s-> mit_timer %lx\n", (void*)s->nic - (void*)s, (void*)s->mac_reg - (void*)s, (void*)s->phy_reg - (void*)s, (void*)&(s->tx) - (void*)s, (void*)&(s->eecd_state) - (void*)s, (void*)s->autoneg_timer - (void*)s, (void*)s->mit_timer - (void*)s);
     qklee_mmio_write(opaque, addr, val, size);
 //    e1000_bc_mmio_write(opaque, addr, val, size);
 }
@@ -1325,6 +1328,11 @@ static void e1000_bc_mmio_write(void *opaque, hwaddr addr, uint64_t val,
 static uint64_t
 e1000_mmio_read(void *opaque, hwaddr addr, unsigned size)
 {
+    E1000State *s = opaque;
+    fprintf(stderr, "qklee/qemu-2.1.2/hw/net/e1000.c:e1000_mmio_write E1000State s     @%p\n", s);
+    fprintf(stderr, "offset s->nic %p, s->mac_reg %p, s->phy_reg %p, s->tx %p,s->eecd_state %p, s->autoneg_timer %p, s-> mit_timer %p\n", s->nic, s->mac_reg, s->phy_reg, &(s->tx), &(s->eecd_state), s->autoneg_timer, s->mit_timer);
+
+
     return qklee_mmio_read(opaque, addr, size);
 //    return e1000_bc_mmio_read(opaque, addr, size);
 }

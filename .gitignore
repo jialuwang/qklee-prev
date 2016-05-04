@@ -1,2 +1,5 @@
 ./model/klee-last/
-./model/klee-out-*/*
+./model/klee-out-0/*
+./model/klee-out-1/*
+./model/klee-out-2/*
+./model/klee-out-3/*

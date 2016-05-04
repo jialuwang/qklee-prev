@@ -18,8 +18,12 @@ MMIO_REQUEST request;
 int main()
 {
 	qklee_request_cpy(&request, sizeof(MMIO_REQUEST));
+//	qklee_correlate("request", &request);
+       
 
 	int ret;
+//	set_request();
+//      preload_e1000_state();
 	switch (request.type) {
 	    case 1 :
 		e1000_bc_mmio_write(request.opaque, request.addr, request.val, request.size);
@@ -43,3 +47,4 @@ int main()
     qklee_ret(ret);
     return 0;
 }
+

@@ -1635,6 +1635,9 @@ int qklee_mmio_read(void *opaque, hwaddr addr, unsigned size) {
   mmio_request.size = size;
   mmio_request.type = 2;
 
+  fprintf(stderr, "mmio_read:addr -- %" PRIu64 "\n", addr);
+  fprintf(stderr, "mmio_read:val  -- %u\n", size);
+ 
   theInterpreter->executorRun();
 
   return mmio_request.ret;
@@ -1688,5 +1691,16 @@ int qklee_ret(int ret) {
 void qklee_finish_once(void) {
   llvm::errs() << "qklee_finish_once!\n";
 }
+
+void qklee_correlate(char* vname, MMIO_REQUEST* request) {
+  klee_message("variable %s starts at address %"PRIu64"", vname, request);
+  switch(request->type) {
+    case 1: klee_message("mmio_write: E1000_state@%p", request->opaque); break;
+    case 2: klee_message("mmio_read: E1000_state@%p", request->opaque); break;
+    case 3: klee_message("receive: NetClientState@%p", request->opaque); break;
+    case 4: klee_message("set_link_status: NetClientState@%p", request->opaque); break;
+    case 5: klee_message("can_receive: NetClientState@%p", request->opaque); break;
+  }
+} //qklee_correlate
 
 }
